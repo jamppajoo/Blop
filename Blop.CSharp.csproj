@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Finish.cs" />
     <Compile Include="Assets\Scripts\Floor\IsFloor.cs" />
     <Compile Include="Assets\Scripts\GridSystem.cs" />
+    <Compile Include="Assets\Scripts\LevelSelect.cs" />
     <Compile Include="Assets\Scripts\MobileControllers.cs" />
     <Compile Include="Assets\Scripts\Quit.cs" />
     <Compile Include="Assets\Scripts\Restart.cs" />

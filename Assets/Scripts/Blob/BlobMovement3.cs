@@ -5,9 +5,14 @@ public class BlobMovement3 : MonoBehaviour {
     float horizontalMovement, verticalMovement;
     public float WaitBeforeMoveSeconds;
     private bool canMove = true;
+    private bool canMoveDown = true, canMoveUp = true, canMoveRight = true, canMoveLeft= true, canMoveForward = true, canMoveBackward = true;
+    private Rigidbody playerRb;
+    private bool inAir = false;
+    
     
 	// Use this for initialization
 	void Start () {
+        playerRb = GameObject.Find("Blop").transform.gameObject.GetComponent<Rigidbody>();
 
 	
 	}
@@ -20,30 +25,89 @@ public class BlobMovement3 : MonoBehaviour {
         Ray LeftHit = new Ray(transform.position, Vector3.left);
         Ray BackHit = new Ray(transform.position, Vector3.forward);
         Ray FrontHit = new Ray(transform.position, Vector3.back);
-
-
-        if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 && hit.transform.gameObject.tag == "Floor")
-            Debug.Log("DownHit");
-
-        if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 && hit.transform.gameObject.tag == "RightWall")
-                Debug.Log("RightHit");
-
-        if ((Physics.Raycast(LeftHit, out hit)) && hit.distance < 1  && hit.transform.gameObject.tag == "LeftWall")
-            Debug.Log("LeftHit");
-
-        if ((Physics.Raycast(BackHit, out hit)) && hit.distance < 1 && hit.transform.gameObject.tag == "BackWall")
-            Debug.Log("BackHit");
+        playerRb.isKinematic = false;
 
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
-       // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
-        // Debug.Log(canMove);
 
-        if (canMove && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
-            StartCoroutine(Move(new Vector3(horizontalMovement,verticalMovement,0)));
-        else if (canMove && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
+
+        if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 )
+        {
+            if (verticalMovement < 0 && CameraMovement.isDown)
+                verticalMovement = 0;
+        }
+        if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )
+        {
+            if (hit.transform.gameObject.tag == "RightWall")
+            {
+                playerRb.isKinematic = true;
+            }
+            if (hit.transform.gameObject.tag == "RightWall" && inAir)
+            {
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+            }
+
+            if (horizontalMovement > 0)
+                horizontalMovement = 0;
+        }
+
+        if ((Physics.Raycast(LeftHit, out hit)) && hit.distance < 1)
+        {
+            if (hit.transform.gameObject.tag == "LeftWall")
+            {
+                playerRb.isKinematic = true;
+            }
+            if (hit.transform.gameObject.tag == "LeftWall" && inAir)
+            {
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+            }
+            if (horizontalMovement < 0)
+                horizontalMovement = 0;
+        }
+        if ((Physics.Raycast(BackHit, out hit)) && hit.distance < 1  )
+        {
+            if (hit.transform.gameObject.tag == "BackWall")
+            {
+                playerRb.isKinematic = true;
+            }
+
+            if (hit.transform.gameObject.tag == "BackWall" && inAir)
+            {
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+            }
+
+            if (verticalMovement > 0 && CameraMovement.isUp)
+                    verticalMovement = 0;
+        }
+        if ((Physics.Raycast(FrontHit, out hit)) && hit.distance < 1)
+        {
+            if (hit.transform.gameObject.tag == "FrontWall")
+            {
+                playerRb.isKinematic = true;
+            }
+
+            if (hit.transform.gameObject.tag == "FrontWall" && inAir)
+            {
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+            }
+
+            if (verticalMovement < 0 && CameraMovement.isUp)
+                verticalMovement = 0;
+        }
+        // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
+
+        if (playerRb.velocity.y != 0)
+            inAir = true;
+        else inAir = false;
+        
+        
+        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
+            StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0)));
+        
+            
+        else if (canMove && !inAir &&(horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
             StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement)));
-
+            
     }
     IEnumerator Move(Vector3 direction)
     {
