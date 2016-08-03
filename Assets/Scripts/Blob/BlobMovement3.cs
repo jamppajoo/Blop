@@ -8,6 +8,7 @@ public class BlobMovement3 : MonoBehaviour {
     private bool canMoveDown = true, canMoveUp = true, canMoveRight = true, canMoveLeft= true, canMoveForward = true, canMoveBackward = true;
     private Rigidbody playerRb;
     private bool inAir = false;
+    private Vector3 velocity = Vector3.zero;
     
     
 	// Use this for initialization
@@ -113,7 +114,6 @@ public class BlobMovement3 : MonoBehaviour {
     {
         canMove = false;
         gameObject.transform.position = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
-
         yield return new WaitForSeconds(WaitBeforeMoveSeconds);
         canMove = true;
     }
