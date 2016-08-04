@@ -9,6 +9,8 @@ public class BlobMovement3 : MonoBehaviour {
     private Rigidbody playerRb;
     private bool inAir = false;
     private Vector3 velocity = Vector3.zero;
+    public float moveScale = 1f;
+    public float smoothFactor = 0.1f;
     
     
 	// Use this for initialization
@@ -45,7 +47,7 @@ public class BlobMovement3 : MonoBehaviour {
             }
             if (hit.transform.gameObject.tag == "RightWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale));
             }
 
             if (horizontalMovement > 0)
@@ -60,7 +62,7 @@ public class BlobMovement3 : MonoBehaviour {
             }
             if (hit.transform.gameObject.tag == "LeftWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale));
             }
             if (horizontalMovement < 0)
                 horizontalMovement = 0;
@@ -74,7 +76,7 @@ public class BlobMovement3 : MonoBehaviour {
 
             if (hit.transform.gameObject.tag == "BackWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale));
             }
 
             if (verticalMovement > 0 && CameraMovement.isUp)
@@ -89,7 +91,7 @@ public class BlobMovement3 : MonoBehaviour {
 
             if (hit.transform.gameObject.tag == "FrontWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0)));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale));
             }
 
             if (verticalMovement < 0 && CameraMovement.isUp)
@@ -103,18 +105,23 @@ public class BlobMovement3 : MonoBehaviour {
         
         
         if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
-            StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0)));
+            StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale));
         
             
         else if (canMove && !inAir &&(horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
-            StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement)));
+            StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement),moveScale));
             
-    }
-    IEnumerator Move(Vector3 direction)
+    }   
+    IEnumerator Move(Vector3 direction, float Scale)
     {
+        Vector3 previousPoint = gameObject.transform.position;
+        Vector3 nextPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
+
         canMove = false;
-        gameObject.transform.position = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
+        gameObject.transform.position = nextPoint;
         yield return new WaitForSeconds(WaitBeforeMoveSeconds);
+
         canMove = true;
     }
+
 }
