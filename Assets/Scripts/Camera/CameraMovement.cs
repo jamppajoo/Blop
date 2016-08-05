@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 	private Animator animator;
 	public static bool isUp, isDown;
+    public static bool changeMade = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,12 +15,13 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space) || changeMade ) {
 			if (!isUp)
 				animator.SetBool ("ToUp", true);
 			else if (!isDown)
 				animator.SetBool ("ToDown", true);
 		}
+        changeMade = false;
 	
 	}
 	void IsUp()
@@ -31,6 +33,6 @@ public class CameraMovement : MonoBehaviour {
 	void IsDown(){
 		isDown = true;
 		isUp = false;
-		animator.SetBool ("ToDown", false);
+        animator.SetBool ("ToDown", false);
 	}
 }

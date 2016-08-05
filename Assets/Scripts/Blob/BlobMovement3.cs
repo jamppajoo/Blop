@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BlobMovement3 : MonoBehaviour {
-    float horizontalMovement, verticalMovement;
+    public float horizontalMovement, verticalMovement;
     public float WaitBeforeMoveSeconds;
     private bool canMove = true;
     private bool canMoveDown = true, canMoveUp = true, canMoveRight = true, canMoveLeft= true, canMoveForward = true, canMoveBackward = true;
@@ -28,11 +28,19 @@ public class BlobMovement3 : MonoBehaviour {
         Ray LeftHit = new Ray(transform.position, Vector3.left);
         Ray BackHit = new Ray(transform.position, Vector3.forward);
         Ray FrontHit = new Ray(transform.position, Vector3.back);
+        Ray UpHit = new Ray(transform.position, Vector3.up);
         playerRb.isKinematic = false;
-
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
-        verticalMovement = Input.GetAxisRaw("Vertical");
-
+        if (MobileControllers.moveHorizontal == 0 && MobileControllers.moveVertical == 0)
+        {
+            horizontalMovement = Input.GetAxisRaw("Horizontal");
+            verticalMovement = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            horizontalMovement = MobileControllers.moveHorizontal;
+            verticalMovement = MobileControllers.moveVertical;
+        }
+            
 
         if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 )
         {
@@ -97,6 +105,11 @@ public class BlobMovement3 : MonoBehaviour {
             if (verticalMovement < 0 && CameraMovement.isUp)
                 verticalMovement = 0;
         }
+        if (Physics.Raycast(UpHit,out hit) && hit.distance <1)
+            {
+            if (verticalMovement > 0)
+                verticalMovement = 0;
+            }
         // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
         if (playerRb.velocity.y != 0)
@@ -110,8 +123,15 @@ public class BlobMovement3 : MonoBehaviour {
             
         else if (canMove && !inAir &&(horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
             StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement),moveScale));
-            
+
+
+        MobileControllers.moveVertical = 0;
+        MobileControllers.moveHorizontal = 0;
     }   
+
+    public void MoveBlop()
+    { 
+}
     IEnumerator Move(Vector3 direction, float Scale)
     {
         Vector3 previousPoint = gameObject.transform.position;
