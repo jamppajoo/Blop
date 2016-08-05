@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BlobMovement3 : MonoBehaviour {
-    float horizontalMovement, verticalMovement;
+    public float horizontalMovement, verticalMovement;
     public float WaitBeforeMoveSeconds;
     private bool canMove = true;
     private bool canMoveDown = true, canMoveUp = true, canMoveRight = true, canMoveLeft= true, canMoveForward = true, canMoveBackward = true;
@@ -29,10 +29,18 @@ public class BlobMovement3 : MonoBehaviour {
         Ray BackHit = new Ray(transform.position, Vector3.forward);
         Ray FrontHit = new Ray(transform.position, Vector3.back);
         playerRb.isKinematic = false;
-
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
-        verticalMovement = Input.GetAxisRaw("Vertical");
-
+        if (MobileControllers.moveHorizontal == 0 && MobileControllers.moveVertical == 0)
+        {
+            horizontalMovement = Input.GetAxisRaw("Horizontal");
+            verticalMovement = Input.GetAxisRaw("Vertical");
+            Debug.Log("Shit");
+        }
+        else
+        {
+            horizontalMovement = MobileControllers.moveHorizontal;
+            verticalMovement = MobileControllers.moveVertical;
+        }
+            
 
         if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 )
         {
@@ -110,8 +118,15 @@ public class BlobMovement3 : MonoBehaviour {
             
         else if (canMove && !inAir &&(horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
             StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement),moveScale));
-            
+
+
+        MobileControllers.moveVertical = 0;
+        MobileControllers.moveHorizontal = 0;
     }   
+
+    public void MoveBlop()
+    { 
+}
     IEnumerator Move(Vector3 direction, float Scale)
     {
         Vector3 previousPoint = gameObject.transform.position;
