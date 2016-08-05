@@ -13,7 +13,6 @@ public class ButtonQuit : MonoBehaviour {
     }
     void QuitScene()
     {
-        Debug.Log("ASD");
         Application.Quit();
     }
 }
