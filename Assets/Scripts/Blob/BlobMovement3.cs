@@ -33,7 +33,6 @@ public class BlobMovement3 : MonoBehaviour {
         {
             horizontalMovement = Input.GetAxisRaw("Horizontal");
             verticalMovement = Input.GetAxisRaw("Vertical");
-            Debug.Log("Shit");
         }
         else
         {

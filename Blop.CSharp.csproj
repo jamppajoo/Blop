@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Blob\BlobMovement2.cs" />
     <Compile Include="Assets\Scripts\Blob\BlobMovement3.cs" />
     <Compile Include="Assets\Scripts\Block.cs" />
+    <Compile Include="Assets\Scripts\ButtonQuit.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Finish.cs" />
     <Compile Include="Assets\Scripts\Floor\IsFloor.cs" />
