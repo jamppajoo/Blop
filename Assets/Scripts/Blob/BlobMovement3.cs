@@ -108,7 +108,7 @@ public class BlobMovement3 : MonoBehaviour {
         if (Physics.Raycast(UpHit,out hit) && hit.distance <1)
             {
             if (verticalMovement > 0)
-                return;
+                verticalMovement = 0;
             }
         // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
