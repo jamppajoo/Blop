@@ -28,6 +28,7 @@ public class BlobMovement3 : MonoBehaviour {
         Ray LeftHit = new Ray(transform.position, Vector3.left);
         Ray BackHit = new Ray(transform.position, Vector3.forward);
         Ray FrontHit = new Ray(transform.position, Vector3.back);
+        Ray UpHit = new Ray(transform.position, Vector3.up);
         playerRb.isKinematic = false;
         if (MobileControllers.moveHorizontal == 0 && MobileControllers.moveVertical == 0)
         {
@@ -104,6 +105,11 @@ public class BlobMovement3 : MonoBehaviour {
             if (verticalMovement < 0 && CameraMovement.isUp)
                 verticalMovement = 0;
         }
+        if (Physics.Raycast(UpHit,out hit) && hit.distance <1)
+            {
+            if (verticalMovement > 0)
+                return;
+            }
         // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
         if (playerRb.velocity.y != 0)
