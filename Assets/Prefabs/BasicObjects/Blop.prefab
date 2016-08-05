@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMovement: 0
   verticalMovement: 0
-  WaitBeforeMoveSeconds: 0.2
+  WaitBeforeMoveSeconds: 0.15
   moveScale: 1
   smoothFactor: 0.1
 --- !u!114 &11418830
