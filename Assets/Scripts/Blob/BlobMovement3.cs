@@ -49,6 +49,8 @@ public class BlobMovement3 : MonoBehaviour {
         }
         if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )
         {
+            Debug.Log(hit.transform.gameObject);
+
             if (hit.transform.gameObject.tag == "RightWall")
             {
                 playerRb.isKinematic = true;
