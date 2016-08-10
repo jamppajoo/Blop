@@ -45,6 +45,7 @@ GameObject:
   - 222: {fileID: 22299172}
   - 114: {fileID: 11485266}
   - 114: {fileID: 11427224}
+  - 114: {fileID: 11432616}
   m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
@@ -80,6 +81,7 @@ GameObject:
   - 222: {fileID: 22287560}
   - 114: {fileID: 11487682}
   - 114: {fileID: 11444334}
+  - 114: {fileID: 11419736}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -166,6 +168,7 @@ GameObject:
   - 222: {fileID: 22243064}
   - 114: {fileID: 11491402}
   - 114: {fileID: 11409280}
+  - 114: {fileID: 11410168}
   m_Layer: 5
   m_Name: Down
   m_TagString: Untagged
@@ -184,6 +187,7 @@ GameObject:
   - 222: {fileID: 22293652}
   - 114: {fileID: 11421660}
   - 114: {fileID: 11481280}
+  - 114: {fileID: 11474092}
   m_Layer: 5
   m_Name: Up
   m_TagString: Untagged
@@ -234,6 +238,7 @@ GameObject:
   - 222: {fileID: 22253182}
   - 114: {fileID: 11422736}
   - 114: {fileID: 11418994}
+  - 114: {fileID: 11415222}
   m_Layer: 5
   m_Name: ChangeView
   m_TagString: Untagged
@@ -346,6 +351,32 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11410168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
+--- !u!114 &11415222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11418994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,6 +418,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11419736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11421660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,6 +559,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: R
+--- !u!114 &11432616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11444334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -750,6 +807,25 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11474092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &11481280
 MonoBehaviour:
   m_ObjectHideFlags: 1
