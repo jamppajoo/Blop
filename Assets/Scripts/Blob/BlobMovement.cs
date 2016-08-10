@@ -56,7 +56,7 @@ public class BlobMovement : MonoBehaviour {
             }
             if (hit.transform.gameObject.tag == "RightWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale,timeToMove));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale,timeToMove /2));
             }
 
             if (horizontalMovement > 0)
@@ -71,7 +71,7 @@ public class BlobMovement : MonoBehaviour {
             }
             if (hit.transform.gameObject.tag == "LeftWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove /2));
             }
             if (horizontalMovement < 0)
                 horizontalMovement = 0;
@@ -85,7 +85,7 @@ public class BlobMovement : MonoBehaviour {
 
             if (hit.transform.gameObject.tag == "BackWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove/2));
             }
 
             if (verticalMovement > 0 && CameraMovement.isUp)
@@ -100,7 +100,7 @@ public class BlobMovement : MonoBehaviour {
 
             if (hit.transform.gameObject.tag == "FrontWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove/2));
             }
 
             if (verticalMovement < 0 && CameraMovement.isUp)
