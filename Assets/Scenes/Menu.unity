@@ -2448,7 +2448,7 @@ GameObject:
   - 222: {fileID: 1756643290}
   - 114: {fileID: 1756643289}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Pasketeksti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2504,7 +2504,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "MegaAlphabuild 0.001\nProperty of Jumuvirma Oy\n(aika asiallista eik\xF6s
+  m_Text: "MegaAlphabuild 0.002\nProperty of Jumuvirma Oy\n(aika asiallista eik\xF6s
     :3)"
 --- !u!222 &1756643290
 CanvasRenderer:
