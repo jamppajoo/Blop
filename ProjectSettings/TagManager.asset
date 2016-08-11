@@ -10,6 +10,7 @@ TagManager:
   - LeftWall
   - FrontWall
   - solid
+  - UpWall
   layers:
   - Default
   - TransparentFX

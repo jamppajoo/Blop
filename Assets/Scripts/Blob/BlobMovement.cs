@@ -107,10 +107,11 @@ public class BlobMovement : MonoBehaviour {
                 verticalMovement = 0;
         }
         if (Physics.Raycast(UpHit,out hit) && hit.distance <1)
-            {
+        {
+            playerRb.isKinematic = true;
             if (verticalMovement > 0)
                 verticalMovement = 0;
-            }
+        }
         // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
         if (playerRb.velocity.y != 0)
