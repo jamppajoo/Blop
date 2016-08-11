@@ -6854,7 +6854,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 420088, guid: fd79f1082bc78f2459f1d80d76dbb790, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 420088, guid: fd79f1082bc78f2459f1d80d76dbb790, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6895,6 +6895,10 @@ Prefab:
     - target: {fileID: 117030, guid: fd79f1082bc78f2459f1d80d76dbb790, type: 2}
       propertyPath: m_Name
       value: LeftWallTile (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 420088, guid: fd79f1082bc78f2459f1d80d76dbb790, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd79f1082bc78f2459f1d80d76dbb790, type: 2}
