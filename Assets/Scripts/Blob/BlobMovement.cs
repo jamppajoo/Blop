@@ -152,7 +152,7 @@ public class BlobMovement : MonoBehaviour {
 
         
 
-        while ((elapsedtime <movementTime) )
+        while (elapsedtime <movementTime )
         {
             gameObject.transform.position = Vector3.Lerp(startPoint, nextPoint, (elapsedtime / movementTime));
             elapsedtime += Time.fixedDeltaTime;
