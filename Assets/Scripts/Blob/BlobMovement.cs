@@ -48,8 +48,6 @@ public class BlobMovement : MonoBehaviour {
         }
         if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )
         {
-            Debug.Log(hit.transform.gameObject);
-
             if (hit.transform.gameObject.tag == "RightWall")
             {
                 playerRb.isKinematic = true;
@@ -107,10 +105,21 @@ public class BlobMovement : MonoBehaviour {
                 verticalMovement = 0;
         }
         if (Physics.Raycast(UpHit,out hit) && hit.distance <1)
-            {
+        {
+            if (hit.transform.gameObject.tag == "FrontWall" && verticalMovement >1)
+                verticalMovement = 0;
+            else if (hit.transform.gameObject.tag == "BackWall")
+                Debug.Log("Tähän tulee jotan koodia joskus :DD");
+
+            playerRb.isKinematic = true;
+
+
+            /* //old working code
+            playerRb.isKinematic = true;
             if (verticalMovement > 0)
                 verticalMovement = 0;
-            }
+                */
+        }
         // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
         if (playerRb.velocity.y != 0)
