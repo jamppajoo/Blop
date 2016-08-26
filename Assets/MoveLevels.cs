@@ -16,7 +16,9 @@ public class MoveLevels : MonoBehaviour {
 
     public void Start()
     {
-        nextLevelsButton.onClick.AddListener(() => nextButtonPressed());
+        nextLevelsButton.onClick.AddListener(() => moveToLocation(true));
+        previousLevelsButton.onClick.AddListener(() => moveToLocation(false));
+
         startPoint = levels.GetComponent<RectTransform>().anchoredPosition;
         movePoint = new Vector2(levels.GetComponent<RectTransform>().anchoredPosition.x - 1920, levels.GetComponent<RectTransform>().anchoredPosition.y);
     }
@@ -24,25 +26,21 @@ public class MoveLevels : MonoBehaviour {
     {
         
     }
-    public void nextButtonPressed()
-    {
-        while (movePoint.x < levels.GetComponent<RectTransform>().anchoredPosition.x)
-        {
-            moveToLocation();
-            return;
-        }
-            
-    }
-    public void moveToLocation()
+
+    public void moveToLocation(bool toLeft)
     {
         
         Debug.Log(startPoint.x);
         Debug.Log(movePoint.x);
         Debug.Log(levels.GetComponent<RectTransform>().anchoredPosition.x);
 
-        levels.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(startPoint, movePoint, Time.deltaTime/smoothTime);
-        
-            
+        //levels.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(startPoint, movePoint, Time.deltaTime/smoothTime);
+        if (toLeft)
+            levels.GetComponent<RectTransform>().anchoredPosition = movePoint;
+
+        if (!toLeft)
+            levels.GetComponent<RectTransform>().anchoredPosition = startPoint;
+
     }
 
 }
