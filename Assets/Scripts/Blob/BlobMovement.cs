@@ -150,7 +150,7 @@ public class BlobMovement : MonoBehaviour {
         
             
         else if (canMove && !inAir &&(horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
-            StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement),moveScale, timeToMove));
+            StartCoroutine(Move(new Vector3(horizontalMovement, 0,verticalMovement  ),moveScale, timeToMove));
 
 
         MobileControllers.moveVertical = 0;
