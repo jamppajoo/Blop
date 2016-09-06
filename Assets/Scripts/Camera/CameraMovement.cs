@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
 	private Animator animator;
-	public static bool isUp, isDown;
+	public static bool isUp, isDown, rotatedUp;
     public static bool changeMade = false;
     public bool cameraRotate = false;
 	
@@ -11,6 +11,7 @@ public class CameraMovement : MonoBehaviour {
 	void Start () {
 		animator = GetComponent<Animator> ();
 		isUp = false;
+        rotatedUp = false;
 		isDown = true;
 	}
 	
@@ -27,9 +28,15 @@ public class CameraMovement : MonoBehaviour {
             else if(cameraRotate)
             {
                 if (!isUp)
+                {
                     animator.SetBool("RotateToUp", true);
+                    rotatedUp = true;
+                }
                 else if (!isDown)
+                {
                     animator.SetBool("RotateToDown", true);
+                    rotatedUp = false;
+                }
             }
 		}
         changeMade = false;
@@ -37,7 +44,6 @@ public class CameraMovement : MonoBehaviour {
 	}
 	void IsUp()
 	{
-        Debug.Log("asdads");
 		isUp = true;
 		isDown = false;
 		animator.SetBool ("ToUp", false);

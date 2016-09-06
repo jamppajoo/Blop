@@ -72,7 +72,7 @@ public class BlobMovement : MonoBehaviour {
             {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove /2));
             }
-            if (horizontalMovement < 0)
+            if (horizontalMovement < 0 )
                 horizontalMovement = 0;
         }
         if ((Physics.Raycast(BackHit, out hit)) && hit.distance < 1  )
@@ -117,24 +117,7 @@ public class BlobMovement : MonoBehaviour {
             }
             else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0)
                 verticalMovement = 0;
-            /*
-            Debug.Log(hit.transform.gameObject.tag);
-
-            if (hit.transform.gameObject.tag == "FrontWall" && verticalMovement > 1)
-                verticalMovement = 0;
-            else if (hit.transform.gameObject.tag == "BackWall")
-            {
-                Debug.Log("Tähän tulee jotan koodia joskus :DD");
-            }
-
-            playerRb.isKinematic = true;
-            /*
-
-            /* //old working code
-            playerRb.isKinematic = true;
-            if (verticalMovement > 0)
-                verticalMovement = 0;
-                */
+          
         }
 
 
@@ -147,11 +130,24 @@ public class BlobMovement : MonoBehaviour {
         
         if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale, timeToMove));
-        
-            
-        else if (canMove && !inAir &&(horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
+
+        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
+        {
+            if (CameraMovement.rotatedUp)
+                StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), moveScale, timeToMove));
+
+            else
+                StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
+        }
+        /*
+
+            else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
+
             StartCoroutine(Move(new Vector3(horizontalMovement, 0,verticalMovement  ),moveScale, timeToMove));
 
+        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.rotatedUp && CameraMovement.isUp)
+            StartCoroutine(Move(new Vector3(verticalMovement *-1, 0, horizontalMovement), moveScale, timeToMove));
+            */
 
         MobileControllers.moveVertical = 0;
         MobileControllers.moveHorizontal = 0;
