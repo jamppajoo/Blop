@@ -268,7 +268,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 1
-    functionName: IsUp
+    functionName: rotatedIsUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

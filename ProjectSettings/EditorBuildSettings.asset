@@ -8,34 +8,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.1.unity
+    path: Assets/Scenes/LevelPack1/Level1.1.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.2.unity
+    path: Assets/Scenes/LevelPack1/Level1.2.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.3.unity
+    path: Assets/Scenes/LevelPack1/Level1.3.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.4.unity
+    path: Assets/Scenes/LevelPack1/Level1.4.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.5.unity
+    path: Assets/Scenes/LevelPack1/Level1.5.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.6.unity
+    path: Assets/Scenes/LevelPack1/Level1.6.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.7.unity
+    path: Assets/Scenes/LevelPack1/Level1.7.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.8.unity
+    path: Assets/Scenes/LevelPack1/Level1.8.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.9.unity
+    path: Assets/Scenes/LevelPack1/Level1.9.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.10.unity
+    path: Assets/Scenes/LevelPack1/Level1.10.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.11.unity
+    path: Assets/Scenes/LevelPack1/Level1.11.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.12.unity
+    path: Assets/Scenes/LevelPack1/Level1.12.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.13.unity
+    path: Assets/Scenes/LevelPack1/Level1.13.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.14.unity
+    path: Assets/Scenes/LevelPack1/Level1.14.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.15.unity
+    path: Assets/Scenes/LevelPack1/Level1.15.unity
   - enabled: 1
-    path: Assets/Scenes/Level1.16.unity
+    path: Assets/Scenes/LevelPack1/Level1.16.unity
+  - enabled: 1
+    path: Assets/Scenes/LevelPack2/Level2.1.unity
+  - enabled: 1
+    path: Assets/Scenes/LevelPack2/Level2.2.unity
+  - enabled: 1
+    path: Assets/Scenes/LevelPack2/Level2.3.unity

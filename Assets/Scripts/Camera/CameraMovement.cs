@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
 	private Animator animator;
-	public static bool isUp, isDown, rotatedUp;
+	public static bool isUp, isDown, rotatedUp,rotatedDown;
     public static bool changeMade = false;
     public bool cameraRotate = false;
 	
@@ -13,6 +13,7 @@ public class CameraMovement : MonoBehaviour {
 		isUp = false;
         rotatedUp = false;
 		isDown = true;
+        rotatedDown = true;
 	}
 	
 	// Update is called once per frame
@@ -27,16 +28,11 @@ public class CameraMovement : MonoBehaviour {
             }
             else if(cameraRotate)
             {
-                if (!isUp)
-                {
+                if (!rotatedUp)
                     animator.SetBool("RotateToUp", true);
-                    rotatedUp = true;
-                }
-                else if (!isDown)
-                {
-                    animator.SetBool("RotateToDown", true);
-                    rotatedUp = false;
-                }
+                else if (!rotatedDown)
+                  animator.SetBool("RotateToDown", true);
+                    
             }
 		}
         changeMade = false;
@@ -47,12 +43,25 @@ public class CameraMovement : MonoBehaviour {
 		isUp = true;
 		isDown = false;
 		animator.SetBool ("ToUp", false);
-        animator.SetBool("RotateToUp", false);
     }
 	void IsDown(){
 		isDown = true;
 		isUp = false;
         animator.SetBool ("ToDown", false);
+    }
+    void rotatedIsUp()
+    {
+        rotatedUp = true;
+        rotatedDown = false;
+        isDown = false;
+        animator.SetBool("RotateToUp", false);
+
+    }
+    void rotatedIsDown()
+    {
+        rotatedDown = true;
+        isDown = true;
+        rotatedUp = false;
         animator.SetBool("RotateToDown", false);
     }
 }

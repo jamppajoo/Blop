@@ -58,8 +58,10 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale,timeToMove /2));
             }
 
-            if (horizontalMovement > 0)
+            if (horizontalMovement > 0 && (CameraMovement.isUp || CameraMovement.isDown))
                 horizontalMovement = 0;
+            if (verticalMovement < 0 && CameraMovement.rotatedUp)
+                verticalMovement = 0;
         }
 
         if ((Physics.Raycast(LeftHit, out hit)) && hit.distance < 1)
@@ -72,8 +74,10 @@ public class BlobMovement : MonoBehaviour {
             {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove /2));
             }
-            if (horizontalMovement < 0 )
+            if (horizontalMovement < 0 && (CameraMovement.isDown || CameraMovement.isUp) )
                 horizontalMovement = 0;
+            if (verticalMovement > 0 && CameraMovement.rotatedUp)
+                verticalMovement = 0;
         }
         if ((Physics.Raycast(BackHit, out hit)) && hit.distance < 1  )
         {
@@ -89,6 +93,9 @@ public class BlobMovement : MonoBehaviour {
 
             if (verticalMovement > 0 && CameraMovement.isUp)
                     verticalMovement = 0;
+            if (horizontalMovement > 0 && CameraMovement.rotatedUp)
+                horizontalMovement = 0;
+            
         }
         if ((Physics.Raycast(FrontHit, out hit)) && hit.distance < 1)
         {
@@ -104,6 +111,8 @@ public class BlobMovement : MonoBehaviour {
 
             if (verticalMovement < 0 && CameraMovement.isUp)
                 verticalMovement = 0;
+            if (horizontalMovement < 0 && CameraMovement.rotatedUp)
+                horizontalMovement = 0;
         }
 
         if (Physics.Raycast(UpHit, out hit) && hit.distance < 1)
@@ -112,16 +121,17 @@ public class BlobMovement : MonoBehaviour {
             if (hit.transform.gameObject.tag == "UpWall")
             {
                 playerRb.isKinematic = true;
-                if (verticalMovement > 0)
+                if (verticalMovement > 0 && CameraMovement.isDown)
                     verticalMovement = 0;
             }
-            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0)
+            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  CameraMovement.isDown)
                 verticalMovement = 0;
+
           
         }
 
 
-        // Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
+         Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
         if (playerRb.velocity.y != 0)
             inAir = true;
@@ -131,15 +141,16 @@ public class BlobMovement : MonoBehaviour {
         if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale, timeToMove));
 
-        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
+        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) )
         {
             if (CameraMovement.rotatedUp)
                 StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), moveScale, timeToMove));
 
-            else
+            else if (CameraMovement.isUp)
                 StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
         }
-        /*
+        
+      /*
 
             else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
 
@@ -147,7 +158,7 @@ public class BlobMovement : MonoBehaviour {
 
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.rotatedUp && CameraMovement.isUp)
             StartCoroutine(Move(new Vector3(verticalMovement *-1, 0, horizontalMovement), moveScale, timeToMove));
-            */
+             */ 
 
         MobileControllers.moveVertical = 0;
         MobileControllers.moveHorizontal = 0;
