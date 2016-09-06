@@ -66,7 +66,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000001, guid: d6a253b1fc7f99d41a0181e468664dcf,
+  m_LightingDataAsset: {fileID: 112000001, guid: 957ad8b7dde8a9443a54d3a74afa108d,
     type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cbf0c928858ff4fa2412d1d8f0aca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Level14
+  sceneToLoad: Level1.14
   rotationSpeed: 50
 --- !u!23 &256083065
 MeshRenderer:
