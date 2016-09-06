@@ -90,7 +90,7 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.Jumuvirma.Blop
-  bundleVersion: 0.002
+  bundleVersion: 0.01
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
