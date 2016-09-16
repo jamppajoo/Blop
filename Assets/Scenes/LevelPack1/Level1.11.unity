@@ -1085,6 +1085,10 @@ Prefab:
       propertyPath: m_Name
       value: NormalLevelBasicObjects (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 11405468, guid: 9d16695557517f145b3faee84a3e8128, type: 2}
+      propertyPath: m_Text
+      value: Level 1.11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d16695557517f145b3faee84a3e8128, type: 2}
   m_IsPrefabParent: 0

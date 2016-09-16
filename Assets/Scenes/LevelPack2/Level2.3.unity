@@ -2158,6 +2158,10 @@ Prefab:
       propertyPath: m_Name
       value: RotatingCameraLevelBasicObjects (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11494992, guid: c47d5e7129bfd5d4f8100490fa23b2a3, type: 2}
+      propertyPath: m_Text
+      value: Level 2.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c47d5e7129bfd5d4f8100490fa23b2a3, type: 2}
   m_IsPrefabParent: 0

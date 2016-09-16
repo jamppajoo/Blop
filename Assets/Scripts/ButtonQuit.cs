@@ -4,15 +4,22 @@ using UnityEngine.UI;
 
 public class ButtonQuit : MonoBehaviour {
 
-    public Button QuitButton;
+    private Button QuitButton;
+    private GameObject levelPackSelect;
 
     void Start()
     {
         QuitButton = GameObject.Find("Quit").GetComponent<Button>();
-        QuitButton.onClick.AddListener(() => QuitScene());
+        levelPackSelect = GameObject.Find("LevelPackSelect");
+        QuitButton.onClick.AddListener(() => pressedQuit());
+       
     }
-    void QuitScene()
+    void pressedQuit()
     {
-        Application.Quit();
+        if (levelPackSelect.activeSelf)
+        {
+            Application.Quit();
+        }
     }
+    
 }

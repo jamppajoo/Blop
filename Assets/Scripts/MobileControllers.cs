@@ -28,15 +28,7 @@ public class MobileControllers : MonoBehaviour
     void Initial()
     {
         ChangeView.onClick.AddListener(() => ViewChange());
-        /* Up.onClick.AddListener(() => GoUp());
-         Down.onClick.AddListener(() => GoDown());
-         Left.onClick.AddListener(() => GoLeft());
-         Right.onClick.AddListener(() => GoRight());*/
         Back.onClick.AddListener(() => GoToMenu());
-
-
-
-        
 
         EventTrigger upTrigger = Up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();

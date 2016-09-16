@@ -20,7 +20,6 @@ public class Teleport : MonoBehaviour {
 
     void OnTriggerEnter(Collider c)
     {
-        Debug.Log("EASPDOK");
         if (c.gameObject.name == "Blop")
         {
             c.transform.position = new Vector3(c.transform.position.x, upperTeleport.transform.position.y, c.transform.position.z);

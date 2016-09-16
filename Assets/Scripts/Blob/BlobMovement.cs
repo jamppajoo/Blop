@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BlobMovement : MonoBehaviour {
     private float horizontalMovement, verticalMovement;
     private bool canMove = true;
-   // private bool canMoveDown = true, canMoveUp = true, canMoveRight = true, canMoveLeft= true, canMoveForward = true, canMoveBackward = true;
     private Rigidbody playerRb;
     private bool inAir = false;
     private Vector3 velocity = Vector3.zero;
@@ -15,12 +15,12 @@ public class BlobMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerRb = GameObject.Find("Blop").transform.gameObject.GetComponent<Rigidbody>();
-
-	
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        
+        //Raycast to every direction
         RaycastHit hit;
         Ray DownHit = new Ray(transform.position, Vector3.down);
         Ray RightHit = new Ray(transform.position, Vector3.right);
@@ -29,6 +29,8 @@ public class BlobMovement : MonoBehaviour {
         Ray FrontHit = new Ray(transform.position, Vector3.back);
         Ray UpHit = new Ray(transform.position, Vector3.up);
         playerRb.isKinematic = false;
+
+        //If not using mobilecontrollers to move
         if (MobileControllers.moveHorizontal == 0 && MobileControllers.moveVertical == 0)
         {
             horizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -41,6 +43,7 @@ public class BlobMovement : MonoBehaviour {
         }
 
         
+        //Pretty much only shitton of raycasting in different directions and restricting movement depend on that
 
         if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 )
         {
@@ -95,7 +98,6 @@ public class BlobMovement : MonoBehaviour {
                     verticalMovement = 0;
             if (horizontalMovement > 0 && CameraMovement.rotatedUp)
                 horizontalMovement = 0;
-            
         }
         if ((Physics.Raycast(FrontHit, out hit)) && hit.distance < 1)
         {
@@ -117,7 +119,6 @@ public class BlobMovement : MonoBehaviour {
 
         if (Physics.Raycast(UpHit, out hit) && hit.distance < 1)
         {
-
             if (hit.transform.gameObject.tag == "UpWall")
             {
                 playerRb.isKinematic = true;
@@ -126,21 +127,15 @@ public class BlobMovement : MonoBehaviour {
             }
             else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  CameraMovement.isDown)
                 verticalMovement = 0;
-
-          
         }
-
-
-         Debug.Log("HorizontalMovement  :" + horizontalMovement + "VerticalMovement    :" + verticalMovement);
 
         if (playerRb.velocity.y != 0)
             inAir = true;
         else inAir = false;
-        
-        
+        //Check movement and other things
         if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale, timeToMove));
-
+        //Same but check if camera is rotated only up or up & 90 degrees
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) )
         {
             if (CameraMovement.rotatedUp)
@@ -149,42 +144,21 @@ public class BlobMovement : MonoBehaviour {
             else if (CameraMovement.isUp)
                 StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
         }
-        
-      /*
-
-            else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.isUp)
-
-            StartCoroutine(Move(new Vector3(horizontalMovement, 0,verticalMovement  ),moveScale, timeToMove));
-
-        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && CameraMovement.rotatedUp && CameraMovement.isUp)
-            StartCoroutine(Move(new Vector3(verticalMovement *-1, 0, horizontalMovement), moveScale, timeToMove));
-             */ 
-
         MobileControllers.moveVertical = 0;
         MobileControllers.moveHorizontal = 0;
+
+        //Check if the y velocity is too much, if so, restart level, teleport stuff
+        if(playerRb.velocity.y < -15)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }   
-
-    public void MoveBlop()
-    { 
-}
+    //Movement script
     IEnumerator Move(Vector3 direction, float Scale, float movementTime)
-    {/*
-        Vector3 previousPoint = gameObject.transform.position;
-        Vector3 nextPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
-
-        canMove = false;
-        gameObject.transform.position = nextPoint;
-        yield return new WaitForSeconds(movementTime);
-
-        canMove = true;*/
-
+    {
         canMove = false;
         float elapsedtime = 0;
 
         Vector3 startPoint = gameObject.transform.position;
         Vector3 nextPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
-
-        
 
         while (elapsedtime <movementTime )
         {
@@ -194,10 +168,6 @@ public class BlobMovement : MonoBehaviour {
             yield return null;
 
         }
-
         canMove = true;
-        
-
     }
-
 }

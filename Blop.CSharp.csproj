@@ -69,13 +69,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MoveLevels.cs" />
     <Compile Include="Assets\Scripts\Blob\BlobMovement.cs" />
     <Compile Include="Assets\Scripts\ButtonQuit.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Finish.cs" />
     <Compile Include="Assets\Scripts\Floor\IsFloor.cs" />
     <Compile Include="Assets\Scripts\GridSystem.cs" />
+    <Compile Include="Assets\Scripts\LevelPackSelect.cs" />
     <Compile Include="Assets\Scripts\LevelSelect.cs" />
     <Compile Include="Assets\Scripts\MobileControllers.cs" />
     <Compile Include="Assets\Scripts\Quit.cs" />
