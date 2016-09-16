@@ -7,6 +7,7 @@ public class CameraMovement : MonoBehaviour {
     public static bool changeMade = false;
     public bool cameraRotate = false;
     private GameObject Blop, MainCamera;
+    public float speed = 5f;
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
@@ -71,7 +72,7 @@ public class CameraMovement : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        MainCamera.gameObject.transform.position = Vector3.Lerp(MainCamera.gameObject.transform.position, Blop.gameObject.transform.position, 5f *Time.deltaTime);
+        MainCamera.gameObject.transform.position = Vector3.Lerp(MainCamera.gameObject.transform.position, Blop.gameObject.transform.position, speed *Time.deltaTime);
   
 
     }
