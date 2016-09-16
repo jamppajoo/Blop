@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\GridSystem.cs" />
     <Compile Include="Assets\Scripts\LevelPackSelect.cs" />
     <Compile Include="Assets\Scripts\LevelSelect.cs" />
+    <Compile Include="Assets\Scripts\LevelStarSystem.cs" />
     <Compile Include="Assets\Scripts\MobileControllers.cs" />
     <Compile Include="Assets\Scripts\Quit.cs" />
     <Compile Include="Assets\Scripts\Restart.cs" />

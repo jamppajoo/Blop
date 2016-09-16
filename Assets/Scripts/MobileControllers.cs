@@ -33,7 +33,7 @@ public class MobileControllers : MonoBehaviour
         EventTrigger upTrigger = Up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();
         upEntry.eventID = EventTriggerType.PointerDown;
-        upEntry.callback.AddListener((data) =>{ GoUp(); });
+        upEntry.callback.AddListener((data) => { GoUp(); });
         upTrigger.triggers.Add(upEntry);
 
         EventTrigger downTrigger = Down.GetComponent<EventTrigger>();
@@ -53,11 +53,8 @@ public class MobileControllers : MonoBehaviour
         rightEntry.eventID = EventTriggerType.PointerDown;
         rightEntry.callback.AddListener((data) => { GoRight(); });
         rightTrigger.triggers.Add(rightEntry);
-
-
-
     }
-
+    
     public void OnPointerDownDelegate(PointerEventData data)
     {
         Debug.Log(data);
@@ -69,9 +66,7 @@ public class MobileControllers : MonoBehaviour
     }
     public void GoUp()
     {
-        Debug.Log("Pressed button");
-
-        moveVertical = 1;   
+        moveVertical = 1;
     }
     public void GoDown()
     {
@@ -89,6 +84,5 @@ public class MobileControllers : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-
     
 }

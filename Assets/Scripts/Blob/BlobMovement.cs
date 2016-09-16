@@ -10,7 +10,7 @@ public class BlobMovement : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     public float moveScale = 1f;
     public float timeToMove;
-    
+    public static int buttonPresses = 0;
     
 	// Use this for initialization
 	void Start () {
@@ -154,6 +154,7 @@ public class BlobMovement : MonoBehaviour {
     //Movement script
     IEnumerator Move(Vector3 direction, float Scale, float movementTime)
     {
+        buttonPresses++;
         canMove = false;
         float elapsedtime = 0;
 
