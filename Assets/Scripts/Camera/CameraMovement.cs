@@ -6,18 +6,22 @@ public class CameraMovement : MonoBehaviour {
 	public static bool isUp, isDown, rotatedUp,rotatedDown;
     public static bool changeMade = false;
     public bool cameraRotate = false;
-	
+    private GameObject Blop, MainCamera;
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
+        Blop = GameObject.Find("Blop");
+        MainCamera = GameObject.Find("MainCamera");
 		isUp = false;
         rotatedUp = false;
 		isDown = true;
         rotatedDown = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        
+    }
+
+    // Update is called once per frame
+    void Update () {        
+
 		if (Input.GetKeyDown (KeyCode.Space) || changeMade ) {
             if(!cameraRotate)
             {
@@ -63,5 +67,12 @@ public class CameraMovement : MonoBehaviour {
         isDown = true;
         rotatedUp = false;
         animator.SetBool("RotateToDown", false);
+    }
+
+    public void FixedUpdate()
+    {
+        MainCamera.gameObject.transform.position = Vector3.Lerp(MainCamera.gameObject.transform.position, Blop.gameObject.transform.position, 5f *Time.deltaTime);
+  
+
     }
 }
