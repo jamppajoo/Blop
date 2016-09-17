@@ -24,7 +24,15 @@ public class CameraMovement : MonoBehaviour {
     void Update () {        
 
 		if (Input.GetKeyDown (KeyCode.Space) || changeMade ) {
-            if(!cameraRotate)
+            BlobMovement.buttonPresses += 1;
+            MobileControllers.ChangeView.interactable = false;
+            MobileControllers.Up.interactable = false;
+            MobileControllers.Down.interactable = false;
+            MobileControllers.Left.interactable = false;
+            MobileControllers.Right.interactable = false;
+            MobileControllers.Back.interactable = false;
+            MobileControllers.canPress = false;
+            if (!cameraRotate)
             {
                 if (!isUp)
                     animator.SetBool("ToUp", true);
@@ -48,11 +56,13 @@ public class CameraMovement : MonoBehaviour {
 		isUp = true;
 		isDown = false;
 		animator.SetBool ("ToUp", false);
+        setStuff();
     }
 	void IsDown(){
 		isDown = true;
 		isUp = false;
         animator.SetBool ("ToDown", false);
+        setStuff();
     }
     void rotatedIsUp()
     {
@@ -60,6 +70,7 @@ public class CameraMovement : MonoBehaviour {
         rotatedDown = false;
         isDown = false;
         animator.SetBool("RotateToUp", false);
+        setStuff();
 
     }
     void rotatedIsDown()
@@ -68,8 +79,19 @@ public class CameraMovement : MonoBehaviour {
         isDown = true;
         rotatedUp = false;
         animator.SetBool("RotateToDown", false);
-    }
+        setStuff();
 
+    }
+    void setStuff()
+    {
+        MobileControllers.ChangeView.interactable = true;
+        MobileControllers.Up.interactable = true;
+        MobileControllers.Down.interactable = true;
+        MobileControllers.Left.interactable = true;
+        MobileControllers.Right.interactable = true;
+        MobileControllers.Back.interactable = true ;
+        MobileControllers.canPress = true ;
+    }
     public void FixedUpdate()
     {
         MainCamera.gameObject.transform.position = Vector3.Lerp(MainCamera.gameObject.transform.position, Blop.gameObject.transform.position, speed *Time.deltaTime);

@@ -8,10 +8,9 @@ using UnityEngine.EventSystems;
 public class MobileControllers : MonoBehaviour
 {
 
-    private Button ChangeView;
-    private Button Up, Down, Left, Right;
-    private Button Back;
+    public static Button ChangeView, Up, Down, Left, Right,Back;
     public static float moveHorizontal = 0, moveVertical;
+    public static bool canPress = true;
     // Use this for initialization
     void Start()
     {
@@ -63,26 +62,35 @@ public class MobileControllers : MonoBehaviour
     public void ViewChange()
     {
         CameraMovement.changeMade = true;
+        
     }
     public void GoUp()
     {
+        if (canPress) 
         moveVertical = 1;
     }
     public void GoDown()
     {
-        moveVertical = -1;
+        if (canPress)
+            moveVertical = -1;
     }
     public void GoLeft()
     {
-        moveHorizontal = -1;
+        if (canPress)
+            moveHorizontal = -1;
     }
     public void GoRight()
     {
-        moveHorizontal = 1;
+        if (canPress)
+            moveHorizontal = 1;
     }
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public void RestartCurrentLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
 }

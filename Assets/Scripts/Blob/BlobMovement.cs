@@ -7,7 +7,6 @@ public class BlobMovement : MonoBehaviour {
     private bool canMove = true;
     private Rigidbody playerRb;
     private bool inAir = false;
-    private Vector3 velocity = Vector3.zero;
     public float moveScale = 1f;
     public float timeToMove;
     public static int buttonPresses = 0;
@@ -15,6 +14,7 @@ public class BlobMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerRb = GameObject.Find("Blop").transform.gameObject.GetComponent<Rigidbody>();
+        buttonPresses = 0;
 	}
 	
 	// Update is called once per frame
@@ -150,10 +150,12 @@ public class BlobMovement : MonoBehaviour {
         //Check if the y velocity is too much, if so, restart level, teleport stuff
         if(playerRb.velocity.y < -15)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }   
     //Movement script
     IEnumerator Move(Vector3 direction, float Scale, float movementTime)
     {
+        if(Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
         buttonPresses++;
         canMove = false;
         float elapsedtime = 0;

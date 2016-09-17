@@ -14,7 +14,9 @@ public class ReturnToMenu : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("Menu");
             if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+
+    }
     
-}
 }
