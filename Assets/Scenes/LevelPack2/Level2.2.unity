@@ -1348,6 +1348,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11482342, guid: c47d5e7129bfd5d4f8100490fa23b2a3, type: 2}
+      propertyPath: threeStarMovementAmount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 11482342, guid: c47d5e7129bfd5d4f8100490fa23b2a3, type: 2}
+      propertyPath: twoStarMovementAmount
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 11482342, guid: c47d5e7129bfd5d4f8100490fa23b2a3, type: 2}
+      propertyPath: oneStarMovementAmount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c47d5e7129bfd5d4f8100490fa23b2a3, type: 2}
   m_IsPrefabParent: 0

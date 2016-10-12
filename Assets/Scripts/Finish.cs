@@ -17,11 +17,14 @@ public class Finish : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider c)
     {
-
+        //Assing star amount to gamemanager
+       //    GameObject.Find("GameManager").GetComponent<GameManager>().LevelPack1Stars[SceneManager.GetActiveScene().buildIndex-1] = (GameObject.Find("StarSystem").GetComponent<LevelStarSystem>().stars);
+        
         levelPassedScreen.GetComponent<LevelStarSystem>().showLevelPassedScreen();
 	}
     public void nextLevel()
     {
+
         //If next level is pressed on the levelpassedpanel, load new scene
         SceneManager.LoadScene (sceneToLoad);
     }

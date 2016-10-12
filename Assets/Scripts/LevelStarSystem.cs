@@ -10,10 +10,12 @@ public class LevelStarSystem : MonoBehaviour {
     private GameObject oneStar, twoStar, threeStar, nextLevel, restartLevel, finish, mobileControllers;
     static GameObject levelPassedPanel;
     private int buttonPressesAmount = 0;
+    public int stars;
 
 
     // Use this for initialization
     void Start () {
+        stars = 3;
         buttonPressesText = GameObject.Find("ButtonPressesText").GetComponent<Text>();
         oneStar = GameObject.Find("oneStar");
         twoStar = GameObject.Find("twoStar");
@@ -35,11 +37,16 @@ public class LevelStarSystem : MonoBehaviour {
         buttonPressesText.text = buttonPressesAmount.ToString();
 
         if (buttonPressesAmount > oneStarMovementAmount)
-            levelPassed(1);
+            stars = 0;
         else if (buttonPressesAmount > twoStarMovementAmount)
-            levelPassed(2);
+            stars = 1;
+            
         else if (buttonPressesAmount > threeStarMovementAmount)
-            levelPassed(3);
+            stars = 2;
+        else if (buttonPressesAmount <= threeStarMovementAmount)
+            stars = 3;
+
+        levelPassed(stars);
 
     }
     //Controlled from Finish script
@@ -47,22 +54,27 @@ public class LevelStarSystem : MonoBehaviour {
     {
         switch(stars)
         {
-            case 1:
+            case 0:
                 oneStar.SetActive(false);
                 nextLevel.SetActive(false);
                 break;
-            case 2:
+            case 1:
                 twoStar.SetActive(false);
                 nextLevel.SetActive(true);
                 break;
-            case 3:
+            case 2:
                 threeStar.SetActive(false);
                 nextLevel.SetActive(true);
                 break;
-        }    
+            case 3:
+                nextLevel.SetActive(true);
+                break;
+        }
+        
     }
     public void showLevelPassedScreen()
     {
+        
         levelPassedPanel.SetActive(true);
         mobileControllers.SetActive(false);
         

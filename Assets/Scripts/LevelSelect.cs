@@ -6,7 +6,6 @@ public class LevelSelect : MonoBehaviour {
     
     public void Start()
     {
-        //LoadScene("null");
     }
 
 	public void LoadScene(string SceneName)

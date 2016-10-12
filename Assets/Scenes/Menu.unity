@@ -3092,6 +3092,68 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 795186455}
+--- !u!1 &799567998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 799568000}
+  - 114: {fileID: 799567999}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &799567999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799567998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b0e5608d2e26942a5eb1262608723c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelPack1Names:
+  - Level1.1
+  - Level1.2
+  - Level1.3
+  - Level1.4
+  - Level1.5
+  - Level1.6
+  - Level1.7
+  - Level1.8
+  - Level1.9
+  - Level1.10
+  - Level1.11
+  - Level1.12
+  - Level1.13
+  - Level1.14
+  - Level1.15
+  - Level1.16
+  - Level1.17
+  - Level1.18
+  - Level1.19
+  - Level1.20
+  LevelPack1Stars: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!4 &799568000
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799567998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 361.1989, y: 268.3091, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &813924799
 GameObject:
   m_ObjectHideFlags: 0

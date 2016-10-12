@@ -236,6 +236,7 @@ GameObject:
   - 224: {fileID: 22462518}
   - 222: {fileID: 22261078}
   - 114: {fileID: 11497042}
+  - 114: {fileID: 11492728}
   m_Layer: 5
   m_Name: LevelNumber
   m_TagString: Untagged
@@ -1712,9 +1713,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b3a9c3f489c5a4dbd34105cb19e82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threeStarMovementAmount: 3
-  twoStarMovementAmount: 5
-  oneStarMovementAmount: 7
+  threeStarMovementAmount: 14
+  twoStarMovementAmount: 19
+  oneStarMovementAmount: 25
+  stars: 0
 --- !u!114 &11484946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1804,6 +1806,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b19540cdc8eab1c40a2592380ed8d504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11492728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2251748b18edc6c4682dd07fd731252f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11494502
