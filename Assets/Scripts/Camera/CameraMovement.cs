@@ -24,7 +24,8 @@ public class CameraMovement : MonoBehaviour {
     void Update () {        
 
 		if (Input.GetKeyDown (KeyCode.Space) || changeMade ) {
-            BlobMovement.buttonPresses += 1;
+            BlobMovement.buttonPresses++;
+            GameManager.totalButtonPressesLeft--;
             MobileControllers.ChangeView.interactable = false;
             MobileControllers.Up.interactable = false;
             MobileControllers.Down.interactable = false;

@@ -156,7 +156,10 @@ public class BlobMovement : MonoBehaviour {
     IEnumerator Move(Vector3 direction, float Scale, float movementTime)
     {
         if(Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
-        buttonPresses++;
+        {
+            buttonPresses++;
+            GameManager.totalButtonPressesLeft--;
+        }
         canMove = false;
         float elapsedtime = 0;
 

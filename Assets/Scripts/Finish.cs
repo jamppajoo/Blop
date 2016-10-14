@@ -18,7 +18,8 @@ public class Finish : MonoBehaviour {
 	void OnTriggerEnter(Collider c)
     {
         //Assing star amount to gamemanager
-       //    GameObject.Find("GameManager").GetComponent<GameManager>().LevelPack1Stars[SceneManager.GetActiveScene().buildIndex-1] = (GameObject.Find("StarSystem").GetComponent<LevelStarSystem>().stars);
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] < (GameObject.Find("StarSystem").GetComponent<LevelStarSystem>().stars))
+           GameObject.Find("GameManager").GetComponent<GameManager>().LevelPack1Stars[SceneManager.GetActiveScene().buildIndex-1] = (GameObject.Find("StarSystem").GetComponent<LevelStarSystem>().stars);
         
         levelPassedScreen.GetComponent<LevelStarSystem>().showLevelPassedScreen();
 	}
