@@ -3,8 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-    
-    public int[] LevelPack1Stars = new int[20];
+
+    public int[] LevelPack1Stars;
+    public int[] LevelPack2Stars;
+
+    public int buttonPressesMax;
+
     public static int totalButtonPressesLeft = 200;
     private Text buttonPressesLeftText;
     private static Canvas gameManagerCanvas;
@@ -19,28 +23,17 @@ public class GameManager : MonoBehaviour {
         {
             sharedGM = this;
             DontDestroyOnLoad(sharedGM);
-            
-
         }
         else
         {
             Destroy(this.gameObject);
             
         }
-
-        
-
-
     }
 
     // Update is called once per frame
     void Update () {
-        buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/200";
+        buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
 	
 	}
-
-    public void UpdateButtonPresses()
-    {
-
-    }
 }
