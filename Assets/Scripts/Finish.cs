@@ -6,7 +6,6 @@ public class Finish : MonoBehaviour {
 	public string sceneToLoad;
 	public int rotationSpeed;
     GameObject levelPassedScreen;
-    GameManager GameManager;
     LevelStarSystem LevelStarSystem;
     private bool levelPack1 = false, levelPack2 = false, levelPack3 = false;
 
@@ -14,7 +13,6 @@ public class Finish : MonoBehaviour {
     {
         levelPassedScreen = GameObject.Find("StarSystem");
 
-        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         LevelStarSystem = GameObject.Find("StarSystem").GetComponent<LevelStarSystem>();
 
 
@@ -32,19 +30,20 @@ public class Finish : MonoBehaviour {
         //Assing star amount to gamemanager
 
         if (levelPack1)
-            if (GameManager.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] < (LevelStarSystem.stars))
+            if (GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] < (LevelStarSystem.stars))
             {
-                GameManager.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] = (LevelStarSystem.stars);
-                GameManager.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex ] = 0;
+                GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] = (LevelStarSystem.stars);
+                GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex ] = 0;
             }
         if (levelPack2)
-            if (GameManager.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] < (LevelStarSystem.stars))
+            if (GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] < (LevelStarSystem.stars))
             {
-                GameManager.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] = (LevelStarSystem.stars);
-                GameManager.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 20] = 0;
+                GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] = (LevelStarSystem.stars);
+                GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 20] = 0;
 
             }
         levelPassedScreen.GetComponent<LevelStarSystem>().showLevelPassedScreen();
+        GameManager.sharedGM.Save();
 	}
     public void nextLevel()
     {

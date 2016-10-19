@@ -9,17 +9,16 @@ public class LevelSelect : MonoBehaviour {
     public List<Button> levels = new List<Button>();
     
     private Text levelStars;
-    private GameManager GameManager;
     
     public void Start()
     {
-        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         int i = 0;
         foreach(Transform child in transform)
         {
             if (child.gameObject.transform.name.StartsWith("Level1"))
             {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.LevelPack1Stars[i].ToString();
+                child.GetChild(1).GetComponent<Text>().text = GameManager.sharedGM.LevelPack1Stars[i].ToString();
                 levels.Add(child.GetComponent<Button>());
                 if (child.GetChild(1).GetComponent<Text>().text != 4.ToString())
                 {
@@ -27,7 +26,7 @@ public class LevelSelect : MonoBehaviour {
                 }
                 else child.GetComponent<Button>().interactable = false;
                 
-                switch (GameManager.LevelPack1Stars[i])
+                switch (GameManager.sharedGM.LevelPack1Stars[i])
                 {
                     case 1:
                         child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
@@ -55,14 +54,14 @@ public class LevelSelect : MonoBehaviour {
             }
             else if (child.gameObject.transform.name.StartsWith("Level2"))
             {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.LevelPack2Stars[i].ToString();
+                child.GetChild(1).GetComponent<Text>().text = GameManager.sharedGM.LevelPack2Stars[i].ToString();
                 levels.Add(child.GetComponent<Button>());
                 if (child.GetChild(1).GetComponent<Text>().text != 4.ToString())
                 {
                     child.GetComponent<Button>().interactable = true;
                 }
                 else child.GetComponent<Button>().interactable = false;
-                switch (GameManager.LevelPack2Stars[i])
+                switch (GameManager.sharedGM.LevelPack2Stars[i])
                 {
                     case 1:
                         child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
