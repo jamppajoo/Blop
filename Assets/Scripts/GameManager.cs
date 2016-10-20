@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 /*
     Handles stars, button presses left, button presses max amount and saves them to the file
@@ -13,7 +14,8 @@ using System.IO;
     This Gameobject is't deleted in any point of the game. Allways on the back running.
 */
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public int[] LevelPack1Stars;
     public int[] LevelPack2Stars;
@@ -25,13 +27,20 @@ public class GameManager : MonoBehaviour {
     public static int totalButtonPressesLeft = 200;
     private Text buttonPressesLeftText;
     private static Canvas gameManagerCanvas;
-    
+
+    private Transform adsMenu;
+
     public static GameManager sharedGM;
-    void Awake() {
-        gameManagerCanvas = gameObject.transform.GetChild(0).GetComponent<Canvas>() ;
+    void Awake()
+    {
+        gameManagerCanvas = gameObject.transform.GetChild(0).GetComponent<Canvas>();
         buttonPressesLeftText = gameManagerCanvas.transform.GetChild(0).GetComponent<Text>();
-        
-        if(sharedGM == null)
+        adsMenu = gameManagerCanvas.transform.GetChild(1);
+        adsMenu.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GoToMenu());
+        adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => ShowAd());
+
+
+        if (sharedGM == null)
         {
             sharedGM = this;
             DontDestroyOnLoad(sharedGM);
@@ -39,30 +48,55 @@ public class GameManager : MonoBehaviour {
         else
         {
             Destroy(this.gameObject);
-            
+
         }
         Load();
+
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
-	}
+        if (totalButtonPressesLeft <= 0)
+            ShowAdMenu();
+    }
     public int ReturnTotalStarAmount()
     {
         totalStarAmount = 0;
-        
-        for (int i =0; i < LevelPack1Stars.Length;i++)
+
+        for (int i = 0; i < LevelPack1Stars.Length; i++)
         {
-            if(LevelPack1Stars[i] != 4)
+            if (LevelPack1Stars[i] != 4)
                 totalStarAmount += LevelPack1Stars[i];
         }
-        for (int i = 0; i< LevelPack2Stars.Length;i++)
+        for (int i = 0; i < LevelPack2Stars.Length; i++)
         {
-            if(LevelPack2Stars[i] != 4)
+            if (LevelPack2Stars[i] != 4)
                 totalStarAmount += LevelPack2Stars[i];
         }
         return totalStarAmount;
+    }
+    public void ShowAdMenu()
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+        {
+            adsMenu.gameObject.SetActive(true);
+            MobileControllers.Up.interactable = false;
+            MobileControllers.Down.interactable = false;
+            MobileControllers.Left.interactable = false;
+            MobileControllers.Right.interactable = false;
+            MobileControllers.Back.interactable = false;
+        }
+        else adsMenu.gameObject.SetActive(false);
+    }
+    public void ShowAd()
+    {
+        print("MAINOS :DD");
+    }
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
     public void Save()
     {
@@ -70,7 +104,7 @@ public class GameManager : MonoBehaviour {
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
         PlayerData data = new PlayerData();
-        for(int i = 0; i < LevelPack1Stars.Length;i++)
+        for (int i = 0; i < LevelPack1Stars.Length; i++)
             data.LevelPack1Stars[i] = LevelPack1Stars[i];
         for (int i = 0; i < LevelPack2Stars.Length; i++)
             data.LevelPack2Stars[i] = LevelPack2Stars[i];
@@ -83,20 +117,30 @@ public class GameManager : MonoBehaviour {
     }
     public void Load()
     {
-        if(File.Exists(Application.persistentDataPath + "/playerinfo.dat"))
+        if (File.Exists(Application.persistentDataPath + "/playerinfo.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
-            PlayerData data = (PlayerData) bf.Deserialize(file);
+            PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
-            for(int i = 0; i < data.LevelPack1Stars.Length;i++)
+            for (int i = 0; i < data.LevelPack1Stars.Length; i++)
                 LevelPack1Stars[i] = data.LevelPack1Stars[i];
             for (int i = 0; i < data.LevelPack2Stars.Length; i++)
                 LevelPack2Stars[i] = data.LevelPack2Stars[i];
             buttonPressesMax = data.buttonPressesMax;
             totalButtonPressesLeft = data.totalButtonPressesLeft;
         }
-
+    }
+    public void DeletePersonalData()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerinfo.dat"))
+        {
+            DirectoryInfo dataDir = new DirectoryInfo(Application.persistentDataPath);
+            dataDir.Delete(true);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            print("ASD" );
+            
+        }
     }
 }
 

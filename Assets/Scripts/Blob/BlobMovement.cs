@@ -51,8 +51,7 @@ public class BlobMovement : MonoBehaviour {
 
             else if (hit.transform.gameObject.tag != "Floor")
             {
-                horizontalMovement = 0;
-                verticalMovement = 0;
+                
                 //Some scipt that repesents blop has stuck
             }
         }
@@ -139,10 +138,10 @@ public class BlobMovement : MonoBehaviour {
             inAir = true;
         else inAir = false;
         //Check movement and other things
-        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
+        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown && GameManager.totalButtonPressesLeft >0)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale, timeToMove));
         //Same but check if camera is rotated only up or up & 90 degrees
-        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) )
+        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && GameManager.totalButtonPressesLeft > 0)
         {
             if (CameraMovement.rotatedUp)
                 StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), moveScale, timeToMove));

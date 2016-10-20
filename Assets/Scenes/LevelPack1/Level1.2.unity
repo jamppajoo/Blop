@@ -201,7 +201,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11495920, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &82651712
@@ -267,7 +268,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11495920, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &102429964
@@ -333,13 +335,56 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11495920, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &120552594 stripped
 Transform:
   m_PrefabParentObject: {fileID: 413972, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_PrefabInternal: {fileID: 781228137}
+--- !u!1001 &132794378
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011240951116, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &308911913 stripped
 Transform:
   m_PrefabParentObject: {fileID: 402558, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
@@ -402,7 +447,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (10)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &685686631 stripped
@@ -452,7 +498,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &826704848 stripped
@@ -545,7 +592,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &954952058 stripped
@@ -599,7 +647,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1054392245
@@ -781,7 +830,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (9)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1099798204 stripped
@@ -843,7 +893,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1314993586 stripped
@@ -917,7 +968,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11495920, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1593819784
@@ -1017,7 +1069,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1753274120
@@ -1083,7 +1136,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11495920, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1782289730
@@ -1129,7 +1183,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1871235601 stripped
@@ -1195,7 +1250,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11495920, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1921433729
@@ -1241,7 +1297,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1931003962 stripped
@@ -1287,7 +1344,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2087801278 stripped
@@ -1337,7 +1395,8 @@ Prefab:
       propertyPath: m_Name
       value: FloorTile (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11463422, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9f8ccceaeefcb5043ab2d26aa9a96c82, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2134575120 stripped

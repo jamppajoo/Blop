@@ -62,11 +62,11 @@ public class LevelSelect : MonoBehaviour {
             {
                 child.GetChild(1).GetComponent<Text>().text = GameManager.sharedGM.LevelPack2Stars[i].ToString();
                 levels.Add(child.GetComponent<Button>());
-                if (child.GetChild(1).GetComponent<Text>().text != 4.ToString())
+                if (child.GetChild(1).GetComponent<Text>().text != 4.ToString()  )
                 {
                     child.GetComponent<Button>().interactable = true;
                 }
-                else child.GetComponent<Button>().interactable = false;
+                else  child.GetComponent<Button>().interactable = false;
                 switch (GameManager.sharedGM.LevelPack2Stars[i])
                 {
                     case 1:

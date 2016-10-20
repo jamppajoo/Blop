@@ -11,6 +11,7 @@ public class MobileControllers : MonoBehaviour
     public static Button ChangeView, Up, Down, Left, Right,Back;
     public static float moveHorizontal = 0, moveVertical;
     public static bool canPress = true;
+    public static MobileControllers controller;
     // Use this for initialization
     void Start()
     {

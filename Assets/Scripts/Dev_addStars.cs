@@ -9,7 +9,7 @@ public class Dev_addStars : MonoBehaviour {
     }
     public void AddStars()
     {
-        if (GameManager.totalButtonPressesLeft + 100 < GameManager.sharedGM.buttonPressesMax)
+        if (GameManager.totalButtonPressesLeft + 100 <= GameManager.sharedGM.buttonPressesMax)
         GameManager.totalButtonPressesLeft += 100;
         GameManager.sharedGM.Save();
     }
