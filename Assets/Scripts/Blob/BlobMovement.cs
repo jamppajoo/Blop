@@ -44,11 +44,17 @@ public class BlobMovement : MonoBehaviour {
 
         
         //Pretty much only shitton of raycasting in different directions and restricting movement depend on that
-
         if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 )
         {
             if (verticalMovement < 0 && CameraMovement.isDown)
                 verticalMovement = 0;
+
+            else if (hit.transform.gameObject.tag != "Floor")
+            {
+                horizontalMovement = 0;
+                verticalMovement = 0;
+                //Some scipt that repesents blop has stuck
+            }
         }
         if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )
         {
@@ -155,10 +161,12 @@ public class BlobMovement : MonoBehaviour {
     //Movement script
     IEnumerator Move(Vector3 direction, float Scale, float movementTime)
     {
+        //Check that player moves whole block, if so, add buttonpresses.
         if(Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
         {
             buttonPresses++;
             GameManager.totalButtonPressesLeft--;
+            GameManager.sharedGM.Save();
         }
         canMove = false;
         float elapsedtime = 0;

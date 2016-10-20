@@ -4,6 +4,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
+/*
+    Main function of this scipt is to find every component relative to LevelPassedPanel
+    and make it work (stars, buttons ect). Also displays how many times any button has
+    been pressed to the screen. But that's only for dev purposes.
+*/
+
 public class LevelStarSystem : MonoBehaviour {
 
     private Text buttonPressesText;
@@ -12,10 +18,11 @@ public class LevelStarSystem : MonoBehaviour {
     static GameObject levelPassedPanel;
     private int buttonPressesAmount = 0;
     public int stars;
+    
 
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         stars = 3;
         buttonPressesText = GameObject.Find("ButtonPressesText").GetComponent<Text>();
         oneStar = GameObject.Find("oneStar");
@@ -27,6 +34,7 @@ public class LevelStarSystem : MonoBehaviour {
         finish = GameObject.Find("Finish");
         restartLevel = GameObject.Find("RestartLevel");
         mobileControllers = GameObject.Find("MobileControllers");
+        //Set levelPassedPanel not active since we just started level
         levelPassedPanel.SetActive(false);
         nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.GetComponent<Finish>().nextLevel());
         restartLevel.GetComponent<Button>().onClick.AddListener(() => Restart());
@@ -34,6 +42,7 @@ public class LevelStarSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Check how many times any button has been pressed since level started
         buttonPressesAmount = BlobMovement.buttonPresses;
         buttonPressesText.text = buttonPressesAmount.ToString();
 

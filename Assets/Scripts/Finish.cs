@@ -12,10 +12,8 @@ public class Finish : MonoBehaviour {
     void Start()
     {
         levelPassedScreen = GameObject.Find("StarSystem");
-
         LevelStarSystem = GameObject.Find("StarSystem").GetComponent<LevelStarSystem>();
-
-
+        //Check what levelpack player is playing
         if (SceneManager.GetActiveScene().buildIndex <= 20)
             levelPack1 = true;
         else if (SceneManager.GetActiveScene().buildIndex > 20)
@@ -23,12 +21,12 @@ public class Finish : MonoBehaviour {
     }
     void Update()
 	{
+        //Rotate finish block
 		transform.Rotate (Vector3.up * Time.deltaTime*rotationSpeed);
 	}
 	void OnTriggerEnter(Collider c)
     {
-        //Assing star amount to gamemanager
-
+        //Assing star amount to GameManager if star amount is bigger than in there.
         if (levelPack1)
             if (GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] < (LevelStarSystem.stars))
             {
@@ -47,7 +45,6 @@ public class Finish : MonoBehaviour {
 	}
     public void nextLevel()
     {
-
         //If next level is pressed on the levelpassedpanel, load new scene
         SceneManager.LoadScene (sceneToLoad);
     }
