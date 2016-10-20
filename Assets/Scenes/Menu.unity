@@ -3603,6 +3603,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: zoneId
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
   m_IsPrefabParent: 0
@@ -12662,7 +12667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Add 100 Stars
+  m_Text: Add 10 Stars
 --- !u!222 &1377096814
 CanvasRenderer:
   m_ObjectHideFlags: 0

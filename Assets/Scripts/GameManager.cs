@@ -5,6 +5,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 /*
     Handles stars, button presses left, button presses max amount and saves them to the file
@@ -23,11 +24,12 @@ public class GameManager : MonoBehaviour
     private int totalStarAmount;
 
     public int buttonPressesMax;
+    public int adRewardAmount;
+    public string zoneId;
 
     public static int totalButtonPressesLeft = 200;
     private Text buttonPressesLeftText;
     private static Canvas gameManagerCanvas;
-
     private Transform adsMenu;
 
     public static GameManager sharedGM;
@@ -36,8 +38,8 @@ public class GameManager : MonoBehaviour
         gameManagerCanvas = gameObject.transform.GetChild(0).GetComponent<Canvas>();
         buttonPressesLeftText = gameManagerCanvas.transform.GetChild(0).GetComponent<Text>();
         adsMenu = gameManagerCanvas.transform.GetChild(1);
+        adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate() { ShowAd(); });
         adsMenu.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GoToMenu());
-        adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => ShowAd());
 
 
         if (sharedGM == null)
@@ -81,18 +83,61 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex > 0)
         {
-            adsMenu.gameObject.SetActive(true);
-            MobileControllers.Up.interactable = false;
-            MobileControllers.Down.interactable = false;
-            MobileControllers.Left.interactable = false;
-            MobileControllers.Right.interactable = false;
-            MobileControllers.Back.interactable = false;
+            if(totalButtonPressesLeft <=0)
+            {
+                adsMenu.gameObject.SetActive(true);
+                MobileControllers.Up.interactable = false;
+                MobileControllers.Down.interactable = false;
+                MobileControllers.Left.interactable = false;
+                MobileControllers.Right.interactable = false;
+                MobileControllers.Back.interactable = false;
+            }
+            else if(totalButtonPressesLeft > 0)
+            {
+                adsMenu.gameObject.SetActive(false);
+                MobileControllers.Up.interactable = true;
+                MobileControllers.Down.interactable = true;
+                MobileControllers.Left.interactable = true;
+                MobileControllers.Right.interactable = true;
+                MobileControllers.Back.interactable = true;
+            }
+            
+
+            if(adsMenu.transform.GetChild(1).GetComponent<Button>())
+            {
+                if (string.IsNullOrEmpty(zoneId)) zoneId = null;
+                adsMenu.transform.GetChild(1).GetComponent<Button>().interactable = Advertisement.IsReady(zoneId);
+            }
+
         }
-        else adsMenu.gameObject.SetActive(false);
+        else {
+            adsMenu.gameObject.SetActive(false);
+        }
     }
     public void ShowAd()
     {
-        print("MAINOS :DD");
+        if (string.IsNullOrEmpty(zoneId))
+            zoneId = null;
+        ShowOptions options = new ShowOptions();
+        options.resultCallback = HandleShowResult;
+        Advertisement.Show(zoneId, options);
+    }
+    private void HandleShowResult(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Finished:
+                totalButtonPressesLeft += adRewardAmount;
+                Save();
+                ShowAdMenu();
+                break;
+            case ShowResult.Skipped:
+                Debug.LogWarning("Video was skipped.");
+                break;
+            case ShowResult.Failed:
+                Debug.LogError("Video failed to show.");
+                break;
+        }
     }
     public void GoToMenu()
     {
