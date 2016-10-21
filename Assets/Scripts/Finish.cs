@@ -9,6 +9,7 @@ public class Finish : MonoBehaviour {
     LevelStarSystem LevelStarSystem;
     private bool levelPack1 = false, levelPack2 = false, levelPack3 = false;
 
+
     void Start()
     {
         levelPassedScreen = GameObject.Find("StarSystem");
@@ -30,8 +31,16 @@ public class Finish : MonoBehaviour {
         if (levelPack1)
             if (GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] < (LevelStarSystem.stars))
             {
+                if (LevelStarSystem.stars == 3)
+                {
+                    GameManager.totalButtonPressesLeft += 40;
+                    StartCoroutine(GameManager.sharedGM.ShowToastMessage("Added 40 presses"));
+                }
+
                 GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] = (LevelStarSystem.stars);
-                GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex ] = 0;
+                //if next levels star amount is over 3, make it zero
+                if(GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex] >3)
+                    GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex ] = 0;
             }
         if (levelPack2)
             if (GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] < (LevelStarSystem.stars))

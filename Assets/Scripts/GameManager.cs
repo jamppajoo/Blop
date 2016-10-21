@@ -13,6 +13,7 @@ using UnityEngine.Advertisements;
     file.
     Has variable sharedGM which can be called to directly call variables. (GameManager.sharedGM.buttonPressesMax = 100)
     This Gameobject is't deleted in any point of the game. Allways on the back running.
+    Everything in GameManager has to be in specific order in Unity becouse of getchild() methods.
 */
 
 public class GameManager : MonoBehaviour
@@ -32,15 +33,22 @@ public class GameManager : MonoBehaviour
     private static Canvas gameManagerCanvas;
     private Transform adsMenu;
 
+    private Text toastMessage;
+    private Image toastMessageBG;
+
     public static GameManager sharedGM;
     void Awake()
     {
         gameManagerCanvas = gameObject.transform.GetChild(0).GetComponent<Canvas>();
-        buttonPressesLeftText = gameManagerCanvas.transform.GetChild(0).GetComponent<Text>();
-        adsMenu = gameManagerCanvas.transform.GetChild(1);
-        adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate() { ShowAd(); });
+
+        toastMessageBG = gameManagerCanvas.transform.GetChild(0).GetComponent<Image>();
+        toastMessage = gameManagerCanvas.transform.GetChild(1).GetComponent<Text>();
+
+        adsMenu = gameManagerCanvas.transform.GetChild(2);
+        adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate () { ShowAd(); });
         adsMenu.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GoToMenu());
 
+        buttonPressesLeftText = gameManagerCanvas.transform.GetChild(3).GetComponent<Text>();
 
         if (sharedGM == null)
         {
@@ -55,8 +63,7 @@ public class GameManager : MonoBehaviour
         Load();
 
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
@@ -79,6 +86,8 @@ public class GameManager : MonoBehaviour
         }
         return totalStarAmount;
     }
+
+    //This is called when player runs out of moves
     public void ShowAdMenu()
     {
         if (SceneManager.GetActiveScene().buildIndex > 0)
@@ -130,6 +139,7 @@ public class GameManager : MonoBehaviour
                 totalButtonPressesLeft += adRewardAmount;
                 Save();
                 ShowAdMenu();
+                StartCoroutine(ShowToastMessage("Added 100 presses"));
                 break;
             case ShowResult.Skipped:
                 Debug.LogWarning("Video was skipped.");
@@ -143,6 +153,37 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
+    //"Toast" to express player that it gained some moves. Also fading in this function
+
+    public IEnumerator ShowToastMessage(string toastMessageVariable)
+    {
+        float time = 3;
+        float elapsedTime =0;
+
+        print("Showtoast");
+        toastMessage.text = toastMessageVariable;
+        while(time > elapsedTime)
+        {
+            elapsedTime += Time.fixedDeltaTime;
+            toastMessage.gameObject.SetActive(true);
+            toastMessageBG.gameObject.SetActive(true);
+
+            if (elapsedTime >1)
+            {
+                toastMessageBG.GetComponent<CanvasRenderer>().SetAlpha(toastMessageBG.GetComponent<CanvasRenderer>().GetAlpha() - .01f);
+                toastMessage.GetComponent<CanvasRenderer>().SetAlpha(toastMessageBG.GetComponent<CanvasRenderer>().GetAlpha() - .01f);
+            }
+            yield return null;
+        }
+        toastMessage.gameObject.SetActive(false);
+        toastMessageBG.gameObject.SetActive(false);
+        elapsedTime = 0;
+        
+
+    }
+
+    //Save and load methods, so that player's progress does not get lost
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -176,6 +217,8 @@ public class GameManager : MonoBehaviour
             totalButtonPressesLeft = data.totalButtonPressesLeft;
         }
     }
+
+    //Dev button witch deletes personal data folder, for testing purposes
     public void DeletePersonalData()
     {
         if (File.Exists(Application.persistentDataPath + "/playerinfo.dat"))
@@ -189,6 +232,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
+//Class witch contains player's saved data
 [Serializable]
 class PlayerData
 {
