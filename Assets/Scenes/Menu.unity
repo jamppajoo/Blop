@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692516, g: 0.4967867, b: 0.57508475, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692528, g: 0.49678677, b: 0.57508475, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2836,6 +2836,7 @@ MonoBehaviour:
   LevelPackButton: {fileID: 326743046}
   levels: {fileID: 834166170}
   backToLevelSelect: {fileID: 691305914}
+  unlockLevelPackStarAmount: 69
 --- !u!1 &331792638
 GameObject:
   m_ObjectHideFlags: 0
@@ -5527,6 +5528,7 @@ MonoBehaviour:
   LevelPackButton: {fileID: 664762529}
   levels: {fileID: 795186455}
   backToLevelSelect: {fileID: 691305914}
+  unlockLevelPackStarAmount: 0
 --- !u!1 &675284622
 GameObject:
   m_ObjectHideFlags: 0
@@ -10258,6 +10260,7 @@ MonoBehaviour:
   LevelPackButton: {fileID: 1165181727}
   levels: {fileID: 1386481504}
   backToLevelSelect: {fileID: 691305914}
+  unlockLevelPackStarAmount: 35
 --- !u!1 &1177915079
 GameObject:
   m_ObjectHideFlags: 0

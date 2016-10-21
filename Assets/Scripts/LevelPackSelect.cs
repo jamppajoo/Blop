@@ -7,6 +7,7 @@ public class LevelPackSelect : MonoBehaviour {
     public Button LevelPackButton;
     private Button temp;
     public GameObject levels, backToLevelSelect;
+    public int unlockLevelPackStarAmount ;
     private GameObject levelPackSelect;
 
     void Start()
@@ -15,6 +16,10 @@ public class LevelPackSelect : MonoBehaviour {
         LevelPackButton.onClick.AddListener(() => { LevelPackButtonPressed(); });
         temp = backToLevelSelect.GetComponent<Button>();
         levelPackSelect = GameObject.Find("LevelPackSelect");
+        print(GameManager.sharedGM.ReturnTotalStarAmount());
+        if (unlockLevelPackStarAmount > GameManager.sharedGM.ReturnTotalStarAmount())
+            gameObject.GetComponent<Button>().interactable = false;
+        else  gameObject.GetComponent<Button>().interactable = true;
         temp.onClick.AddListener(() => { BackButtonPressed(); });
 
     }
@@ -23,9 +28,6 @@ public class LevelPackSelect : MonoBehaviour {
         levels.SetActive(true);
         levelPackSelect.SetActive(false);
         backToLevelSelect.SetActive(true);
-        //temp.onClick.AddListener(() => { BackButtonPressed(); });
-
-
     }
     public void BackButtonPressed()
     {
