@@ -48,11 +48,10 @@ public class BlobMovement : MonoBehaviour {
         {
             if (verticalMovement < 0 && CameraMovement.isDown)
                 verticalMovement = 0;
-
-            else if (hit.transform.gameObject.tag != "Floor")
+            
+            else if (hit.transform.gameObject.tag != "Floor" && hit.distance > .47f)
             {
-                
-                //Some scipt that repesents blop has stuck
+                //Some code that repesents that blop is over wrong block
             }
         }
         if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )

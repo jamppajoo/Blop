@@ -8,11 +8,15 @@ public class GridSystem: MonoBehaviour
     public float cell_size = 1f; // = larghezza/altezza delle celle
     private float x, y, z;
 
+    LevelStarSystem system;
+    
+
     void Start()
     {
         x = 0f;
         y = 0f;
         z = 0f;
+        system = GameObject.Find("StarSystem").GetComponent<LevelStarSystem>();
 
     }
 
@@ -23,5 +27,4 @@ public class GridSystem: MonoBehaviour
         z = Mathf.Round(transform.position.z / cell_size) * cell_size;
         transform.position = new Vector3(x, y, z);
     }
-
 }

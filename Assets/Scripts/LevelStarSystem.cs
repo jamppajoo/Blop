@@ -16,9 +16,8 @@ public class LevelStarSystem : MonoBehaviour {
     public int threeStarMovementAmount, twoStarMovementAmount, oneStarMovementAmount;
     private GameObject oneStar, twoStar, threeStar, nextLevel, restartLevel, finish, mobileControllers;
     static GameObject levelPassedPanel;
-    private int buttonPressesAmount = 0;
+    public int buttonPressesAmount = 0;
     public int stars;
-    
 
 
     // Use this for initialization

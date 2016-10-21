@@ -3603,6 +3603,101 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[4]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[5]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[6]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[8]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[9]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[10]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[11]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[12]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[13]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[14]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[15]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[16]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[17]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[18]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 2}
+      propertyPath: LevelPack1Stars.Array.data[19]
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81954bf9adb90e94a81e71a2eae17d4e, type: 2}
   m_IsPrefabParent: 0
