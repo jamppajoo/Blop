@@ -29,7 +29,9 @@ public class GameManager : MonoBehaviour
     public string zoneId;
 
     public static int totalButtonPressesLeft = 200;
-    private Text buttonPressesLeftText;
+    private Text buttonPressesLeftText, moreJumpsText;
+    private float moreJumpsIn;
+    public float moreJumpsDelay;
     private static Canvas gameManagerCanvas;
     private Transform adsMenu;
 
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
         adsMenu.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GoToMenu());
 
         buttonPressesLeftText = gameManagerCanvas.transform.GetChild(3).GetComponent<Text>();
+        moreJumpsText = buttonPressesLeftText.transform.GetChild(1).GetComponent<Text>();
 
         if (sharedGM == null)
         {
@@ -69,6 +72,17 @@ public class GameManager : MonoBehaviour
         buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
         if (totalButtonPressesLeft <= 0)
             ShowAdMenu();
+        if(moreJumpsIn > 0)
+        {
+            moreJumpsIn -= Time.deltaTime;
+        }
+        else if (moreJumpsIn <= 0)
+        {
+            moreJumpsIn = moreJumpsDelay;
+            if (totalButtonPressesLeft < buttonPressesMax + 10)
+                totalButtonPressesLeft += 20;
+        }
+        moreJumpsText.text = moreJumpsIn.ToString();
     }
     public int ReturnTotalStarAmount()
     {

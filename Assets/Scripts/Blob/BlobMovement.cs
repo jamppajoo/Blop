@@ -49,7 +49,7 @@ public class BlobMovement : MonoBehaviour {
             if (verticalMovement < 0 && CameraMovement.isDown)
                 verticalMovement = 0;
             
-            else if (hit.transform.gameObject.tag != "Floor" && hit.distance > .47f)
+            else if (hit.transform.gameObject.tag != "Floor")
             {
                 //Some code that repesents that blop is over wrong block
             }
@@ -166,6 +166,7 @@ public class BlobMovement : MonoBehaviour {
             GameManager.totalButtonPressesLeft--;
             GameManager.sharedGM.Save();
         }
+
         canMove = false;
         float elapsedtime = 0;
 
