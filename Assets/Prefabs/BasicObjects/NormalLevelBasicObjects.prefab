@@ -1097,9 +1097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b3a9c3f489c5a4dbd34105cb19e82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threeStarMovementAmount: 34
-  twoStarMovementAmount: 40
-  oneStarMovementAmount: 55
+  threeStarMovementAmount: 13
+  twoStarMovementAmount: 15
+  oneStarMovementAmount: 20
   buttonPressesAmount: 0
   stars: 0
 --- !u!114 &11419884
@@ -2612,7 +2612,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200, y: -100}
+  m_AnchoredPosition: {x: -400, y: -40}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22475698
