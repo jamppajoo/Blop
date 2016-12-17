@@ -44,16 +44,7 @@ public class BlobMovement : MonoBehaviour {
 
         
         //Pretty much only shitton of raycasting in different directions and restricting movement depend on that
-        if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1 )
-        {
-            if (verticalMovement < 0 && CameraMovement.isDown)
-                verticalMovement = 0;
-            
-            else if (hit.transform.gameObject.tag != "Floor" && hit.distance > .47f)
-            {
-                //Some code that repesents that blop is over wrong block
-            }
-        }
+        
         if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )
         {
             if (hit.transform.gameObject.tag == "RightWall")
@@ -132,7 +123,19 @@ public class BlobMovement : MonoBehaviour {
             else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  CameraMovement.isDown)
                 verticalMovement = 0;
         }
+        if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1)
+        {
+            if (verticalMovement < 0 && CameraMovement.isDown)
+                verticalMovement = 0;
 
+            else if (hit.transform.gameObject.tag != "Floor" && playerRb.isKinematic == false)
+            {
+                print("Blob stuck!");
+                horizontalMovement = 0;
+                verticalMovement = 0;
+                MobileControllers.RestartButton.gameObject.SetActive(true);
+            }
+        }
         if (playerRb.velocity.y != 0)
             inAir = true;
         else inAir = false;
@@ -181,5 +184,6 @@ public class BlobMovement : MonoBehaviour {
 
         }
         canMove = true;
+        
     }
 }

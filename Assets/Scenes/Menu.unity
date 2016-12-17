@@ -2836,7 +2836,7 @@ MonoBehaviour:
   LevelPackButton: {fileID: 326743046}
   levels: {fileID: 834166170}
   backToLevelSelect: {fileID: 691305914}
-  unlockLevelPackStarAmount: 69
+  unlockLevelPackStarAmount: 40
 --- !u!1 &331792638
 GameObject:
   m_ObjectHideFlags: 0
@@ -6781,7 +6781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &762406233
 RectTransform:
   m_ObjectHideFlags: 0

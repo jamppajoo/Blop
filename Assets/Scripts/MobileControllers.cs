@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class MobileControllers : MonoBehaviour
 {
 
-    public static Button ChangeView, Up, Down, Left, Right,Back;
+    public static Button ChangeView, Up, Down, Left, Right,Back, RestartButton;
     public static float moveHorizontal = 0, moveVertical;
     public static bool canPress = true;
     public static MobileControllers controller;
@@ -21,6 +21,7 @@ public class MobileControllers : MonoBehaviour
         Left = GameObject.Find("Left").GetComponent<Button>();
         Right = GameObject.Find("Right").GetComponent<Button>();
         Back = GameObject.Find("Back").GetComponent<Button>();
+        RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         Initial();
     }
 
@@ -29,6 +30,8 @@ public class MobileControllers : MonoBehaviour
     {
         ChangeView.onClick.AddListener(() => ViewChange());
         Back.onClick.AddListener(() => GoToMenu());
+        RestartButton.onClick.AddListener(() => RestartCurrentLevel());
+        RestartButton.gameObject.SetActive(false);
 
         EventTrigger upTrigger = Up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();
