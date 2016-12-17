@@ -44,7 +44,6 @@ public class BlobMovement : MonoBehaviour {
 
         
         //Pretty much only shitton of raycasting in different directions and restricting movement depend on that
-        
         if ((Physics.Raycast(RightHit, out hit))&& hit.distance <1 )
         {
             if (hit.transform.gameObject.tag == "RightWall")
@@ -169,6 +168,7 @@ public class BlobMovement : MonoBehaviour {
             GameManager.totalButtonPressesLeft--;
             GameManager.sharedGM.Save();
         }
+
         canMove = false;
         float elapsedtime = 0;
 

@@ -16,7 +16,6 @@ public class LevelPackSelect : MonoBehaviour {
         LevelPackButton.onClick.AddListener(() => { LevelPackButtonPressed(); });
         temp = backToLevelSelect.GetComponent<Button>();
         levelPackSelect = GameObject.Find("LevelPackSelect");
-        print(GameManager.sharedGM.ReturnTotalStarAmount());
         if (unlockLevelPackStarAmount > GameManager.sharedGM.ReturnTotalStarAmount())
             gameObject.GetComponent<Button>().interactable = false;
         else  gameObject.GetComponent<Button>().interactable = true;
