@@ -42,7 +42,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -71,7 +71,8 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000001, guid: 957ad8b7dde8a9443a54d3a74afa108d,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -305,6 +306,18 @@ Prefab:
     - target: {fileID: 415424, guid: 9d16695557517f145b3faee84a3e8128, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11412626, guid: 9d16695557517f145b3faee84a3e8128, type: 2}
+      propertyPath: threeStarMovementAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11412626, guid: 9d16695557517f145b3faee84a3e8128, type: 2}
+      propertyPath: twoStarMovementAmount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11412626, guid: 9d16695557517f145b3faee84a3e8128, type: 2}
+      propertyPath: oneStarMovementAmount
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d16695557517f145b3faee84a3e8128, type: 2}

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public int[] LevelPack1Stars;
     public int[] LevelPack2Stars;
+    public int[] LevelPack3Stars;
 
     private int totalStarAmount;
 
@@ -98,6 +99,11 @@ public class GameManager : MonoBehaviour
             if (LevelPack2Stars[i] != 4)
                 totalStarAmount += LevelPack2Stars[i];
         }
+        for (int i = 0; i < LevelPack3Stars.Length; i++)
+        {
+            if (LevelPack3Stars[i] != 4)
+                totalStarAmount += LevelPack3Stars[i];
+        }
         return totalStarAmount;
     }
 
@@ -174,11 +180,11 @@ public class GameManager : MonoBehaviour
     {
         float time = 3;
         float elapsedTime =0;
-
-        print("Showtoast");
+        
         toastMessage.text = toastMessageVariable;
         while(time > elapsedTime)
         {
+
             elapsedTime += Time.fixedDeltaTime;
             toastMessage.gameObject.SetActive(true);
             toastMessageBG.gameObject.SetActive(true);
@@ -193,8 +199,6 @@ public class GameManager : MonoBehaviour
         toastMessage.gameObject.SetActive(false);
         toastMessageBG.gameObject.SetActive(false);
         elapsedTime = 0;
-        
-
     }
 
     //Save and load methods, so that player's progress does not get lost
@@ -208,6 +212,9 @@ public class GameManager : MonoBehaviour
             data.LevelPack1Stars[i] = LevelPack1Stars[i];
         for (int i = 0; i < LevelPack2Stars.Length; i++)
             data.LevelPack2Stars[i] = LevelPack2Stars[i];
+        for (int i = 0; i < LevelPack3Stars.Length; i++)
+            data.LevelPack3Stars[i] = LevelPack3Stars[i];
+
         data.buttonPressesMax = buttonPressesMax;
         data.totalButtonPressesLeft = totalButtonPressesLeft;
 
@@ -227,6 +234,11 @@ public class GameManager : MonoBehaviour
                 LevelPack1Stars[i] = data.LevelPack1Stars[i];
             for (int i = 0; i < data.LevelPack2Stars.Length; i++)
                 LevelPack2Stars[i] = data.LevelPack2Stars[i];
+            for (int i = 0; i < data.LevelPack3Stars.Length; i++)
+                LevelPack3Stars[i] = data.LevelPack3Stars[i];
+
+            print(LevelPack3Stars.Length + "Levelpack3");
+            print(data.LevelPack3Stars.Length + "AsdAAAA");
             buttonPressesMax = data.buttonPressesMax;
             totalButtonPressesLeft = data.totalButtonPressesLeft;
         }
@@ -240,8 +252,6 @@ public class GameManager : MonoBehaviour
             DirectoryInfo dataDir = new DirectoryInfo(Application.persistentDataPath);
             dataDir.Delete(true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            print("ASD" );
-            
         }
     }
 }
@@ -251,8 +261,8 @@ public class GameManager : MonoBehaviour
 class PlayerData
 {
     public int[] LevelPack1Stars = new int[20];
-    public int[] LevelPack2Stars = new int[20];
+    public int[] LevelPack2Stars = new int[3];
+    public int[] LevelPack3Stars = new int[2];
     public int buttonPressesMax;
     public int totalButtonPressesLeft;
-
 }

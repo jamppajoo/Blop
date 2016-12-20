@@ -49,7 +49,6 @@ public class LevelStarSystem : MonoBehaviour {
             stars = 0;
         else if (buttonPressesAmount > twoStarMovementAmount)
             stars = 1;
-            
         else if (buttonPressesAmount > threeStarMovementAmount)
             stars = 2;
         else if (buttonPressesAmount <= threeStarMovementAmount)

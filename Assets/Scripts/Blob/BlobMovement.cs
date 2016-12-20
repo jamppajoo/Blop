@@ -127,7 +127,7 @@ public class BlobMovement : MonoBehaviour {
             if (verticalMovement < 0 && CameraMovement.isDown)
                 verticalMovement = 0;
 
-            else if (hit.transform.gameObject.tag != "Floor" && playerRb.isKinematic == false)
+            else if (hit.transform.gameObject.tag != "Floor" && hit.transform.gameObject.name != "Restart" && hit.transform.gameObject.name != "Teleport" && playerRb.isKinematic == false)
             {
                 print("Blob stuck!");
                 horizontalMovement = 0;
@@ -154,8 +154,8 @@ public class BlobMovement : MonoBehaviour {
         MobileControllers.moveHorizontal = 0;
 
         //Check if the y velocity is too much, if so, restart level, teleport stuff
-        if(playerRb.velocity.y < -15)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (playerRb.velocity.y < -15)
+            MobileControllers.RestartButton.gameObject.SetActive(true);
         
     }   
     //Movement script

@@ -17,8 +17,10 @@ public class Finish : MonoBehaviour {
         //Check what levelpack player is playing
         if (SceneManager.GetActiveScene().buildIndex <= 20)
             levelPack1 = true;
-        else if (SceneManager.GetActiveScene().buildIndex > 20)
+        else if (SceneManager.GetActiveScene().buildIndex >= 21 && SceneManager.GetActiveScene().buildIndex <= 23)
             levelPack2 = true;
+        else if (SceneManager.GetActiveScene().buildIndex > 23)
+            levelPack3 = true;
     }
     void Update()
 	{
@@ -39,16 +41,40 @@ public class Finish : MonoBehaviour {
 
                 GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex - 1] = (LevelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
-                if(GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex] >3)
-                    GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex ] = 0;
+                if(SceneManager.GetActiveScene().buildIndex != GameManager.sharedGM.LevelPack1Stars.Length)
+                    if(GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex] >3)
+                        GameManager.sharedGM.LevelPack1Stars[SceneManager.GetActiveScene().buildIndex ] = 0;
             }
         if (levelPack2)
             if (GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] < (LevelStarSystem.stars))
             {
+                if (LevelStarSystem.stars == 3)
+                {
+                    GameManager.totalButtonPressesLeft += 40;
+                    StartCoroutine(GameManager.sharedGM.ShowToastMessage("Added 40 presses"));
+                }
                 GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 21] = (LevelStarSystem.stars);
-                GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex - 20] = 0;
+                //if next levels star amount is over 3, make it zero
+                if (SceneManager.GetActiveScene().buildIndex-20 != GameManager.sharedGM.LevelPack2Stars.Length)
+                    if (GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex-20] > 3)
+                    GameManager.sharedGM.LevelPack2Stars[SceneManager.GetActiveScene().buildIndex-20] = 0;
 
             }
+        if (levelPack3)
+            if (GameManager.sharedGM.LevelPack3Stars[SceneManager.GetActiveScene().buildIndex - 24] < (LevelStarSystem.stars))
+            {
+                if (LevelStarSystem.stars == 3)
+                {
+                    GameManager.totalButtonPressesLeft += 40;
+                    StartCoroutine(GameManager.sharedGM.ShowToastMessage("Added 40 presses"));
+                }
+                GameManager.sharedGM.LevelPack3Stars[SceneManager.GetActiveScene().buildIndex - 24] = (LevelStarSystem.stars);
+                //if next levels star amount is over 3, make it zero
+                if (SceneManager.GetActiveScene().buildIndex-23 != GameManager.sharedGM.LevelPack3Stars.Length)
+                    if (GameManager.sharedGM.LevelPack3Stars[SceneManager.GetActiveScene().buildIndex-23] > 3)
+                    GameManager.sharedGM.LevelPack3Stars[SceneManager.GetActiveScene().buildIndex-23] = 0;
+            }
+
         levelPassedScreen.GetComponent<LevelStarSystem>().showLevelPassedScreen();
         GameManager.sharedGM.Save();
 	}

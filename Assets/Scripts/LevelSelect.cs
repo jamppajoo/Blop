@@ -91,8 +91,41 @@ public class LevelSelect : MonoBehaviour {
                 }
                 i++;
             }
-              
-            
+            else if (child.gameObject.transform.name.StartsWith("Level3")) // Do same thing to Levels 3.x
+            {
+                child.GetChild(1).GetComponent<Text>().text = GameManager.sharedGM.LevelPack3Stars[i].ToString();
+                levels.Add(child.GetComponent<Button>());
+                if (child.GetChild(1).GetComponent<Text>().text != 4.ToString())
+                {
+                    child.GetComponent<Button>().interactable = true;
+                }
+                else child.GetComponent<Button>().interactable = false;
+                switch (GameManager.sharedGM.LevelPack3Stars[i])
+                {
+                    case 1:
+                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
+                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
+                        break;
+                    case 2:
+                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
+                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
+                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
+                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
+                        break;
+                    case 3:
+                        child.GetChild(1).GetChild(4).GetComponent<Image>().enabled = false;
+                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
+                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
+                        child.GetChild(1).GetChild(5).GetComponent<Image>().enabled = true;
+                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
+                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
+                        break;
+
+                }
+                i++;
+            }
+
+
         }
         foreach (Button b in levels)
         {   
