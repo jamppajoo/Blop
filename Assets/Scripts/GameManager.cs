@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
                 totalButtonPressesLeft += adRewardAmount;
                 Save();
                 ShowAdMenu();
-                StartCoroutine(ShowToastMessage("Added 100 presses"));
+                //StartCoroutine(ShowToastMessage("Added 100 presses"));
                 break;
             case ShowResult.Skipped:
                 Debug.LogWarning("Video was skipped.");
@@ -175,8 +175,11 @@ public class GameManager : MonoBehaviour
     }
 
     //"Toast" to express player that it gained some moves. Also fading in this function
-
-    public IEnumerator ShowToastMessage(string toastMessageVariable)
+    public void ShowtoastMessage(string toastMessage)
+    {
+        StartCoroutine(ShowToastMessage2(toastMessage));
+    }
+    public IEnumerator ShowToastMessage2(string toastMessageVariable)
     {
         float time = 3;
         float elapsedTime =0;
