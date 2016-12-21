@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private int totalStarAmount;
 
     public int buttonPressesMax;
+    public int timedButtonPressesAmount;
     public int adRewardAmount;
     public string zoneId;
 
@@ -73,17 +74,29 @@ public class GameManager : MonoBehaviour
         buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
         if (totalButtonPressesLeft <= 0)
             ShowAdMenu();
-        if(moreJumpsIn > 0)
+
+        //More button presses, now works only ingame
+        if(totalButtonPressesLeft < buttonPressesMax)
         {
-            moreJumpsIn -= Time.deltaTime;
+            if (moreJumpsIn > 0)
+            {
+                moreJumpsIn -= Time.deltaTime;
+            }
+            //When timer is at 0, add button presses, but only to the max amount and save
+            else if (moreJumpsIn <= 0)
+            {
+                moreJumpsIn = moreJumpsDelay;
+                if (totalButtonPressesLeft < buttonPressesMax - timedButtonPressesAmount)
+                    totalButtonPressesLeft += timedButtonPressesAmount;
+                else totalButtonPressesLeft += buttonPressesMax - totalButtonPressesLeft;
+                Save();
+            }
+            moreJumpsText.text = moreJumpsIn.ToString();
         }
-        else if (moreJumpsIn <= 0)
+        else
         {
-            moreJumpsIn = moreJumpsDelay;
-            if (totalButtonPressesLeft < buttonPressesMax + 10)
-                totalButtonPressesLeft += 20;
+            moreJumpsText.text = "Full";
         }
-        moreJumpsText.text = moreJumpsIn.ToString();
     }
     public int ReturnTotalStarAmount()
     {
