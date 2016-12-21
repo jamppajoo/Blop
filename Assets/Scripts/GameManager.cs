@@ -252,9 +252,6 @@ public class GameManager : MonoBehaviour
                 LevelPack2Stars[i] = data.LevelPack2Stars[i];
             for (int i = 0; i < data.LevelPack3Stars.Length; i++)
                 LevelPack3Stars[i] = data.LevelPack3Stars[i];
-
-            print(LevelPack3Stars.Length + "Levelpack3");
-            print(data.LevelPack3Stars.Length + "AsdAAAA");
             buttonPressesMax = data.buttonPressesMax;
             totalButtonPressesLeft = data.totalButtonPressesLeft;
         }
