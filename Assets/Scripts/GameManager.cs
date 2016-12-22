@@ -273,9 +273,9 @@ public class GameManager : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-    public int[] LevelPack1Stars = new int[20];
-    public int[] LevelPack2Stars = new int[3];
-    public int[] LevelPack3Stars = new int[2];
+    public int[] LevelPack1Stars = new int[GameManager.sharedGM.LevelPack1Stars.Length];
+    public int[] LevelPack2Stars = new int[GameManager.sharedGM.LevelPack2Stars.Length];
+    public int[] LevelPack3Stars = new int[GameManager.sharedGM.LevelPack3Stars.Length];
     public int buttonPressesMax;
     public int totalButtonPressesLeft;
 }
