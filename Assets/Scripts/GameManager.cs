@@ -32,12 +32,15 @@ public class GameManager : MonoBehaviour
 
     public static int totalButtonPressesLeft = 200;
     private Text buttonPressesLeftText, moreJumpsText;
-    private float moreJumpsIn = 20;
+    public float moreJumpsIn;
     private static Canvas gameManagerCanvas;
     private Transform adsMenu;
 
     private Text toastMessage;
     private Image toastMessageBG;
+
+    int curTime, savedTime, difTime;
+    private bool giveMoreJumps = false;
 
     public static GameManager sharedGM;
     void Awake()
@@ -54,8 +57,6 @@ public class GameManager : MonoBehaviour
         buttonPressesLeftText = gameManagerCanvas.transform.GetChild(3).GetComponent<Text>();
         moreJumpsText = buttonPressesLeftText.transform.GetChild(1).GetComponent<Text>();
 
-
-
         if (sharedGM == null)
         {
             sharedGM = this;
@@ -66,16 +67,44 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
 
         }
+
         Load();
 
     }
     
     void Update()
     {
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        curTime = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+
+        if (totalButtonPressesLeft < buttonPressesMax)
+        {
+            if (curTime % moreJumpsIn == 0 && giveMoreJumps)
+            {
+                giveMoreJumps = false;
+
+                if (totalButtonPressesLeft < buttonPressesMax - timedButtonPressesAmount)
+                    totalButtonPressesLeft += timedButtonPressesAmount;
+                else
+                    totalButtonPressesLeft += buttonPressesMax - totalButtonPressesLeft;
+                Save();
+
+            }
+            else if (curTime % moreJumpsIn != 0)
+            {
+                giveMoreJumps = true;
+            }
+            moreJumpsText.text = (Mathf.Abs((curTime % moreJumpsIn)-moreJumpsIn)).ToString();
+        }
+        else moreJumpsText.text = "Full";
+       
+
+            
+
         buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
         if (totalButtonPressesLeft <= 0)
             ShowAdMenu();
-
+        /*
         //More button presses, now works only ingame
         if(totalButtonPressesLeft < buttonPressesMax)
         {
@@ -97,7 +126,7 @@ public class GameManager : MonoBehaviour
         else
         {
             moreJumpsText.text = "Full";
-        }
+        }*/
     }
     public int ReturnTotalStarAmount()
     {
@@ -234,11 +263,13 @@ public class GameManager : MonoBehaviour
 
         data.buttonPressesMax = buttonPressesMax;
         data.totalButtonPressesLeft = totalButtonPressesLeft;
+        data.savedTime = savedTime;
 
         bf.Serialize(file, data);
 
         file.Close();
     }
+    
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/playerinfo.dat"))
@@ -255,6 +286,7 @@ public class GameManager : MonoBehaviour
                 LevelPack3Stars[i] = data.LevelPack3Stars[i];
             buttonPressesMax = data.buttonPressesMax;
             totalButtonPressesLeft = data.totalButtonPressesLeft;
+            savedTime = data.savedTime;
         }
     }
 
@@ -268,6 +300,11 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    void OnApplicationPause(bool pauseStatus)
+    {
+        savedTime = curTime;
+    }
 }
 
 //Class witch contains player's saved data
@@ -279,4 +316,6 @@ class PlayerData
     public int[] LevelPack3Stars = new int[GameManager.sharedGM.LevelPack3Stars.Length];
     public int buttonPressesMax;
     public int totalButtonPressesLeft;
+    public int savedTime;
 }
+
