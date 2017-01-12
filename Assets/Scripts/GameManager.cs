@@ -32,8 +32,7 @@ public class GameManager : MonoBehaviour
 
     public static int totalButtonPressesLeft = 200;
     private Text buttonPressesLeftText, moreJumpsText;
-    private float moreJumpsIn;
-    public float moreJumpsDelay;
+    private float moreJumpsIn = 20;
     private static Canvas gameManagerCanvas;
     private Transform adsMenu;
 
@@ -54,6 +53,8 @@ public class GameManager : MonoBehaviour
 
         buttonPressesLeftText = gameManagerCanvas.transform.GetChild(3).GetComponent<Text>();
         moreJumpsText = buttonPressesLeftText.transform.GetChild(1).GetComponent<Text>();
+
+
 
         if (sharedGM == null)
         {
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
             //When timer is at 0, add button presses, but only to the max amount and save
             else if (moreJumpsIn <= 0)
             {
-                moreJumpsIn = moreJumpsDelay;
+                
                 if (totalButtonPressesLeft < buttonPressesMax - timedButtonPressesAmount)
                     totalButtonPressesLeft += timedButtonPressesAmount;
                 else totalButtonPressesLeft += buttonPressesMax - totalButtonPressesLeft;
