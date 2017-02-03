@@ -155,7 +155,13 @@ public class BlobMovement : MonoBehaviour {
 
         //Check if the y velocity is too much, if so, restart level, teleport stuff
         if (playerRb.velocity.y < -15)
+        {
             MobileControllers.RestartButton.gameObject.SetActive(true);
+            playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 15);
+            print(playerRb.velocity.y);
+        }
+            
+
         
     }   
     //Movement script
