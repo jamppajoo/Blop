@@ -96,6 +96,10 @@
     <Compile Include="Assets\Scripts\LevelPackSelect.cs" />
     <Compile Include="Assets\Scripts\LevelSelect.cs" />
     <Compile Include="Assets\Scripts\LevelStarSystem.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuBlobMovement.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuCameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuMobileControllers.cs" />
     <Compile Include="Assets\Scripts\MobileControllers.cs" />
     <Compile Include="Assets\Scripts\Quit.cs" />
     <Compile Include="Assets\Scripts\Restart.cs" />
