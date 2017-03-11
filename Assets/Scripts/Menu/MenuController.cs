@@ -5,6 +5,8 @@ using UnityEngine;
 public class MenuController : MonoBehaviour {
     // Use this for initialization
 
+    public static MenuController MC;
+
     GameObject[] levelPackLeveles;
     void Start() {
 
@@ -25,7 +27,6 @@ public class MenuController : MonoBehaviour {
     {
         foreach (Transform child in transform)
         {
-            print("AS");
             child.gameObject.SetActive(false);
             print("Ei näyyy");
         }

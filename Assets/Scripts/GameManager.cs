@@ -42,7 +42,33 @@ public class GameManager : MonoBehaviour
     int curTime, savedTime, difTime;
     private bool giveMoreJumps = false;
 
+    public GameObject levelPack1;
+
+
     public static GameManager sharedGM;
+
+
+    public void setVisible()
+    {
+
+        foreach (Transform child in levelPack1.transform)
+        {
+            child.gameObject.SetActive(true);
+            print("Näkkyyy");
+        }
+
+    }
+    public void setInVisible()
+    {
+        foreach (Transform child in levelPack1.transform)
+        {
+            child.gameObject.SetActive(false);
+            print("Ei näyyy");
+        }
+    }
+
+
+
     void Awake()
     {
         gameManagerCanvas = gameObject.transform.GetChild(0).GetComponent<Canvas>();
@@ -67,10 +93,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
 
         }
-        
-
-
         Load();
+        setInVisible();
 
     }
     
