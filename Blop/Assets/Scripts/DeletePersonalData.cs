@@ -10,6 +10,6 @@ public class DeletePersonalData : MonoBehaviour {
 	}
     public void DeleteData()
     {
-        GameManager.sharedGM.DeletePersonalData();
+        SaveAndLoad.Instance.DeletePersonalData();
     }
 }

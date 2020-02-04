@@ -33,49 +33,49 @@ public class Finish : MonoBehaviour {
     {
         //Assing star amount to GameManager if star amount is bigger than in there.
         if (levelPack1)
-            if (GameManager.sharedGM.LevelPack1Stars[ActiveSceneBuildIndex - 1] < (LevelStarSystem.stars))
+            if (GameManager.Instance.LevelPack1Stars[ActiveSceneBuildIndex - 1] < (LevelStarSystem.stars))
             {
                 if (LevelStarSystem.stars == 3)
                 {
                     //Add new system to reward player
                 }
 
-                GameManager.sharedGM.LevelPack1Stars[ActiveSceneBuildIndex - 1] = (LevelStarSystem.stars);
+                GameManager.Instance.LevelPack1Stars[ActiveSceneBuildIndex - 1] = (LevelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
-                if(ActiveSceneBuildIndex != GameManager.sharedGM.LevelPack1Stars.Length)
-                    if(GameManager.sharedGM.LevelPack1Stars[ActiveSceneBuildIndex] > 3)
-                        GameManager.sharedGM.LevelPack1Stars[ActiveSceneBuildIndex] = 0;
+                if(ActiveSceneBuildIndex != GameManager.Instance.LevelPack1Stars.Length)
+                    if(GameManager.Instance.LevelPack1Stars[ActiveSceneBuildIndex] > 3)
+                        GameManager.Instance.LevelPack1Stars[ActiveSceneBuildIndex] = 0;
             }
         if (levelPack2)
-            if (GameManager.sharedGM.LevelPack2Stars[ActiveSceneBuildIndex - 21] < (LevelStarSystem.stars))
+            if (GameManager.Instance.LevelPack2Stars[ActiveSceneBuildIndex - 21] < (LevelStarSystem.stars))
             {
                 if (LevelStarSystem.stars == 3)
                 {
                     //Add new system to reward player
                 }
-                GameManager.sharedGM.LevelPack2Stars[ActiveSceneBuildIndex - 21] = (LevelStarSystem.stars);
+                GameManager.Instance.LevelPack2Stars[ActiveSceneBuildIndex - 21] = (LevelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
-                if (ActiveSceneBuildIndex - 20 != GameManager.sharedGM.LevelPack2Stars.Length)
-                    if (GameManager.sharedGM.LevelPack2Stars[ActiveSceneBuildIndex - 20] > 3)
-                    GameManager.sharedGM.LevelPack2Stars[ActiveSceneBuildIndex - 20] = 0;
+                if (ActiveSceneBuildIndex - 20 != GameManager.Instance.LevelPack2Stars.Length)
+                    if (GameManager.Instance.LevelPack2Stars[ActiveSceneBuildIndex - 20] > 3)
+                    GameManager.Instance.LevelPack2Stars[ActiveSceneBuildIndex - 20] = 0;
 
             }
         if (levelPack3)
-            if (GameManager.sharedGM.LevelPack3Stars[ActiveSceneBuildIndex - 24] < (LevelStarSystem.stars))
+            if (GameManager.Instance.LevelPack3Stars[ActiveSceneBuildIndex - 24] < (LevelStarSystem.stars))
             {
                 if (LevelStarSystem.stars == 3)
                 {
                     //Add new system to reward player
                 }
-                GameManager.sharedGM.LevelPack3Stars[ActiveSceneBuildIndex - 24] = (LevelStarSystem.stars);
+                GameManager.Instance.LevelPack3Stars[ActiveSceneBuildIndex - 24] = (LevelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
-                if (ActiveSceneBuildIndex - 23 != GameManager.sharedGM.LevelPack3Stars.Length)
-                    if (GameManager.sharedGM.LevelPack3Stars[ActiveSceneBuildIndex - 23] > 3)
-                    GameManager.sharedGM.LevelPack3Stars[ActiveSceneBuildIndex - 23] = 0;
+                if (ActiveSceneBuildIndex - 23 != GameManager.Instance.LevelPack3Stars.Length)
+                    if (GameManager.Instance.LevelPack3Stars[ActiveSceneBuildIndex - 23] > 3)
+                    GameManager.Instance.LevelPack3Stars[ActiveSceneBuildIndex - 23] = 0;
             }
 
         levelPassedScreen.GetComponent<LevelStarSystem>().showLevelPassedScreen();
-        GameManager.sharedGM.Save();
+        SaveAndLoad.Instance.Save();
 	}
     public void nextLevel()
     {

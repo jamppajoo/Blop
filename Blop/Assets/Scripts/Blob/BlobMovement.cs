@@ -170,7 +170,6 @@ public class BlobMovement : MonoBehaviour {
         if(Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
         {
             buttonPresses++;
-            GameManager.sharedGM.Save();
         }
 
         canMove = false;
