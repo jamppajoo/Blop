@@ -37,8 +37,7 @@ public class Finish : MonoBehaviour {
             {
                 if (LevelStarSystem.stars == 3)
                 {
-                    GameManager.totalButtonPressesLeft += 40;
-                    GameManager.sharedGM.ShowtoastMessage("Added 40 pressess");
+                    //Add new system to reward player
                 }
 
                 GameManager.sharedGM.LevelPack1Stars[ActiveSceneBuildIndex - 1] = (LevelStarSystem.stars);
@@ -52,8 +51,7 @@ public class Finish : MonoBehaviour {
             {
                 if (LevelStarSystem.stars == 3)
                 {
-                    GameManager.totalButtonPressesLeft += 40;
-                    GameManager.sharedGM.ShowtoastMessage("Added 40 pressess");
+                    //Add new system to reward player
                 }
                 GameManager.sharedGM.LevelPack2Stars[ActiveSceneBuildIndex - 21] = (LevelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
@@ -67,8 +65,7 @@ public class Finish : MonoBehaviour {
             {
                 if (LevelStarSystem.stars == 3)
                 {
-                    GameManager.totalButtonPressesLeft += 40;
-                    GameManager.sharedGM.ShowtoastMessage("Added 40 pressess");
+                    //Add new system to reward player
                 }
                 GameManager.sharedGM.LevelPack3Stars[ActiveSceneBuildIndex - 24] = (LevelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero

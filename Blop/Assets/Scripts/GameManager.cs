@@ -24,14 +24,9 @@ public class GameManager : MonoBehaviour
     public int[] LevelPack3Stars;
 
     private int totalStarAmount;
-
-    public int buttonPressesMax;
-    public int timedButtonPressesAmount;
-    public int adRewardAmount;
+    
     public string zoneId;
-
-    public static int totalButtonPressesLeft = 200;
-    private Text buttonPressesLeftText, moreJumpsText;
+    
     public float moreJumpsIn;
     private static Canvas gameManagerCanvas;
     private Transform adsMenu;
@@ -40,7 +35,6 @@ public class GameManager : MonoBehaviour
     private Image toastMessageBG;
 
     int curTime, savedTime, difTime;
-    private bool giveMoreJumps = false;
 
     public GameObject levelPack1;
 
@@ -80,9 +74,6 @@ public class GameManager : MonoBehaviour
         adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate () { ShowAd(); });
         adsMenu.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GoToMenu());
 
-        buttonPressesLeftText = gameManagerCanvas.transform.GetChild(3).GetComponent<Text>();
-        moreJumpsText = buttonPressesLeftText.transform.GetChild(1).GetComponent<Text>();
-
         if (sharedGM == null)
         {
             sharedGM = this;
@@ -102,57 +93,7 @@ public class GameManager : MonoBehaviour
     {
         System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
         curTime = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
-
-        if (totalButtonPressesLeft < buttonPressesMax)
-        {
-            if (curTime % moreJumpsIn == 0 && giveMoreJumps)
-            {
-                giveMoreJumps = false;
-
-                if (totalButtonPressesLeft < buttonPressesMax - timedButtonPressesAmount)
-                    totalButtonPressesLeft += timedButtonPressesAmount;
-                else
-                    totalButtonPressesLeft += buttonPressesMax - totalButtonPressesLeft;
-                Save();
-
-            }
-            else if (curTime % moreJumpsIn != 0)
-            {
-                giveMoreJumps = true;
-            }
-            moreJumpsText.text = (Mathf.Abs((curTime % moreJumpsIn)-moreJumpsIn)).ToString();
-        }
-        else moreJumpsText.text = "Full";
-       
-
-            
-
-        buttonPressesLeftText.text = totalButtonPressesLeft.ToString() + "/" + buttonPressesMax;
-        if (totalButtonPressesLeft <= 0)
-            ShowAdMenu();
-        /*
-        //More button presses, now works only ingame
-        if(totalButtonPressesLeft < buttonPressesMax)
-        {
-            if (moreJumpsIn > 0)
-            {
-                moreJumpsIn -= Time.deltaTime;
-            }
-            //When timer is at 0, add button presses, but only to the max amount and save
-            else if (moreJumpsIn <= 0)
-            {
-                
-                if (totalButtonPressesLeft < buttonPressesMax - timedButtonPressesAmount)
-                    totalButtonPressesLeft += timedButtonPressesAmount;
-                else totalButtonPressesLeft += buttonPressesMax - totalButtonPressesLeft;
-                Save();
-            }
-            moreJumpsText.text = moreJumpsIn.ToString();
-        }
-        else
-        {
-            moreJumpsText.text = "Full";
-        }*/
+        
     }
     public int ReturnTotalStarAmount()
     {
@@ -175,43 +116,7 @@ public class GameManager : MonoBehaviour
         }
         return totalStarAmount;
     }
-
-    //This is called when player runs out of moves
-    public void ShowAdMenu()
-    {
-        if (SceneManager.GetActiveScene().buildIndex > 0)
-        {
-            if(totalButtonPressesLeft <=0)
-            {
-                adsMenu.gameObject.SetActive(true);
-                MobileControllers.Up.interactable = false;
-                MobileControllers.Down.interactable = false;
-                MobileControllers.Left.interactable = false;
-                MobileControllers.Right.interactable = false;
-                MobileControllers.Back.interactable = false;
-            }
-            else if(totalButtonPressesLeft > 0)
-            {
-                adsMenu.gameObject.SetActive(false);
-                MobileControllers.Up.interactable = true;
-                MobileControllers.Down.interactable = true;
-                MobileControllers.Left.interactable = true;
-                MobileControllers.Right.interactable = true;
-                MobileControllers.Back.interactable = true;
-            }
-            
-
-            if(adsMenu.transform.GetChild(1).GetComponent<Button>())
-            {
-                if (string.IsNullOrEmpty(zoneId)) zoneId = null;
-                adsMenu.transform.GetChild(1).GetComponent<Button>().interactable = Advertisement.IsReady(zoneId);
-            }
-
-        }
-        else {
-            adsMenu.gameObject.SetActive(false);
-        }
-    }
+    
     public void ShowAd()
     {
         if (string.IsNullOrEmpty(zoneId))
@@ -220,14 +125,13 @@ public class GameManager : MonoBehaviour
         options.resultCallback = HandleShowResult;
         Advertisement.Show(zoneId, options);
     }
+    //Add new ad scripts
     private void HandleShowResult(ShowResult result)
     {
         switch (result)
         {
             case ShowResult.Finished:
-                totalButtonPressesLeft += adRewardAmount;
                 Save();
-                ShowAdMenu();
                 //StartCoroutine(ShowToastMessage("Added 100 presses"));
                 break;
             case ShowResult.Skipped:
@@ -286,9 +190,7 @@ public class GameManager : MonoBehaviour
             data.LevelPack2Stars[i] = LevelPack2Stars[i];
         for (int i = 0; i < LevelPack3Stars.Length; i++)
             data.LevelPack3Stars[i] = LevelPack3Stars[i];
-
-        data.buttonPressesMax = buttonPressesMax;
-        data.totalButtonPressesLeft = totalButtonPressesLeft;
+        
         data.savedTime = savedTime;
 
         bf.Serialize(file, data);
@@ -310,8 +212,6 @@ public class GameManager : MonoBehaviour
                 LevelPack2Stars[i] = data.LevelPack2Stars[i];
             for (int i = 0; i < data.LevelPack3Stars.Length; i++)
                 LevelPack3Stars[i] = data.LevelPack3Stars[i];
-            buttonPressesMax = data.buttonPressesMax;
-            totalButtonPressesLeft = data.totalButtonPressesLeft;
             savedTime = data.savedTime;
         }
     }
@@ -340,8 +240,6 @@ class PlayerData
     public int[] LevelPack1Stars = new int[GameManager.sharedGM.LevelPack1Stars.Length];
     public int[] LevelPack2Stars = new int[GameManager.sharedGM.LevelPack2Stars.Length];
     public int[] LevelPack3Stars = new int[GameManager.sharedGM.LevelPack3Stars.Length];
-    public int buttonPressesMax;
-    public int totalButtonPressesLeft;
     public int savedTime;
 }
 
