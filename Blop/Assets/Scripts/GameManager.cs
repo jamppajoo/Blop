@@ -17,27 +17,11 @@ public class GameManager : Singleton<GameManager>
 
     private int totalStarAmount;
     
-    public float moreJumpsIn;
-    private static Canvas gameManagerCanvas;
-    private Transform adsMenu;
-
-    private Text toastMessage;
-    private Image toastMessageBG;
-
     void Awake()
     {
-        gameManagerCanvas = gameObject.transform.GetChild(0).GetComponent<Canvas>();
-
-        toastMessageBG = gameManagerCanvas.transform.GetChild(0).GetComponent<Image>();
-        toastMessage = gameManagerCanvas.transform.GetChild(1).GetComponent<Text>();
-
-        adsMenu = gameManagerCanvas.transform.GetChild(2);
-        adsMenu.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate () { ShowAd(); });
-        adsMenu.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GoToMenu());
-
         SaveAndLoad.Instance.Load();
-
     }
+
     public int ReturnTotalStarAmount()
     {
         totalStarAmount = 0;
@@ -60,46 +44,9 @@ public class GameManager : Singleton<GameManager>
         return totalStarAmount;
     }
     
-    private void ShowAd()
-    {
-        AdController.Instance.ShowAd();
-    }
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
     }
-
-    #region oldToastShit
-    //"Toast" to express player that it gained some moves. Also fading in this function
-    //public void ShowtoastMessage(string toastMessage)
-    //{
-    //    StartCoroutine(ShowToastMessage2(toastMessage));
-    //}
-    //public IEnumerator ShowToastMessage2(string toastMessageVariable)
-    //{
-    //    float time = 3;
-    //    float elapsedTime =0;
-
-    //    toastMessage.text = toastMessageVariable;
-    //    while(time > elapsedTime)
-    //    {
-
-    //        elapsedTime += Time.fixedDeltaTime;
-    //        toastMessage.gameObject.SetActive(true);
-    //        toastMessageBG.gameObject.SetActive(true);
-
-    //        if (elapsedTime >1)
-    //        {
-    //            toastMessageBG.GetComponent<CanvasRenderer>().SetAlpha(toastMessageBG.GetComponent<CanvasRenderer>().GetAlpha() - .01f);
-    //            toastMessage.GetComponent<CanvasRenderer>().SetAlpha(toastMessageBG.GetComponent<CanvasRenderer>().GetAlpha() - .01f);
-    //        }
-    //        yield return null;
-    //    }
-    //    toastMessage.gameObject.SetActive(false);
-    //    toastMessageBG.gameObject.SetActive(false);
-    //    elapsedTime = 0;
-    //}
-    #endregion
-
 }
 
