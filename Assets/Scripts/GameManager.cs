@@ -48,24 +48,24 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedGM;
 
 
-    public void setVisible()
-    {
+    //public void setVisible()
+    //{
 
-        foreach (Transform child in levelPack1.transform)
-        {
-            child.gameObject.SetActive(true);
-            print("Näkkyyy");
-        }
+    //    foreach (Transform child in levelPack1.transform)
+    //    {
+    //        child.gameObject.SetActive(true);
+    //        print("Näkkyyy");
+    //    }
 
-    }
-    public void setInVisible()
-    {
-        foreach (Transform child in levelPack1.transform)
-        {
-            child.gameObject.SetActive(false);
-            print("Ei näyyy");
-        }
-    }
+    //}
+    //public void setInVisible()
+    //{
+    //    foreach (Transform child in levelPack1.transform)
+    //    {
+    //        child.gameObject.SetActive(false);
+    //        print("Ei näyyy");
+    //    }
+    //}
 
 
 
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
         }
         Load();
-        setInVisible();
+        //setInVisible();
 
     }
     

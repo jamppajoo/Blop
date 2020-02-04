@@ -63,7 +63,7 @@ public class CameraMovement : MonoBehaviour {
 		animator.SetBool ("ToUp", false);
         if (onMenu)
         {
-            GameManager.sharedGM.setVisible();
+            //GameManager.sharedGM.setVisible();
         }
         setStuff();
     }
@@ -73,7 +73,7 @@ public class CameraMovement : MonoBehaviour {
         animator.SetBool ("ToDown", false);
         if(onMenu)
         {
-            GameManager.sharedGM.setInVisible();
+            //GameManager.sharedGM.setInVisible();
         }
         setStuff();
     }
