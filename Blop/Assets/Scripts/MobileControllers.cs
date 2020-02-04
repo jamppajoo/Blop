@@ -65,7 +65,7 @@ public class MobileControllers : MonoBehaviour
 
     public void ViewChange()
     {
-        CameraMovement.changeMade = true;
+        CameraMovement.Instance.viewChanged = true;
         
     }
     public void GoUp()

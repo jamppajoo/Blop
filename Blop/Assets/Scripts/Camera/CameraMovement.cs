@@ -1,39 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraMovement : MonoBehaviour {
-	private Animator animator;
-	public static bool isUp, isDown, rotatedUp,rotatedDown;
-    public static bool changeMade = false;
+public class CameraMovement : Singleton<CameraMovement>
+{
+    private Animator animator;
+    public bool isUp, isDown, rotatedUp, rotatedDown;
+    public bool viewChanged = false;
     public bool cameraRotate = false;
     public bool onMenu = false;
-    private GameObject Blop, MainCamera;
+    private GameObject player, mainCamera;
     public float speed = 5f;
 
-	// Use this for initialization
-	void Start () {
-		animator = GetComponent<Animator> ();
-        Blop = GameObject.Find("Blop");
-        MainCamera = GameObject.Find("MainCamera");
-		isUp = false;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        player = GameObject.Find("Blop");
+        mainCamera = Camera.main.gameObject;
+        isUp = false;
         rotatedUp = false;
-		isDown = true;
+        isDown = true;
         rotatedDown = true;
-        
     }
 
-    // Update is called once per frame
-    void Update () {        
+    private void Update()
+    {
 
-		if (Input.GetKeyDown (KeyCode.Space) || changeMade ) {
+        if (Input.GetKeyDown(KeyCode.Space) || viewChanged)
+        {
             BlobMovement.buttonPresses++;
-            MobileControllers.ChangeView.interactable = false;
-            MobileControllers.Up.interactable = false;
-            MobileControllers.Down.interactable = false;
-            MobileControllers.Left.interactable = false;
-            MobileControllers.Right.interactable = false;
-            MobileControllers.Back.interactable = false;
-            MobileControllers.canPress = false;
+            SetStuff(false);
             if (!cameraRotate)
             {
                 if (!isUp)
@@ -41,71 +36,67 @@ public class CameraMovement : MonoBehaviour {
                 else if (!isDown)
                     animator.SetBool("ToDown", true);
             }
-            else if(cameraRotate)
+            else if (cameraRotate)
             {
                 if (!rotatedUp)
                     animator.SetBool("RotateToUp", true);
                 else if (!rotatedDown)
-                  animator.SetBool("RotateToDown", true);
-                    
+                    animator.SetBool("RotateToDown", true);
             }
-		}
-        changeMade = false;
-	
-	}
-	void IsUp()
-	{
-		isUp = true;
-		isDown = false;
-		animator.SetBool ("ToUp", false);
-        if (onMenu)
-        {
-            //GameManager.sharedGM.setVisible();
         }
-        setStuff();
+        viewChanged = false;
     }
-	void IsDown(){
-		isDown = true;
-		isUp = false;
-        animator.SetBool ("ToDown", false);
-        if(onMenu)
-        {
-            //GameManager.sharedGM.setInVisible();
-        }
-        setStuff();
+
+    //Move camera to players position
+    public void FixedUpdate()
+    {
+        mainCamera.gameObject.transform.position = Vector3.Lerp(mainCamera.gameObject.transform.position, player.gameObject.transform.position, speed * Time.deltaTime);
     }
-    void rotatedIsUp()
+    private void IsUp()
+    {
+        isUp = true;
+        isDown = false;
+        animator.SetBool("ToUp", false);
+        SetStuff(true);
+    }
+
+    private void IsDown()
+    {
+        isUp = false;
+        isDown = true;
+        animator.SetBool("ToDown", false);
+        SetStuff(true);
+    }
+
+    private void RotatedIsUp()
     {
         rotatedUp = true;
         rotatedDown = false;
         isDown = false;
         animator.SetBool("RotateToUp", false);
-        setStuff();
+        SetStuff(true);
 
     }
-    void rotatedIsDown()
+
+    private void RotatedIsDown()
     {
+        rotatedUp = false;
         rotatedDown = true;
         isDown = true;
-        rotatedUp = false;
         animator.SetBool("RotateToDown", false);
-        setStuff();
+        SetStuff(true);
 
     }
-    void setStuff()
-    {
-        MobileControllers.ChangeView.interactable = true;
-        MobileControllers.Up.interactable = true;
-        MobileControllers.Down.interactable = true;
-        MobileControllers.Left.interactable = true;
-        MobileControllers.Right.interactable = true;
-        MobileControllers.Back.interactable = true ;
-        MobileControllers.canPress = true ;
-    }
-    public void FixedUpdate()
-    {
-        MainCamera.gameObject.transform.position = Vector3.Lerp(MainCamera.gameObject.transform.position, Blop.gameObject.transform.position, speed *Time.deltaTime);
-  
 
+    private void SetStuff(bool active)
+    {
+        MobileControllers.ChangeView.interactable = active;
+        MobileControllers.Up.interactable = active;
+        MobileControllers.Down.interactable = active;
+        MobileControllers.Left.interactable = active;
+        MobileControllers.Right.interactable = active;
+        MobileControllers.Back.interactable = active;
+        MobileControllers.canPress = active;
     }
+    
 }

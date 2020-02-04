@@ -55,9 +55,9 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale,timeToMove /2));
             }
 
-            if (horizontalMovement > 0 && (CameraMovement.isUp || CameraMovement.isDown))
+            if (horizontalMovement > 0 && (CameraMovement.Instance.isUp || CameraMovement.Instance.isDown))
                 horizontalMovement = 0;
-            if (verticalMovement < 0 && CameraMovement.rotatedUp)
+            if (verticalMovement < 0 && CameraMovement.Instance.rotatedUp)
                 verticalMovement = 0;
         }
 
@@ -71,9 +71,9 @@ public class BlobMovement : MonoBehaviour {
             {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove /2));
             }
-            if (horizontalMovement < 0 && (CameraMovement.isDown || CameraMovement.isUp) )
+            if (horizontalMovement < 0 && (CameraMovement.Instance.isDown || CameraMovement.Instance.isUp) )
                 horizontalMovement = 0;
-            if (verticalMovement > 0 && CameraMovement.rotatedUp)
+            if (verticalMovement > 0 && CameraMovement.Instance.rotatedUp)
                 verticalMovement = 0;
         }
         if ((Physics.Raycast(BackHit, out hit)) && hit.distance < 1  )
@@ -88,9 +88,9 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove/2));
             }
 
-            if (verticalMovement > 0 && CameraMovement.isUp)
+            if (verticalMovement > 0 && CameraMovement.Instance.isUp)
                     verticalMovement = 0;
-            if (horizontalMovement > 0 && CameraMovement.rotatedUp)
+            if (horizontalMovement > 0 && CameraMovement.Instance.rotatedUp)
                 horizontalMovement = 0;
         }
         if ((Physics.Raycast(FrontHit, out hit)) && hit.distance < 1)
@@ -105,9 +105,9 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove/2));
             }
 
-            if (verticalMovement < 0 && CameraMovement.isUp)
+            if (verticalMovement < 0 && CameraMovement.Instance.isUp)
                 verticalMovement = 0;
-            if (horizontalMovement < 0 && CameraMovement.rotatedUp)
+            if (horizontalMovement < 0 && CameraMovement.Instance.rotatedUp)
                 horizontalMovement = 0;
         }
 
@@ -116,15 +116,15 @@ public class BlobMovement : MonoBehaviour {
             if (hit.transform.gameObject.tag == "UpWall")
             {
                 playerRb.isKinematic = true;
-                if (verticalMovement > 0 && CameraMovement.isDown)
+                if (verticalMovement > 0 && CameraMovement.Instance.isDown)
                     verticalMovement = 0;
             }
-            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  CameraMovement.isDown)
+            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  CameraMovement.Instance.isDown)
                 verticalMovement = 0;
         }
         if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1)
         {
-            if (verticalMovement < 0 && CameraMovement.isDown)
+            if (verticalMovement < 0 && CameraMovement.Instance.isDown)
                 verticalMovement = 0;
 
             else if (hit.transform.gameObject.tag != "Floor" && hit.transform.gameObject.name != "Restart" && hit.transform.gameObject.name != "Teleport" && playerRb.isKinematic == false)
@@ -139,15 +139,15 @@ public class BlobMovement : MonoBehaviour {
             inAir = true;
         else inAir = false;
         //Check movement and other things
-        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.isDown)
+        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.Instance.isDown)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale, timeToMove));
         //Same but check if camera is rotated only up or up & 90 degrees
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) )
         {
-            if (CameraMovement.rotatedUp)
+            if (CameraMovement.Instance.rotatedUp)
                 StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), moveScale, timeToMove));
 
-            else if (CameraMovement.isUp)
+            else if (CameraMovement.Instance.isUp)
                 StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
         }
         MobileControllers.moveVertical = 0;
