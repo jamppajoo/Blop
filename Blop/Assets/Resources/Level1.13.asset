@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level1.13
   m_EditorClassIdentifier: 
   threeStarMovementAmount: 17
-  twoStarMovementAmount: 19
+  twoStarMovementAmount: 21
