@@ -12,8 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelStarSystem : MonoBehaviour
 {
-
-    public int threeStarMovementAmount, twoStarMovementAmount;
+    private int threeStarMovementAmount, twoStarMovementAmount;
     public Button nextLevel, restartLevel;
     public GameObject oneStar, twoStar, threeStar, levelPassedPanel;
     private int buttonPressesAmount = 0;
@@ -21,6 +20,7 @@ public class LevelStarSystem : MonoBehaviour
     public int stars;
     private MobileControllers mobileControllers;
     private Finish finish;
+    private LevelStats levelStats;
 
     private void Awake()
     {
@@ -34,6 +34,9 @@ public class LevelStarSystem : MonoBehaviour
     private void Start()
     {
         levelPassedPanel.SetActive(false);
+        levelStats = Resources.Load<LevelStats>(GameManager.Instance.levelName);
+        twoStarMovementAmount = levelStats.twoStarMovementAmount;
+        threeStarMovementAmount = levelStats.threeStarMovementAmount;
     }
     private void Update()
     {

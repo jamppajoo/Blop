@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public int[] levelPack1Stars;
+    public int[] levelPack2Stars;
+    public int[] levelPack3Stars;
+
+    public string levelName;
     private void Awake()
     {
         #region Singleton
@@ -31,10 +36,8 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
         #endregion
+        levelName = SceneManager.GetActiveScene().name;
     }
-    public int[] levelPack1Stars;
-    public int[] levelPack2Stars;
-    public int[] levelPack3Stars;
 
     private int totalStarAmount;
 
