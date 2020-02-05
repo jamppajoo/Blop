@@ -56,13 +56,13 @@ public class BlobMovement : MonoBehaviour
 
     private void Awake()
     {
+        buttonPresses = 0;
         cameraMovement = FindObjectOfType<CameraMovement>();
         mobileControllers = FindObjectOfType<MobileControllers>();
     }
     void Start()
     {
         playerRb = GameObject.Find("Blop").transform.gameObject.GetComponent<Rigidbody>();
-        buttonPresses = 0;
     }
     private void CheckRaycasts()
     {

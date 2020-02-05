@@ -31,8 +31,6 @@ public class Finish : MonoBehaviour
     {
         //Rotate finish block
         transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
-        if (Input.GetKeyDown(KeyCode.P))
-            NextLevel();
     }
     void OnTriggerEnter(Collider c)
     {

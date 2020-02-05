@@ -10,9 +10,9 @@ using UnityEngine.SceneManagement;
     been pressed to the screen. But that's only for dev purposes.
 */
 
-public class LevelStarSystem : MonoBehaviour {
+public class LevelStarSystem : MonoBehaviour
+{
 
-    private Text buttonPressesText;
     public int threeStarMovementAmount, twoStarMovementAmount, oneStarMovementAmount;
     private GameObject oneStar, twoStar, threeStar, nextLevel, restartLevel, finish, mobileControllers;
     static GameObject levelPassedPanel;
@@ -21,9 +21,9 @@ public class LevelStarSystem : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         stars = 3;
-        buttonPressesText = GameObject.Find("ButtonPressesText").GetComponent<Text>();
         oneStar = GameObject.Find("oneStar");
         twoStar = GameObject.Find("twoStar");
         threeStar = GameObject.Find("threeStar");
@@ -38,12 +38,12 @@ public class LevelStarSystem : MonoBehaviour {
         nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.GetComponent<Finish>().NextLevel());
         restartLevel.GetComponent<Button>().onClick.AddListener(() => Restart());
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         //Check how many times any button has been pressed since level started
         buttonPressesAmount = BlobMovement.buttonPresses;
-        buttonPressesText.text = buttonPressesAmount.ToString();
 
         if (buttonPressesAmount > oneStarMovementAmount)
             stars = 0;
@@ -60,7 +60,7 @@ public class LevelStarSystem : MonoBehaviour {
     //Controlled from Finish script
     public void LevelPassed(int stars)
     {
-        switch(stars)
+        switch (stars)
         {
             case 0:
                 oneStar.SetActive(false);
@@ -78,14 +78,14 @@ public class LevelStarSystem : MonoBehaviour {
                 nextLevel.SetActive(true);
                 break;
         }
-        
+
     }
     public void ShowLevelPassedScreen()
     {
-        
+
         levelPassedPanel.SetActive(true);
         mobileControllers.SetActive(false);
-        
+
     }
     //Restart button on levelpassPanel
     public void Restart()

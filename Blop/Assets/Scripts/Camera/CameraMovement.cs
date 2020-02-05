@@ -49,6 +49,7 @@ public class CameraMovement : MonoBehaviour
                 else if (!rotatedDown)
                     animator.SetBool("RotateToDown", true);
             }
+            EventManager.ChangeViewPressed();
         }
         viewChanged = false;
     }
