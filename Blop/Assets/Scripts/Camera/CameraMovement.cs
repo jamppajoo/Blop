@@ -1,21 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraMovement : Singleton<CameraMovement>
+public class CameraMovement : MonoBehaviour
 {
     private Animator animator;
     public bool isUp, isDown, rotatedUp, rotatedDown;
     public bool viewChanged = false;
     public bool cameraRotate = false;
     public bool onMenu = false;
-    private GameObject player, mainCamera;
+    private BlobMovement playerMovement;
+    private GameObject mainCameraObject;
     public float speed = 5f;
 
+    private MobileControllers mobileControllers;
+    private void Awake()
+    {
+        mobileControllers = FindObjectOfType<MobileControllers>();
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.Find("Blop");
-        mainCamera = Camera.main.gameObject;
+        playerMovement = FindObjectOfType<BlobMovement>();
+        mainCameraObject = gameObject.transform.parent.gameObject;
         isUp = false;
         rotatedUp = false;
         isDown = true;
@@ -50,7 +56,7 @@ public class CameraMovement : Singleton<CameraMovement>
     //Move camera to players position
     public void FixedUpdate()
     {
-        mainCamera.gameObject.transform.position = Vector3.Lerp(mainCamera.gameObject.transform.position, player.gameObject.transform.position, speed * Time.deltaTime);
+       mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, playerMovement.gameObject.transform.position, speed * Time.deltaTime);
     }
     //Functions are ran from cameras animation events
     private void IsUp()
@@ -91,13 +97,13 @@ public class CameraMovement : Singleton<CameraMovement>
 
     private void SetStuff(bool active)
     {
-        MobileControllers.Instance.ChangeView.interactable = active;
-        MobileControllers.Instance.Up.interactable = active;
-        MobileControllers.Instance.Down.interactable = active;
-        MobileControllers.Instance.Left.interactable = active;
-        MobileControllers.Instance.Right.interactable = active;
-        MobileControllers.Instance.Back.interactable = active;
-        MobileControllers.Instance.canPress = active;
+        mobileControllers.changeView.interactable = active;
+        mobileControllers.up.interactable = active;
+        mobileControllers.down.interactable = active;
+        mobileControllers.left.interactable = active;
+        mobileControllers.right.interactable = active;
+        mobileControllers.back.interactable = active;
+        mobileControllers.canPress = active;
     }
     
 }

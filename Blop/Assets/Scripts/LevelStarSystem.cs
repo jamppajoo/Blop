@@ -35,7 +35,7 @@ public class LevelStarSystem : MonoBehaviour {
         mobileControllers = GameObject.Find("MobileControllers");
         //Set levelPassedPanel not active since we just started level
         levelPassedPanel.SetActive(false);
-        nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.GetComponent<Finish>().nextLevel());
+        nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.GetComponent<Finish>().NextLevel());
         restartLevel.GetComponent<Button>().onClick.AddListener(() => Restart());
     }
 	
@@ -54,11 +54,11 @@ public class LevelStarSystem : MonoBehaviour {
         else if (buttonPressesAmount <= threeStarMovementAmount)
             stars = 3;
 
-        levelPassed(stars);
+        LevelPassed(stars);
 
     }
     //Controlled from Finish script
-    public void levelPassed(int stars)
+    public void LevelPassed(int stars)
     {
         switch(stars)
         {
@@ -80,7 +80,7 @@ public class LevelStarSystem : MonoBehaviour {
         }
         
     }
-    public void showLevelPassedScreen()
+    public void ShowLevelPassedScreen()
     {
         
         levelPassedPanel.SetActive(true);

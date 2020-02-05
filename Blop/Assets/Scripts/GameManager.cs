@@ -9,15 +9,36 @@ using UnityEngine.SceneManagement;
     Everything in GameManager has to be in specific order in Unity becouse of GetChild() methods.
 */
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
-    public int[] LevelPack1Stars;
-    public int[] LevelPack2Stars;
-    public int[] LevelPack3Stars;
+    #region Singleton
+
+    private static GameManager _instance;
+
+    public static GameManager Instance { get { return _instance; } }
+
+    #endregion
+
+    private void Awake()
+    {
+        #region Singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(this.gameObject);
+        #endregion
+    }
+    public int[] levelPack1Stars;
+    public int[] levelPack2Stars;
+    public int[] levelPack3Stars;
 
     private int totalStarAmount;
-    
-    void Awake()
+
+    void Start()
     {
         SaveAndLoad.Instance.Load();
     }
@@ -26,25 +47,25 @@ public class GameManager : Singleton<GameManager>
     {
         totalStarAmount = 0;
 
-        for (int i = 0; i < LevelPack1Stars.Length; i++)
+        for (int i = 0; i < levelPack1Stars.Length; i++)
         {
-            if (LevelPack1Stars[i] != 4)
-                totalStarAmount += LevelPack1Stars[i];
+            if (levelPack1Stars[i] != 4)
+                totalStarAmount += levelPack1Stars[i];
         }
-        for (int i = 0; i < LevelPack2Stars.Length; i++)
+        for (int i = 0; i < levelPack2Stars.Length; i++)
         {
-            if (LevelPack2Stars[i] != 4)
-                totalStarAmount += LevelPack2Stars[i];
+            if (levelPack2Stars[i] != 4)
+                totalStarAmount += levelPack2Stars[i];
         }
-        for (int i = 0; i < LevelPack3Stars.Length; i++)
+        for (int i = 0; i < levelPack3Stars.Length; i++)
         {
-            if (LevelPack3Stars[i] != 4)
-                totalStarAmount += LevelPack3Stars[i];
+            if (levelPack3Stars[i] != 4)
+                totalStarAmount += levelPack3Stars[i];
         }
         return totalStarAmount;
     }
     
-    public void GoToMenu()
+    public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
     }

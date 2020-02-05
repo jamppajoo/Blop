@@ -6,8 +6,30 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SaveAndLoad : Singleton<SaveAndLoad>
+public class SaveAndLoad : MonoBehaviour
 {
+    #region Singleton
+
+    private static SaveAndLoad _instance;
+
+    public static SaveAndLoad Instance { get { return _instance; } }
+
+    #endregion
+
+
+    private void Awake()
+    {
+        #region Singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(this.gameObject);
+        #endregion
+    }
     //Save and load methods, so that player's progress does not get lost
     public void Save()
     {
@@ -16,14 +38,14 @@ public class SaveAndLoad : Singleton<SaveAndLoad>
 
         PlayerData data = new PlayerData();
 
-        for (int i = 0; i < GameManager.Instance.LevelPack1Stars.Length; i++)
-            data.LevelPack1Stars[i] = GameManager.Instance.LevelPack1Stars[i];
+        for (int i = 0; i < GameManager.Instance.levelPack1Stars.Length; i++)
+            data.LevelPack1Stars[i] = GameManager.Instance.levelPack1Stars[i];
 
-        for (int i = 0; i < GameManager.Instance.LevelPack2Stars.Length; i++)
-            data.LevelPack2Stars[i] = GameManager.Instance.LevelPack2Stars[i];
+        for (int i = 0; i < GameManager.Instance.levelPack2Stars.Length; i++)
+            data.LevelPack2Stars[i] = GameManager.Instance.levelPack2Stars[i];
 
-        for (int i = 0; i < GameManager.Instance.LevelPack3Stars.Length; i++)
-            data.LevelPack3Stars[i] = GameManager.Instance.LevelPack3Stars[i];
+        for (int i = 0; i < GameManager.Instance.levelPack3Stars.Length; i++)
+            data.LevelPack3Stars[i] = GameManager.Instance.levelPack3Stars[i];
 
         bf.Serialize(file, data);
 
@@ -40,13 +62,13 @@ public class SaveAndLoad : Singleton<SaveAndLoad>
             file.Close();
 
             for (int i = 0; i < data.LevelPack1Stars.Length; i++)
-                GameManager.Instance.LevelPack1Stars[i] = data.LevelPack1Stars[i];
+                GameManager.Instance.levelPack1Stars[i] = data.LevelPack1Stars[i];
 
             for (int i = 0; i < data.LevelPack2Stars.Length; i++)
-                GameManager.Instance.LevelPack2Stars[i] = data.LevelPack2Stars[i];
+                GameManager.Instance.levelPack2Stars[i] = data.LevelPack2Stars[i];
 
             for (int i = 0; i < data.LevelPack3Stars.Length; i++)
-                GameManager.Instance.LevelPack3Stars[i] = data.LevelPack3Stars[i];
+                GameManager.Instance.levelPack3Stars[i] = data.LevelPack3Stars[i];
         }
     }
     
@@ -66,9 +88,9 @@ public class SaveAndLoad : Singleton<SaveAndLoad>
     [Serializable]
     class PlayerData
     {
-        public int[] LevelPack1Stars = new int[GameManager.Instance.LevelPack1Stars.Length];
-        public int[] LevelPack2Stars = new int[GameManager.Instance.LevelPack2Stars.Length];
-        public int[] LevelPack3Stars = new int[GameManager.Instance.LevelPack3Stars.Length];
+        public int[] LevelPack1Stars = new int[GameManager.Instance.levelPack1Stars.Length];
+        public int[] LevelPack2Stars = new int[GameManager.Instance.levelPack2Stars.Length];
+        public int[] LevelPack3Stars = new int[GameManager.Instance.levelPack3Stars.Length];
     }
 
 }

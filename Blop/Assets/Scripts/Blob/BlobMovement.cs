@@ -10,9 +10,15 @@ public class BlobMovement : MonoBehaviour {
     public float moveScale = 1f;
     public float timeToMove;
     public static int buttonPresses = 0;
-    
-	// Use this for initialization
-	void Start () {
+    private CameraMovement cameraMovement;
+    private MobileControllers mobileControllers;
+
+    private void Awake()
+    {
+        cameraMovement = FindObjectOfType<CameraMovement>();
+        mobileControllers = FindObjectOfType<MobileControllers>();
+    }
+    void Start () {
         playerRb = GameObject.Find("Blop").transform.gameObject.GetComponent<Rigidbody>();
         buttonPresses = 0;
 	}
@@ -31,15 +37,15 @@ public class BlobMovement : MonoBehaviour {
         playerRb.isKinematic = false;
 
         //If not using mobilecontrollers to move
-        if (MobileControllers.Instance.moveHorizontal == 0 && MobileControllers.Instance.moveVertical == 0)
+        if (mobileControllers.moveHorizontal == 0 && mobileControllers.moveVertical == 0)
         {
             horizontalMovement = Input.GetAxisRaw("Horizontal");
             verticalMovement = Input.GetAxisRaw("Vertical");
         }
         else
         {
-            horizontalMovement = MobileControllers.Instance.moveHorizontal;
-            verticalMovement = MobileControllers.Instance.moveVertical;
+            horizontalMovement = mobileControllers.moveHorizontal;
+            verticalMovement = mobileControllers.moveVertical;
         }
 
         
@@ -55,9 +61,9 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale,timeToMove /2));
             }
 
-            if (horizontalMovement > 0 && (CameraMovement.Instance.isUp || CameraMovement.Instance.isDown))
+            if (horizontalMovement > 0 && (cameraMovement.isUp || cameraMovement.isDown))
                 horizontalMovement = 0;
-            if (verticalMovement < 0 && CameraMovement.Instance.rotatedUp)
+            if (verticalMovement < 0 && cameraMovement.rotatedUp)
                 verticalMovement = 0;
         }
 
@@ -71,9 +77,9 @@ public class BlobMovement : MonoBehaviour {
             {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove /2));
             }
-            if (horizontalMovement < 0 && (CameraMovement.Instance.isDown || CameraMovement.Instance.isUp) )
+            if (horizontalMovement < 0 && (cameraMovement.isDown || cameraMovement.isUp) )
                 horizontalMovement = 0;
-            if (verticalMovement > 0 && CameraMovement.Instance.rotatedUp)
+            if (verticalMovement > 0 && cameraMovement.rotatedUp)
                 verticalMovement = 0;
         }
         if ((Physics.Raycast(BackHit, out hit)) && hit.distance < 1  )
@@ -88,9 +94,9 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove/2));
             }
 
-            if (verticalMovement > 0 && CameraMovement.Instance.isUp)
+            if (verticalMovement > 0 && cameraMovement.isUp)
                     verticalMovement = 0;
-            if (horizontalMovement > 0 && CameraMovement.Instance.rotatedUp)
+            if (horizontalMovement > 0 && cameraMovement.rotatedUp)
                 horizontalMovement = 0;
         }
         if ((Physics.Raycast(FrontHit, out hit)) && hit.distance < 1)
@@ -105,9 +111,9 @@ public class BlobMovement : MonoBehaviour {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0),moveScale, timeToMove/2));
             }
 
-            if (verticalMovement < 0 && CameraMovement.Instance.isUp)
+            if (verticalMovement < 0 && cameraMovement.isUp)
                 verticalMovement = 0;
-            if (horizontalMovement < 0 && CameraMovement.Instance.rotatedUp)
+            if (horizontalMovement < 0 && cameraMovement.rotatedUp)
                 horizontalMovement = 0;
         }
 
@@ -116,15 +122,15 @@ public class BlobMovement : MonoBehaviour {
             if (hit.transform.gameObject.tag == "UpWall")
             {
                 playerRb.isKinematic = true;
-                if (verticalMovement > 0 && CameraMovement.Instance.isDown)
+                if (verticalMovement > 0 && cameraMovement.isDown)
                     verticalMovement = 0;
             }
-            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  CameraMovement.Instance.isDown)
+            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 &&  cameraMovement.isDown)
                 verticalMovement = 0;
         }
         if ((Physics.Raycast(DownHit, out hit)) && hit.distance < 1)
         {
-            if (verticalMovement < 0 && CameraMovement.Instance.isDown)
+            if (verticalMovement < 0 && cameraMovement.isDown)
                 verticalMovement = 0;
 
             else if (hit.transform.gameObject.tag != "Floor" && hit.transform.gameObject.name != "Restart" && hit.transform.gameObject.name != "Teleport" && playerRb.isKinematic == false)
@@ -132,31 +138,31 @@ public class BlobMovement : MonoBehaviour {
                 print("Blob stuck!");
                 horizontalMovement = 0;
                 verticalMovement = 0;
-                MobileControllers.Instance.RestartButton.gameObject.SetActive(true);
+                mobileControllers.restartButton.gameObject.SetActive(true);
             }
         }
         if (playerRb.velocity.y != 0)
             inAir = true;
         else inAir = false;
         //Check movement and other things
-        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && CameraMovement.Instance.isDown)
+        if (canMove && !inAir && (horizontalMovement !=0 || verticalMovement !=0) && cameraMovement.isDown)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0),moveScale, timeToMove));
         //Same but check if camera is rotated only up or up & 90 degrees
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) )
         {
-            if (CameraMovement.Instance.rotatedUp)
+            if (cameraMovement.rotatedUp)
                 StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), moveScale, timeToMove));
 
-            else if (CameraMovement.Instance.isUp)
+            else if (cameraMovement.isUp)
                 StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
         }
-        MobileControllers.Instance.moveVertical = 0;
-        MobileControllers.Instance.moveHorizontal = 0;
+        mobileControllers.moveVertical = 0;
+        mobileControllers.moveHorizontal = 0;
 
         //Check if the y velocity is too much, if so, restart level, teleport stuff
         if (playerRb.velocity.y < -15)
         {
-            MobileControllers.Instance.RestartButton.gameObject.SetActive(true);
+            mobileControllers.restartButton.gameObject.SetActive(true);
             playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 15);
             print(playerRb.velocity.y);
         }

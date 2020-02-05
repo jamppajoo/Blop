@@ -5,8 +5,15 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
-public class AdController : Singleton<AdController>
+public class AdController : MonoBehaviour
 {
+    #region Singleton
+
+    private static AdController _instance;
+
+    public static AdController Instance { get { return _instance; } }
+
+    #endregion
     public Transform adsMenu;
 
     public Button adsMenuAcceptAdButton, adsMenuDeclineAdButton;
@@ -14,8 +21,20 @@ public class AdController : Singleton<AdController>
 
     private void Awake()
     {
+        #region Singleton
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(this.gameObject);
+        #endregion
+
         adsMenuAcceptAdButton.onClick.AddListener(ShowAd);
         adsMenuDeclineAdButton.onClick.AddListener(DeclineAd);
+        
     }
     
     private void DeclineAd()

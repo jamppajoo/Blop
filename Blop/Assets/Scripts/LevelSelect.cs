@@ -23,7 +23,7 @@ public class LevelSelect : MonoBehaviour {
         {
             if (child.gameObject.transform.name.StartsWith("Level1")) // If they are Level1.x buttons
             {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.LevelPack1Stars[i].ToString();
+                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.levelPack1Stars[i].ToString();
                 levels.Add(child.GetComponent<Button>());             //Add them to levels list. Creates list to inspector as well
                 if (child.GetChild(1).GetComponent<Text>().text != 4.ToString()) // If star amount is not 4 (what is used to appear level has not finised)
                 {
@@ -32,7 +32,7 @@ public class LevelSelect : MonoBehaviour {
                 else child.GetComponent<Button>().interactable = false;
                 
                 //Make stars appear below level button, shitty code but works.
-                switch (GameManager.Instance.LevelPack1Stars[i])
+                switch (GameManager.Instance.levelPack1Stars[i])
                 {
                     case 1:
                         child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
@@ -60,14 +60,14 @@ public class LevelSelect : MonoBehaviour {
             }
             else if (child.gameObject.transform.name.StartsWith("Level2")) // Do same thing to Levels 2.x
             {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.LevelPack2Stars[i].ToString();
+                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.levelPack2Stars[i].ToString();
                 levels.Add(child.GetComponent<Button>());
                 if (child.GetChild(1).GetComponent<Text>().text != 4.ToString()  )
                 {
                     child.GetComponent<Button>().interactable = true;
                 }
                 else  child.GetComponent<Button>().interactable = false;
-                switch (GameManager.Instance.LevelPack2Stars[i])
+                switch (GameManager.Instance.levelPack2Stars[i])
                 {
                     case 1:
                         child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
@@ -93,14 +93,14 @@ public class LevelSelect : MonoBehaviour {
             }
             else if (child.gameObject.transform.name.StartsWith("Level3")) // Do same thing to Levels 3.x
             {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.LevelPack3Stars[i].ToString();
+                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.levelPack3Stars[i].ToString();
                 levels.Add(child.GetComponent<Button>());
                 if (child.GetChild(1).GetComponent<Text>().text != 4.ToString())
                 {
                     child.GetComponent<Button>().interactable = true;
                 }
                 else child.GetComponent<Button>().interactable = false;
-                switch (GameManager.Instance.LevelPack3Stars[i])
+                switch (GameManager.Instance.levelPack3Stars[i])
                 {
                     case 1:
                         child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;

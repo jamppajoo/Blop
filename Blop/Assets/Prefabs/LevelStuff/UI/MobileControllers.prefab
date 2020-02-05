@@ -411,13 +411,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19540cdc8eab1c40a2592380ed8d504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangeView: {fileID: 6049843314360091771}
-  Up: {fileID: 6049843314360076777}
-  Down: {fileID: 6049843314360154843}
-  Left: {fileID: 6049843314360136049}
-  Right: {fileID: 6049843314360117059}
-  Back: {fileID: 5935847762662685825}
-  RestartButton: {fileID: 6049843314360088111}
+  changeView: {fileID: 6049843314360091771}
+  up: {fileID: 6049843314360076777}
+  down: {fileID: 6049843314360154843}
+  left: {fileID: 6049843314360136049}
+  right: {fileID: 6049843314360117059}
+  back: {fileID: 5935847762662685825}
+  restartButton: {fileID: 6049843314360088111}
   moveHorizontal: 0
   moveVertical: 0
   canPress: 1
