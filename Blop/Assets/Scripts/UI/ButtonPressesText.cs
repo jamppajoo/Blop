@@ -14,7 +14,7 @@ public class ButtonPressesText : MonoBehaviour
     }
     private void Start()
     {
-        myText.text = BlobMovement.buttonPresses.ToString();
+        myText.text = BlopMovement.buttonPresses.ToString();
         
     }
 
@@ -25,9 +25,17 @@ public class ButtonPressesText : MonoBehaviour
         EventManager.OnLeftPressed += OnLeftPressed;
         EventManager.OnRightPressed += OnRightPressed;
         EventManager.OnChangeViewPressed += OnChangeViewPressed;
+        //EventManager.OnButtonPressed += ButtonPressed;
     }
+
+    private void ButtonPressed()
+    {
+        myText.text = BlopMovement.buttonPresses.ToString();
+    }
+
     private void OnDisable()
     {
+        //EventManager.OnButtonPressed -= ButtonPressed;
         EventManager.OnUpPressed -= OnUpPressed;
         EventManager.OnDownPressed -= OnDownPressed;
         EventManager.OnLeftPressed -= OnLeftPressed;
@@ -37,26 +45,26 @@ public class ButtonPressesText : MonoBehaviour
 
     private void OnChangeViewPressed()
     {
-        myText.text = BlobMovement.buttonPresses.ToString();
+        myText.text = BlopMovement.buttonPresses.ToString();
     }
 
     private void OnUpPressed()
     {
-        myText.text = BlobMovement.buttonPresses.ToString();
+        myText.text = BlopMovement.buttonPresses.ToString();
     }
 
     private void OnDownPressed()
     {
-        myText.text = BlobMovement.buttonPresses.ToString();
+        myText.text = BlopMovement.buttonPresses.ToString();
     }
 
     private void OnLeftPressed()
     {
-        myText.text = BlobMovement.buttonPresses.ToString();
+        myText.text = BlopMovement.buttonPresses.ToString();
     }
 
     private void OnRightPressed()
     {
-        myText.text = BlobMovement.buttonPresses.ToString();
+        myText.text = BlopMovement.buttonPresses.ToString();
     }
 }

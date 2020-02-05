@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
 
-public class BlobMovement : MonoBehaviour
+public class BlopMovement : MonoBehaviour
 {
     private float horizontalMovement, verticalMovement;
     private bool canMove = true;
@@ -102,7 +102,7 @@ public class BlobMovement : MonoBehaviour
             }
             if (horizontalMovement < 0 && (cameraMovement.isDown || cameraMovement.isUp))
                 horizontalMovement = 0;
-            if (verticalMovement > 0 && cameraMovement.rotatedUp)
+            if (verticalMovement < 0 && cameraMovement.rotatedUp)
                 verticalMovement = 0;
         }
 
@@ -120,7 +120,7 @@ public class BlobMovement : MonoBehaviour
 
             if (horizontalMovement > 0 && (cameraMovement.isUp || cameraMovement.isDown))
                 horizontalMovement = 0;
-            if (verticalMovement < 0 && cameraMovement.rotatedUp)
+            if (verticalMovement > 0 && cameraMovement.rotatedUp)
                 verticalMovement = 0;
         }
 
@@ -139,7 +139,7 @@ public class BlobMovement : MonoBehaviour
 
             if (verticalMovement > 0 && cameraMovement.isUp)
                 verticalMovement = 0;
-            if (horizontalMovement < 0 && cameraMovement.rotatedUp)
+            if (horizontalMovement > 0 && cameraMovement.rotatedUp)
                 horizontalMovement = 0;
         }
 
@@ -157,7 +157,7 @@ public class BlobMovement : MonoBehaviour
             }
             if (verticalMovement < 0 && cameraMovement.isUp)
                 verticalMovement = 0;
-            if (horizontalMovement > 0 && cameraMovement.rotatedUp)
+            if (horizontalMovement < 0 && cameraMovement.rotatedUp)
                 horizontalMovement = 0;
         }
 

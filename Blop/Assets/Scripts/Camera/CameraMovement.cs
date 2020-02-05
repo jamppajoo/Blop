@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     public bool viewChanged = false;
     public bool cameraRotate = false;
     public bool onMenu = false;
-    private BlobMovement playerMovement;
+    private BlopMovement playerMovement;
     private GameObject mainCameraObject;
     public float speed = 5f;
 
@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        playerMovement = FindObjectOfType<BlobMovement>();
+        playerMovement = FindObjectOfType<BlopMovement>();
         mainCameraObject = gameObject.transform.parent.gameObject;
         isUp = false;
         rotatedUp = false;
@@ -33,7 +33,7 @@ public class CameraMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || viewChanged)
         {
-            BlobMovement.buttonPresses++;
+            BlopMovement.buttonPresses++;
             SetStuff(false);
             if (!cameraRotate)
             {

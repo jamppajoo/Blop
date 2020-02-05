@@ -12,30 +12,51 @@ public class EventManager : MonoBehaviour
     public static event InputHandler OnRightPressed;
 
     public static event InputHandler OnChangeViewPressed;
+    public static event InputHandler OnButtonPressed;
 
     public static void UpPressed()
     {
         if (OnUpPressed != null)
+        {
             OnUpPressed();
+            ButtonPressed();
+        }
     }
     public static void DownPressed()
     {
         if (OnDownPressed != null)
+        {
             OnDownPressed();
+            ButtonPressed();
+        }
     }
     public static void LeftPressed()
     {
         if (OnLeftPressed != null)
+        {
             OnLeftPressed();
+            ButtonPressed();
+        }
     }
     public static void RightPressed()
     {
         if (OnRightPressed != null)
+        {
             OnRightPressed();
+            ButtonPressed();
+        }
     }
     public static void ChangeViewPressed()
     {
         if (OnChangeViewPressed != null)
+        {
             OnChangeViewPressed();
+            ButtonPressed();
+        }
+    }
+    public static void ButtonPressed()
+    {
+        if (OnButtonPressed != null)
+            OnButtonPressed();
     }
 }

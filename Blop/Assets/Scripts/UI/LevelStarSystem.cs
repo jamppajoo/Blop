@@ -27,14 +27,12 @@ public class LevelStarSystem : MonoBehaviour
         finish = FindObjectOfType<Finish>();
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
-        //Set levelPassedPanel not active since we just started level
         nextLevel.GetComponent<Button>().onClick.AddListener(finish.NextLevel);
         restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
     }
     private void Start()
     {
         levelPassedPanel.SetActive(false);
-        Debug.Log("ASD: " + GameManager.Instance.levelName);
         levelStats = Resources.Load<LevelStats>(GameManager.Instance.levelName);
         twoStarMovementAmount = levelStats.twoStarMovementAmount;
         threeStarMovementAmount = levelStats.threeStarMovementAmount;
@@ -42,7 +40,7 @@ public class LevelStarSystem : MonoBehaviour
     private void Update()
     {
         //Check how many times any button has been pressed since level started
-        buttonPressesAmount = BlobMovement.buttonPresses;
+        buttonPressesAmount = BlopMovement.buttonPresses;
 
         stars = 1;
         if (buttonPressesAmount > threeStarMovementAmount && buttonPressesAmount <= twoStarMovementAmount)
