@@ -8,8 +8,7 @@ using System;
 public class MobileControllers : MonoBehaviour
 {
     public Button changeView, up, down, left, right, back, restartButton;
-
-    public float moveHorizontal = 0, moveVertical;
+    
     public bool canPress = true;
 
     private CameraMovement cameraMovement;
@@ -38,6 +37,18 @@ public class MobileControllers : MonoBehaviour
         Initialize();
     }
 
+    private void Update()
+    {
+        if (Input.GetAxisRaw("Vertical") > 0.5f)
+            UpPressed();
+        if (Input.GetAxisRaw("Vertical") < -0.5f)
+            DownPressed();
+        if (Input.GetAxisRaw("Horizontal") < -0.5f)
+            LeftPressed();
+        if (Input.GetAxisRaw("Horizontal") > 0.5f)
+            RightPressed();
+    }
+
     private void Initialize()
     {
         changeView.onClick.AddListener(() => ViewChange());
@@ -48,25 +59,25 @@ public class MobileControllers : MonoBehaviour
         EventTrigger upTrigger = up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();
         upEntry.eventID = EventTriggerType.PointerDown;
-        upEntry.callback.AddListener((data) => { GoUp(); });
+        upEntry.callback.AddListener((data) => { UpPressed(); });
         upTrigger.triggers.Add(upEntry);
 
         EventTrigger downTrigger = down.GetComponent<EventTrigger>();
         EventTrigger.Entry downEntry = new EventTrigger.Entry();
         downEntry.eventID = EventTriggerType.PointerDown;
-        downEntry.callback.AddListener((data) => { GoDown(); });
+        downEntry.callback.AddListener((data) => { DownPressed(); });
         downTrigger.triggers.Add(downEntry);
 
         EventTrigger leftTrigger = left.GetComponent<EventTrigger>();
         EventTrigger.Entry leftEntry = new EventTrigger.Entry();
         leftEntry.eventID = EventTriggerType.PointerDown;
-        leftEntry.callback.AddListener((data) => { GoLeft(); });
+        leftEntry.callback.AddListener((data) => { LeftPressed(); });
         leftTrigger.triggers.Add(leftEntry);
 
         EventTrigger rightTrigger = right.GetComponent<EventTrigger>();
         EventTrigger.Entry rightEntry = new EventTrigger.Entry();
         rightEntry.eventID = EventTriggerType.PointerDown;
-        rightEntry.callback.AddListener((data) => { GoRight(); });
+        rightEntry.callback.AddListener((data) => { RightPressed(); });
         rightTrigger.triggers.Add(rightEntry);
     }
 
@@ -80,25 +91,25 @@ public class MobileControllers : MonoBehaviour
         cameraMovement.viewChanged = true;
 
     }
-    public void GoUp()
+    public void UpPressed()
     {
         if (canPress)
-            moveVertical = 1;
+            EventManager.UpPressed();
     }
-    public void GoDown()
+    public void DownPressed()
     {
         if (canPress)
-            moveVertical = -1;
+            EventManager.DownPressed();
     }
-    public void GoLeft()
+    public void LeftPressed()
     {
         if (canPress)
-            moveHorizontal = -1;
+            EventManager.LeftPressed();
     }
-    public void GoRight()
+    public void RightPressed()
     {
         if (canPress)
-            moveHorizontal = 1;
+            EventManager.RightPressed();
     }
     public void GoToMenu()
     {

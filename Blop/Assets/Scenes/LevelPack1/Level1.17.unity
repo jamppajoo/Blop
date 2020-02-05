@@ -660,7 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1832280550}
   m_Layer: 0
-  m_Name: BackWallTile
+  m_Name: FrontWallTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1875,7 +1875,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 135074, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 3}
       propertyPath: m_Name
-      value: BackWallTile (1)
+      value: FrontWallTile
       objectReference: {fileID: 0}
     - target: {fileID: 402558, guid: 786731dc9b6e2e641b27e47e147ba75d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2423,7 +2423,7 @@ PrefabInstance:
     - target: {fileID: 9072155739864187946, guid: 9888ae7f60255bc4eb1f7173e9723a87,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 9072155739864187946, guid: 9888ae7f60255bc4eb1f7173e9723a87,
         type: 3}
@@ -2453,7 +2453,7 @@ PrefabInstance:
     - target: {fileID: 9072155739864187946, guid: 9888ae7f60255bc4eb1f7173e9723a87,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9072155739864187946, guid: 9888ae7f60255bc4eb1f7173e9723a87,
         type: 3}
