@@ -13,43 +13,35 @@ using UnityEngine.SceneManagement;
 public class LevelStarSystem : MonoBehaviour
 {
 
-    public int threeStarMovementAmount, twoStarMovementAmount, oneStarMovementAmount;
-    private GameObject oneStar, twoStar, threeStar, nextLevel, restartLevel, finish, mobileControllers;
-    static GameObject levelPassedPanel;
-    public int buttonPressesAmount = 0;
+    public int threeStarMovementAmount, twoStarMovementAmount;
+    public Button nextLevel, restartLevel;
+    public GameObject oneStar, twoStar, threeStar, levelPassedPanel;
+    private int buttonPressesAmount = 0;
+    [HideInInspector]
     public int stars;
+    private MobileControllers mobileControllers;
+    private Finish finish;
 
-
-    // Use this for initialization
-    void Awake()
+    private void Awake()
     {
+        finish = FindObjectOfType<Finish>();
         stars = 3;
-        oneStar = GameObject.Find("oneStar");
-        twoStar = GameObject.Find("twoStar");
-        threeStar = GameObject.Find("threeStar");
-        nextLevel = GameObject.Find("NextLevel");
-        restartLevel = GameObject.Find("RestartLevel");
-        levelPassedPanel = GameObject.Find("LevelPassedPanel");
-        finish = GameObject.Find("Finish");
-        restartLevel = GameObject.Find("RestartLevel");
-        mobileControllers = GameObject.Find("MobileControllers");
+        mobileControllers = FindObjectOfType<MobileControllers>();
         //Set levelPassedPanel not active since we just started level
-        levelPassedPanel.SetActive(false);
-        nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.GetComponent<Finish>().NextLevel());
+        nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.NextLevel());
         restartLevel.GetComponent<Button>().onClick.AddListener(() => Restart());
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
+    {
+        levelPassedPanel.SetActive(false);
+    }
+    private void Update()
     {
         //Check how many times any button has been pressed since level started
         buttonPressesAmount = BlobMovement.buttonPresses;
 
-        if (buttonPressesAmount > oneStarMovementAmount)
-            stars = 0;
-        else if (buttonPressesAmount > twoStarMovementAmount)
-            stars = 1;
-        else if (buttonPressesAmount > threeStarMovementAmount)
+        stars = 1;
+        if (buttonPressesAmount > threeStarMovementAmount && buttonPressesAmount <= twoStarMovementAmount)
             stars = 2;
         else if (buttonPressesAmount <= threeStarMovementAmount)
             stars = 3;
@@ -57,36 +49,32 @@ public class LevelStarSystem : MonoBehaviour
         LevelPassed(stars);
 
     }
-    //Controlled from Finish script
+    
     public void LevelPassed(int stars)
     {
         switch (stars)
         {
-            case 0:
-                oneStar.SetActive(false);
-                nextLevel.SetActive(false);
-                break;
             case 1:
                 twoStar.SetActive(false);
-                nextLevel.SetActive(true);
+                nextLevel.gameObject.SetActive(true);
                 break;
             case 2:
                 threeStar.SetActive(false);
-                nextLevel.SetActive(true);
+                nextLevel.gameObject.SetActive(true);
                 break;
             case 3:
-                nextLevel.SetActive(true);
+                nextLevel.gameObject.SetActive(true);
                 break;
         }
-
     }
+
     public void ShowLevelPassedScreen()
     {
-
         levelPassedPanel.SetActive(true);
-        mobileControllers.SetActive(false);
+        mobileControllers.gameObject.SetActive(false);
 
     }
+
     //Restart button on levelpassPanel
     public void Restart()
     {

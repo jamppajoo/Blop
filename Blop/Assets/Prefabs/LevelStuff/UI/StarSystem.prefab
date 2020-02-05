@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 9030196249385744262}
   - component: {fileID: 9030196249395762980}
   m_Layer: 5
-  m_Name: oneStar
+  m_Name: OneStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,12 @@ MonoBehaviour:
   threeStarMovementAmount: 13
   twoStarMovementAmount: 15
   oneStarMovementAmount: 20
-  buttonPressesAmount: 0
+  nextLevel: {fileID: 9030196249395964286}
+  restartLevel: {fileID: 9030196249395963216}
+  oneStar: {fileID: 9030196249405469470}
+  twoStar: {fileID: 9030196249405478192}
+  threeStar: {fileID: 9030196249405636764}
+  levelPassedPanel: {fileID: 9030196249405669342}
   stars: 0
 --- !u!1 &9030196249405478192
 GameObject:
@@ -252,7 +257,7 @@ GameObject:
   - component: {fileID: 9030196249385666066}
   - component: {fileID: 9030196249395869172}
   m_Layer: 5
-  m_Name: twoStar
+  m_Name: TwoStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -628,7 +633,7 @@ GameObject:
   - component: {fileID: 9030196249385860346}
   - component: {fileID: 9030196249395966222}
   m_Layer: 5
-  m_Name: threeStar
+  m_Name: ThreeStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
