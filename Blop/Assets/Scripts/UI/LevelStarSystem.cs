@@ -28,12 +28,13 @@ public class LevelStarSystem : MonoBehaviour
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
         //Set levelPassedPanel not active since we just started level
-        nextLevel.GetComponent<Button>().onClick.AddListener(() => finish.NextLevel());
-        restartLevel.GetComponent<Button>().onClick.AddListener(() => Restart());
+        nextLevel.GetComponent<Button>().onClick.AddListener(finish.NextLevel);
+        restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
     }
     private void Start()
     {
         levelPassedPanel.SetActive(false);
+        Debug.Log("ASD: " + GameManager.Instance.levelName);
         levelStats = Resources.Load<LevelStats>(GameManager.Instance.levelName);
         twoStarMovementAmount = levelStats.twoStarMovementAmount;
         threeStarMovementAmount = levelStats.threeStarMovementAmount;
@@ -59,14 +60,11 @@ public class LevelStarSystem : MonoBehaviour
         {
             case 1:
                 twoStar.SetActive(false);
-                nextLevel.gameObject.SetActive(true);
                 break;
             case 2:
                 threeStar.SetActive(false);
-                nextLevel.gameObject.SetActive(true);
                 break;
             case 3:
-                nextLevel.gameObject.SetActive(true);
                 break;
         }
     }

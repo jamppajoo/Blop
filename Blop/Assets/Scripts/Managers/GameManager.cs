@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 /*
     Handles stars and saves them to the file when Save() function is called. When Load() function is called, it loads information from file.
@@ -36,6 +37,14 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
         #endregion
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += NewSceneLoaded;
+    }
+
+    private void NewSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
         levelName = SceneManager.GetActiveScene().name;
     }
 
