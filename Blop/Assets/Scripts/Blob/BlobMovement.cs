@@ -31,15 +31,15 @@ public class BlobMovement : MonoBehaviour {
         playerRb.isKinematic = false;
 
         //If not using mobilecontrollers to move
-        if (MobileControllers.moveHorizontal == 0 && MobileControllers.moveVertical == 0)
+        if (MobileControllers.Instance.moveHorizontal == 0 && MobileControllers.Instance.moveVertical == 0)
         {
             horizontalMovement = Input.GetAxisRaw("Horizontal");
             verticalMovement = Input.GetAxisRaw("Vertical");
         }
         else
         {
-            horizontalMovement = MobileControllers.moveHorizontal;
-            verticalMovement = MobileControllers.moveVertical;
+            horizontalMovement = MobileControllers.Instance.moveHorizontal;
+            verticalMovement = MobileControllers.Instance.moveVertical;
         }
 
         
@@ -132,7 +132,7 @@ public class BlobMovement : MonoBehaviour {
                 print("Blob stuck!");
                 horizontalMovement = 0;
                 verticalMovement = 0;
-                MobileControllers.RestartButton.gameObject.SetActive(true);
+                MobileControllers.Instance.RestartButton.gameObject.SetActive(true);
             }
         }
         if (playerRb.velocity.y != 0)
@@ -150,13 +150,13 @@ public class BlobMovement : MonoBehaviour {
             else if (CameraMovement.Instance.isUp)
                 StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
         }
-        MobileControllers.moveVertical = 0;
-        MobileControllers.moveHorizontal = 0;
+        MobileControllers.Instance.moveVertical = 0;
+        MobileControllers.Instance.moveHorizontal = 0;
 
         //Check if the y velocity is too much, if so, restart level, teleport stuff
         if (playerRb.velocity.y < -15)
         {
-            MobileControllers.RestartButton.gameObject.SetActive(true);
+            MobileControllers.Instance.RestartButton.gameObject.SetActive(true);
             playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 15);
             print(playerRb.velocity.y);
         }

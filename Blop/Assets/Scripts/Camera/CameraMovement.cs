@@ -52,6 +52,7 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         mainCamera.gameObject.transform.position = Vector3.Lerp(mainCamera.gameObject.transform.position, player.gameObject.transform.position, speed * Time.deltaTime);
     }
+    //Functions are ran from cameras animation events
     private void IsUp()
     {
         isUp = true;
@@ -90,13 +91,13 @@ public class CameraMovement : Singleton<CameraMovement>
 
     private void SetStuff(bool active)
     {
-        MobileControllers.ChangeView.interactable = active;
-        MobileControllers.Up.interactable = active;
-        MobileControllers.Down.interactable = active;
-        MobileControllers.Left.interactable = active;
-        MobileControllers.Right.interactable = active;
-        MobileControllers.Back.interactable = active;
-        MobileControllers.canPress = active;
+        MobileControllers.Instance.ChangeView.interactable = active;
+        MobileControllers.Instance.Up.interactable = active;
+        MobileControllers.Instance.Down.interactable = active;
+        MobileControllers.Instance.Left.interactable = active;
+        MobileControllers.Instance.Right.interactable = active;
+        MobileControllers.Instance.Back.interactable = active;
+        MobileControllers.Instance.canPress = active;
     }
     
 }

@@ -4,28 +4,18 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-
-public class MobileControllers : MonoBehaviour
+public class MobileControllers : Singleton<MobileControllers>
 {
+    public Button ChangeView, Up, Down, Left, Right,Back, RestartButton;
 
-    public static Button ChangeView, Up, Down, Left, Right,Back, RestartButton;
-    public static float moveHorizontal = 0, moveVertical;
-    public static bool canPress = true;
-    public static MobileControllers controller;
-    // Use this for initialization
+    public float moveHorizontal = 0, moveVertical;
+    public bool canPress = true;
+
     void Start()
     {
-        ChangeView = GameObject.Find("ChangeView").GetComponent<Button>();
-        Up = GameObject.Find("Up").GetComponent<Button>();
-        Down = GameObject.Find("Down").GetComponent<Button>();
-        Left = GameObject.Find("Left").GetComponent<Button>();
-        Right = GameObject.Find("Right").GetComponent<Button>();
-        Back = GameObject.Find("Back").GetComponent<Button>();
-        RestartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         Initial();
     }
-
-    // Update is called once per frame
+    
     void Initial()
     {
         ChangeView.onClick.AddListener(() => ViewChange());
