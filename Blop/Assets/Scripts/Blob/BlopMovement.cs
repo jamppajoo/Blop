@@ -205,7 +205,6 @@ public class BlopMovement : MonoBehaviour
         {
             mobileControllers.restartButton.gameObject.SetActive(true);
             playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 15);
-            print(playerRb.velocity.y);
         }
 
 
