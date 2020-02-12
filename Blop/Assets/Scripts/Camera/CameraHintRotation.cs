@@ -6,7 +6,7 @@ using MEC;
 public class CameraHintRotation : MonoBehaviour
 {
     public float speed;
-    private Vector3 touchCurrentposition, touchStartPosition, touchOffset;
+    private Vector3 touchCurrentposition, touchOldPosition, touchOffset;
     private float width;
     private float height;
     private bool touchMoved = false;
@@ -41,9 +41,6 @@ public class CameraHintRotation : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                currentPos.x = (currentPos.x - width) / width;
-                currentPos.y = (currentPos.y - height) / height;
-                touchStartPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
                 Timing.KillCoroutines(repositionCameraCoroutineName);
 
             }
@@ -54,8 +51,6 @@ public class CameraHintRotation : MonoBehaviour
                 currentPos.y = (currentPos.y - height) / height;
                 touchCurrentposition = new Vector3(currentPos.x, currentPos.y, 0.0f);
                 touchMoved = true;
-                // Position the cube.
-                //transform.position = position;
             }
             else
                 touchMoved = false;
@@ -68,18 +63,23 @@ public class CameraHintRotation : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            Timing.KillCoroutines(repositionCameraCoroutineName);
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
-            touchStartPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
-            Timing.KillCoroutines(repositionCameraCoroutineName);
+            touchCurrentposition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+            touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
         }
 
-        if (Input.GetMouseButton(0))
+       else if (Input.GetMouseButton(0))
         {
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
             touchCurrentposition = new Vector3(currentPos.x, currentPos.y, 0.0f);
-            touchMoved = true;
+            if ((touchCurrentposition - touchOldPosition).magnitude > 0)
+                touchMoved = true;
+            else
+                touchMoved = false;
+
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -87,19 +87,19 @@ public class CameraHintRotation : MonoBehaviour
             touchMoved = false;
             RepositionCamera();
         }
-
-
     }
 
     private void GetTouchOffset()
     {
-        touchOffset = touchCurrentposition - touchStartPosition;
+        touchOffset = (touchCurrentposition - touchOldPosition);
+
+        touchOldPosition = touchCurrentposition;
         RotateCamera();
     }
     private void RotateCamera()
     {
         touchOffset *= speed;
-        gameObject.transform.rotation = Quaternion.Euler(-touchOffset.y, touchOffset.x, touchOffset.z);
+        gameObject.transform.rotation *= Quaternion.Euler(-touchOffset.y, touchOffset.x, touchOffset.z);
     }
     private void RepositionCamera()
     {
@@ -113,11 +113,11 @@ public class CameraHintRotation : MonoBehaviour
         while (time < timeToMove)
         {
             gameObject.transform.rotation = Quaternion.Lerp(currentRotation, startingRotation, time / timeToMove);
-            Debug.Log("Time:" + gameObject.transform.rotation);
             time += Time.deltaTime;
 
             yield return 0;
         }
         touchOffset = Vector3.zero;
+        touchCurrentposition = Vector3.zero;
     }
 }
