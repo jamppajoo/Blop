@@ -6,6 +6,7 @@ using MEC;
 public class CameraHintRotation : MonoBehaviour
 {
     public float speed;
+    public float repositionTime = 1f;
     private Vector3 touchCurrentposition, touchOldPosition, touchOffset;
     private float width;
     private float height;
@@ -13,7 +14,6 @@ public class CameraHintRotation : MonoBehaviour
     private Vector2 currentPos;
 
     private Quaternion startingRotation;
-
     private const string repositionCameraCoroutineName = "RepositionCameraCoroutine";
 
     private void Awake()
@@ -70,7 +70,7 @@ public class CameraHintRotation : MonoBehaviour
             touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
         }
 
-       else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
@@ -100,10 +100,11 @@ public class CameraHintRotation : MonoBehaviour
     {
         touchOffset *= speed;
         gameObject.transform.rotation *= Quaternion.Euler(-touchOffset.y, touchOffset.x, touchOffset.z);
+        EventManager.DisableIngameButtons();
     }
     private void RepositionCamera()
     {
-        Timing.RunCoroutine(_RepositionCamera(1), repositionCameraCoroutineName);
+        Timing.RunCoroutine(_RepositionCamera(repositionTime), repositionCameraCoroutineName);
 
     }
     private IEnumerator<float> _RepositionCamera(float timeToMove)
@@ -114,9 +115,11 @@ public class CameraHintRotation : MonoBehaviour
         {
             gameObject.transform.rotation = Quaternion.Lerp(currentRotation, startingRotation, time / timeToMove);
             time += Time.deltaTime;
+            EventManager.DisableIngameButtons();
 
             yield return 0;
         }
+            EventManager.EnableIngameButtons();
         touchOffset = Vector3.zero;
         touchCurrentposition = Vector3.zero;
     }

@@ -352,3 +352,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 90
+  repositionTime: 0.5

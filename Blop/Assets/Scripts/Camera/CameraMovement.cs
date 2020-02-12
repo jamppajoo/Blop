@@ -34,7 +34,7 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || viewChanged)
         {
             BlopMovement.buttonPresses++;
-            SetStuff(false);
+            EventManager.DisableIngameButtons();
             if (!cameraRotate)
             {
                 if (!isUp)
@@ -65,7 +65,7 @@ public class CameraMovement : MonoBehaviour
         isUp = true;
         isDown = false;
         animator.SetBool("ToUp", false);
-        SetStuff(true);
+        EventManager.EnableIngameButtons();
     }
 
     private void IsDown()
@@ -73,7 +73,7 @@ public class CameraMovement : MonoBehaviour
         isUp = false;
         isDown = true;
         animator.SetBool("ToDown", false);
-        SetStuff(true);
+        EventManager.EnableIngameButtons();
     }
 
     private void RotatedIsUp()
@@ -82,7 +82,7 @@ public class CameraMovement : MonoBehaviour
         rotatedDown = false;
         isDown = false;
         animator.SetBool("RotateToUp", false);
-        SetStuff(true);
+        EventManager.EnableIngameButtons();
 
     }
 
@@ -92,19 +92,7 @@ public class CameraMovement : MonoBehaviour
         rotatedDown = true;
         isDown = true;
         animator.SetBool("RotateToDown", false);
-        SetStuff(true);
+        EventManager.EnableIngameButtons();
 
     }
-
-    private void SetStuff(bool active)
-    {
-        mobileControllers.changeView.interactable = active;
-        mobileControllers.up.interactable = active;
-        mobileControllers.down.interactable = active;
-        mobileControllers.left.interactable = active;
-        mobileControllers.right.interactable = active;
-        mobileControllers.back.interactable = active;
-        mobileControllers.canPress = active;
-    }
-    
 }

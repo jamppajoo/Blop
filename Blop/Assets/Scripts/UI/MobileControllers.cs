@@ -15,13 +15,35 @@ public class MobileControllers : MonoBehaviour
 
     private void OnEnable()
     {
-        //SceneManager.sceneLoaded += OnSceneLoaded;
+        EventManager.OnDisableIngameButtons += DisableButtons;
+        EventManager.OnEnableIngameButtons += EnableButtons;
     }
-
     private void OnDisable()
     {
-        //SceneManager.sceneLoaded += OnSceneLoaded;
+        EventManager.OnDisableIngameButtons += DisableButtons;
+        EventManager.OnEnableIngameButtons += EnableButtons;
     }
+
+
+    private void EnableButtons()
+    {
+        SetButtonsActive(true);
+    }
+
+    private void DisableButtons()
+    {
+        SetButtonsActive(false);
+    }
+
+    private void SetButtonsActive(bool canBePressed)
+    {
+        changeView.interactable = canBePressed;
+        up.interactable = canBePressed;
+        down.interactable = canBePressed;
+        left.interactable = canBePressed;
+        right.interactable = canBePressed;
+    }
+    
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {

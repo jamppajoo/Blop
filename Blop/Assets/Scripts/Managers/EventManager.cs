@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+
+    #region InputHandler
     public delegate void InputHandler();
 
     public static event InputHandler OnUpPressed;
@@ -13,6 +15,7 @@ public class EventManager : MonoBehaviour
 
     public static event InputHandler OnChangeViewPressed;
     public static event InputHandler OnButtonPressed;
+
 
     public static void UpPressed()
     {
@@ -59,4 +62,31 @@ public class EventManager : MonoBehaviour
         if (OnButtonPressed != null)
             OnButtonPressed();
     }
+    #endregion
+
+    #region GeneralEvent
+
+    public delegate void GeneralEvent();
+
+    public static event GeneralEvent OnDisableIngameButtons;
+    public static event GeneralEvent OnEnableIngameButtons;
+
+    public static void DisableIngameButtons()
+    {
+        if (OnDisableIngameButtons != null)
+        {
+            OnDisableIngameButtons();
+        }
+    }
+    public static void EnableIngameButtons()
+    {
+        if (OnEnableIngameButtons != null)
+        {
+            OnEnableIngameButtons();
+        }
+    }
+
+
+    #endregion
+
 }
