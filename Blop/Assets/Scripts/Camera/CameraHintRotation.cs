@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using UnityEngine.EventSystems;
 
 public class CameraHintRotation : MonoBehaviour
 {
@@ -33,19 +34,22 @@ public class CameraHintRotation : MonoBehaviour
     {
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
-        if (Input.touchCount > 0)
+
+        bool noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
+
+        if (Input.touchCount > 0 )
         {
             Touch touch = Input.GetTouch(0);
 
             currentPos = touch.position;
 
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Began && noUIcontrolsInUse)
             {
                 Timing.KillCoroutines(repositionCameraCoroutineName);
 
             }
             // Move the cube if the screen has the finger moving.
-            if (touch.phase == TouchPhase.Moved)
+            if (touch.phase == TouchPhase.Moved && noUIcontrolsInUse)
             {
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
@@ -55,13 +59,13 @@ public class CameraHintRotation : MonoBehaviour
             else
                 touchMoved = false;
 
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Ended && noUIcontrolsInUse)
                 RepositionCamera();
         }
 
         currentPos = Input.mousePosition;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && noUIcontrolsInUse)
         {
             Timing.KillCoroutines(repositionCameraCoroutineName);
             currentPos.x = (currentPos.x - width) / width;
@@ -70,7 +74,7 @@ public class CameraHintRotation : MonoBehaviour
             touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
         }
 
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && noUIcontrolsInUse)
         {
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
@@ -82,7 +86,7 @@ public class CameraHintRotation : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && noUIcontrolsInUse)
         {
             touchMoved = false;
             RepositionCamera();

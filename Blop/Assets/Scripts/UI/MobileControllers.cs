@@ -24,7 +24,6 @@ public class MobileControllers : MonoBehaviour
         EventManager.OnEnableIngameButtons += EnableButtons;
     }
 
-
     private void EnableButtons()
     {
         SetButtonsActive(true);

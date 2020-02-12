@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     public int[] levelPack3Stars;
 
     public string levelName;
+
+    public int hintsLeft = 3;
+    public bool hintActive = false;
     private void Awake()
     {
         #region Singleton
@@ -50,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     private int totalStarAmount;
 
-    void Start()
+    private void Start()
     {
         SaveAndLoad.Instance.Load();
     }
@@ -80,6 +83,12 @@ public class GameManager : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public void HintUsed()
+    {
+        hintsLeft--;
+        SaveAndLoad.Instance.Save();
+        hintActive = true;
     }
 }
 
