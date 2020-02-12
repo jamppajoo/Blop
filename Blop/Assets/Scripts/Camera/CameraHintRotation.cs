@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MEC;
 
 public class CameraHintRotation : MonoBehaviour
 {
@@ -10,7 +11,15 @@ public class CameraHintRotation : MonoBehaviour
     private float height;
     private bool touchMoved = false;
     private Vector2 currentPos;
-    
+
+    private Quaternion startingRotation;
+
+    private const string repositionCameraCoroutineName = "RepositionCameraCoroutine";
+
+    private void Awake()
+    {
+        startingRotation = gameObject.transform.rotation;
+    }
 
     private void Update()
     {
@@ -35,6 +44,7 @@ public class CameraHintRotation : MonoBehaviour
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
                 touchStartPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+                Timing.KillCoroutines(repositionCameraCoroutineName);
 
             }
             // Move the cube if the screen has the finger moving.
@@ -61,6 +71,7 @@ public class CameraHintRotation : MonoBehaviour
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
             touchStartPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+            Timing.KillCoroutines(repositionCameraCoroutineName);
         }
 
         if (Input.GetMouseButton(0))
@@ -73,6 +84,7 @@ public class CameraHintRotation : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            touchMoved = false;
             RepositionCamera();
         }
 
@@ -91,6 +103,21 @@ public class CameraHintRotation : MonoBehaviour
     }
     private void RepositionCamera()
     {
+        Timing.RunCoroutine(_RepositionCamera(1), repositionCameraCoroutineName);
 
+    }
+    private IEnumerator<float> _RepositionCamera(float timeToMove)
+    {
+        Quaternion currentRotation = gameObject.transform.rotation;
+        float time = 0;
+        while (time < timeToMove)
+        {
+            gameObject.transform.rotation = Quaternion.Lerp(currentRotation, startingRotation, time / timeToMove);
+            Debug.Log("Time:" + gameObject.transform.rotation);
+            time += Time.deltaTime;
+
+            yield return 0;
+        }
+        touchOffset = Vector3.zero;
     }
 }
