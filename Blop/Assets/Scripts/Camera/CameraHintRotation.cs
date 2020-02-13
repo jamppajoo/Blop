@@ -24,9 +24,12 @@ public class CameraHintRotation : MonoBehaviour
 
     private void Update()
     {
-        GetTouchPosition();
-        if (touchMoved)
-            GetTouchOffset();
+        if (GameManager.Instance.hintActive)
+        {
+            GetTouchPosition();
+            if (touchMoved)
+                GetTouchOffset();
+        }
 
     }
 
@@ -37,7 +40,7 @@ public class CameraHintRotation : MonoBehaviour
 
         bool noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
 
-        if (Input.touchCount > 0 )
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -123,7 +126,7 @@ public class CameraHintRotation : MonoBehaviour
 
             yield return 0;
         }
-            EventManager.EnableIngameButtons();
+        EventManager.EnableIngameButtons();
         touchOffset = Vector3.zero;
         touchCurrentposition = Vector3.zero;
     }

@@ -7,7 +7,6 @@ public class Finish : MonoBehaviour
 {
     //public string sceneToLoad;
     public int rotationSpeed;
-    private GameObject levelPassedScreen;
     private LevelStarSystem levelStarSystem;
     private bool levelPack1 = false, levelPack2 = false, levelPack3 = false;
     private int activeSceneBuildIndex;
@@ -15,8 +14,7 @@ public class Finish : MonoBehaviour
 
     void Start()
     {
-        levelPassedScreen = GameObject.Find("StarSystem");
-        levelStarSystem = levelPassedScreen.GetComponent<LevelStarSystem>();
+        levelStarSystem = FindObjectOfType<LevelStarSystem>();
 
         activeSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
         //Check what levelpack player is playing
@@ -77,7 +75,7 @@ public class Finish : MonoBehaviour
                         GameManager.Instance.levelPack3Stars[activeSceneBuildIndex - 23] = 0;
             }
 
-        levelPassedScreen.GetComponent<LevelStarSystem>().ShowLevelPassedScreen();
+        levelStarSystem.ShowLevelPassedScreen();
         SaveAndLoad.Instance.Save();
     }
     public void NextLevel()
