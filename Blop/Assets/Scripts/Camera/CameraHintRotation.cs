@@ -8,9 +8,8 @@ public class CameraHintRotation : MonoBehaviour
 {
     public float speed;
     public float repositionTime = 1f;
-    private Vector3 touchCurrentposition, touchOldPosition, touchOffset;
-    private float width;
-    private float height;
+    private Vector3 touchCurrentPosition, touchOldPosition, touchOffset;
+    private float width, height;
     private bool touchMoved = false;
     private Vector2 currentPos;
 
@@ -56,7 +55,7 @@ public class CameraHintRotation : MonoBehaviour
             {
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
-                touchCurrentposition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+                touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
                 touchMoved = true;
             }
             else
@@ -73,7 +72,7 @@ public class CameraHintRotation : MonoBehaviour
             Timing.KillCoroutines(repositionCameraCoroutineName);
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
-            touchCurrentposition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+            touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
             touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
         }
 
@@ -81,8 +80,8 @@ public class CameraHintRotation : MonoBehaviour
         {
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
-            touchCurrentposition = new Vector3(currentPos.x, currentPos.y, 0.0f);
-            if ((touchCurrentposition - touchOldPosition).magnitude > 0)
+            touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+            if ((touchCurrentPosition - touchOldPosition).magnitude > 0)
                 touchMoved = true;
             else
                 touchMoved = false;
@@ -98,9 +97,9 @@ public class CameraHintRotation : MonoBehaviour
 
     private void GetTouchOffset()
     {
-        touchOffset = (touchCurrentposition - touchOldPosition);
+        touchOffset = (touchCurrentPosition - touchOldPosition);
 
-        touchOldPosition = touchCurrentposition;
+        touchOldPosition = touchCurrentPosition;
         RotateCamera();
     }
     private void RotateCamera()
@@ -128,6 +127,6 @@ public class CameraHintRotation : MonoBehaviour
         }
         EventManager.EnableIngameButtons();
         touchOffset = Vector3.zero;
-        touchCurrentposition = Vector3.zero;
+        touchCurrentPosition = Vector3.zero;
     }
 }

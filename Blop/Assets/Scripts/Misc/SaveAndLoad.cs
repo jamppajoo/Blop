@@ -38,14 +38,8 @@ public class SaveAndLoad : MonoBehaviour
 
         PlayerData data = new PlayerData();
 
-        for (int i = 0; i < GameManager.Instance.levelPack1Stars.Length; i++)
-            data.LevelPack1Stars[i] = GameManager.Instance.levelPack1Stars[i];
-
-        for (int i = 0; i < GameManager.Instance.levelPack2Stars.Length; i++)
-            data.LevelPack2Stars[i] = GameManager.Instance.levelPack2Stars[i];
-
-        for (int i = 0; i < GameManager.Instance.levelPack3Stars.Length; i++)
-            data.LevelPack3Stars[i] = GameManager.Instance.levelPack3Stars[i];
+        for (int i = 0; i < GameManager.Instance.levelsStarAmount.Length; i++)
+            data.LevelsStarAmount[i] = GameManager.Instance.levelsStarAmount[i];
 
         data.HintAmount = GameManager.Instance.hintsLeft;
 
@@ -63,14 +57,8 @@ public class SaveAndLoad : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            for (int i = 0; i < data.LevelPack1Stars.Length; i++)
-                GameManager.Instance.levelPack1Stars[i] = data.LevelPack1Stars[i];
-
-            for (int i = 0; i < data.LevelPack2Stars.Length; i++)
-                GameManager.Instance.levelPack2Stars[i] = data.LevelPack2Stars[i];
-
-            for (int i = 0; i < data.LevelPack3Stars.Length; i++)
-                GameManager.Instance.levelPack3Stars[i] = data.LevelPack3Stars[i];
+            for (int i = 0; i < data.LevelsStarAmount.Length; i++)
+                GameManager.Instance.levelsStarAmount[i] = data.LevelsStarAmount[i];
 
             GameManager.Instance.hintsLeft = data.HintAmount;
         }
@@ -92,9 +80,7 @@ public class SaveAndLoad : MonoBehaviour
     [Serializable]
     class PlayerData
     {
-        public int[] LevelPack1Stars = new int[GameManager.Instance.levelPack1Stars.Length];
-        public int[] LevelPack2Stars = new int[GameManager.Instance.levelPack2Stars.Length];
-        public int[] LevelPack3Stars = new int[GameManager.Instance.levelPack3Stars.Length];
+        public int[] LevelsStarAmount = new int[GameManager.Instance.levelsStarAmount.Length];
         public int HintAmount = 3;
     }
 
