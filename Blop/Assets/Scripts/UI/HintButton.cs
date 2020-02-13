@@ -13,6 +13,7 @@ public class HintButton : MonoBehaviour
     private Text myButtonText;
 
     private HintSystem hintSystem;
+    private AdController adController;
 
     private void Awake()
     {
@@ -21,10 +22,15 @@ public class HintButton : MonoBehaviour
         myButton.onClick.AddListener(HintButtonPressed);
 
         hintSystem = FindObjectOfType<HintSystem>();
+        adController = FindObjectOfType<AdController>();
     }
     private void Start()
     {
-        myButtonText.text += ": " + GameManager.Instance.hintsLeft.ToString();
+        if (!GameManager.Instance.hintActive)
+            myButtonText.text += ": " + GameManager.Instance.hintsLeft.ToString();
+        else
+            myButtonText.text = howToUseText;
+
     }
     private void HintButtonPressed()
     {
@@ -39,16 +45,17 @@ public class HintButton : MonoBehaviour
             GameManager.Instance.HintUsed();
             myButtonText.text = howToUseText;
         }
-        else
+        else if(!GameManager.Instance.hintActive)
         {
             ShowAdMenu();
+            myButtonText.text = howToUseText;
         }
 
 
     }
     private void ShowAdMenu()
     {
-
+        adController.ShowMenu(true);
     }
 
 }

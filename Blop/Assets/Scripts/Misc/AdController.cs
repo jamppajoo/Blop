@@ -14,7 +14,8 @@ public class AdController : MonoBehaviour
     public static AdController Instance { get { return _instance; } }
 
     #endregion
-    public Transform adsMenu;
+
+    public bool isShowing = false;
 
     public Button adsMenuAcceptAdButton, adsMenuDeclineAdButton;
     private string zoneId;
@@ -34,38 +35,76 @@ public class AdController : MonoBehaviour
 
         adsMenuAcceptAdButton.onClick.AddListener(ShowAd);
         adsMenuDeclineAdButton.onClick.AddListener(DeclineAd);
-        
-    }
-    
-    private void DeclineAd()
-    {
-        //TODO make something if player does not want to watch ad
+
     }
 
-    public void ShowAd()
+    private void Start()
     {
+        DisappearMenu();
+
+    }
+    public void ShowMenu(bool show)
+    {
+        if (!show)
+            DisappearMenu();
+        else
+            ShowMenu();
+
+    }
+    private void DisappearMenu()
+    {
+        isShowing = false;
+        gameObject.SetActive(false);
+    }
+    private void ShowMenu()
+    {
+        if (isShowing)
+        {
+            DisappearMenu();
+            return;
+        }
+
+        isShowing = true;
+        gameObject.SetActive(true);
+    }
+
+    private void DeclineAd()
+    {
+        DisappearMenu();
+    }
+
+    private void ShowAd()
+    {
+        Debug.Log("Player watched an ad");
+        AddHint();
         //if (string.IsNullOrEmpty(zoneId))
         //    zoneId = null;
         //ShowOptions options = new ShowOptions();
         //options.resultCallback = HandleShowResult;
         //Advertisement.Show(zoneId, options);
     }
+    
+    private void HandleShowResult(ShowResult result)
+    {
+        //switch (result)
+        //{
+        //    case ShowResult.Finished:
+        //        AddHint();
+        //        break;
+        //    case ShowResult.Skipped:
+        //        DisappearMenu();
+        //        break;
+        //    case ShowResult.Failed:
+        //        AddHint();
+        //        break;
+        //}
+    }
 
-    ////TODO Add new ad scripts
-    //private void HandleShowResult(ShowResult result)
-    //{
-    //    switch (result)
-    //    {
-    //        case ShowResult.Finished:
-    //            SaveAndLoad.Instance.Save();
-    //            //StartCoroutine(ShowToastMessage("Added 100 presses"));
-    //            break;
-    //        case ShowResult.Skipped:
-    //            Debug.LogWarning("Video was skipped.");
-    //            break;
-    //        case ShowResult.Failed:
-    //            Debug.LogError("Video failed to show.");
-    //            break;
-    //    }
-    //}
+    private void AddHint()
+    {
+        GameManager.Instance.hintsLeft++;
+        SaveAndLoad.Instance.Save();
+        GameManager.Instance.HintUsed();
+        DisappearMenu();
+    }
 }

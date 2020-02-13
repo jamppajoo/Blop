@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     }
     public void HintUsed()
     {
-        //hintsLeft--;
+        hintsLeft--;
         SaveAndLoad.Instance.Save();
         hintActive = true;
     }

@@ -20,8 +20,8 @@ public class MobileControllers : MonoBehaviour
     }
     private void OnDisable()
     {
-        EventManager.OnDisableIngameButtons += DisableButtons;
-        EventManager.OnEnableIngameButtons += EnableButtons;
+        EventManager.OnDisableIngameButtons -= DisableButtons;
+        EventManager.OnEnableIngameButtons -= EnableButtons;
     }
 
     private void EnableButtons()
