@@ -7,53 +7,80 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
+    guid: 1d05b820571ca0145a8b924f1c5f0be8
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.1.unity
+    guid: 395df5e04c6f7864296abf80cd267c3f
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.2.unity
+    guid: 84d4deb9980d47b40841bfcba395ac1d
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.3.unity
+    guid: 4d7a7c23769814b448bb0b1eedeceec2
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.4.unity
+    guid: 9d7c6675eac696043977bd2e504ff8f4
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.5.unity
+    guid: 01b893a1b5e805f488b2a1d5fad5cd90
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.6.unity
+    guid: 45ea470b7bdb9dc49b7f35cd58e22689
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.7.unity
+    guid: d3aed7deb4b95cf43999e15e3513c649
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.8.unity
+    guid: 54c5f97f68ae4374185ff94deb4d5929
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.9.unity
+    guid: 9abd04c3f98b19049beb880a4d59ba63
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.10.unity
+    guid: b0a4f9469d4663345b8739f5c43a667c
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.11.unity
+    guid: 2d11528a67fa56a4ea8fba4b4bce6dda
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.12.unity
+    guid: c5b39ecd1ece2d54c8546362e461c680
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.13.unity
+    guid: d3a435df7b249a0418428ef930195cc9
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.14.unity
+    guid: 7f742d6a9ecb12741bb2b14af2bf2985
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.15.unity
+    guid: 3664b16dc3beb354c9a6bddf22001184
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.16.unity
+    guid: 2c0e7c2a02fb29642a209ad6f736f709
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.17.unity
+    guid: a94abdcf7a15baf49bbdbc7c86110b94
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.18.unity
+    guid: fc734521578cdd04eab5aced01a4a094
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.19.unity
+    guid: d001920ba5e6f2d4fb1d1e79118e689b
   - enabled: 1
     path: Assets/Scenes/LevelPack1/Level1.20.unity
-  - enabled: 1
+    guid: ea5e9b53b077b144c8b6dac191b78af1
+  - enabled: 0
     path: Assets/Scenes/LevelPack2/Level2.1.unity
-  - enabled: 1
+    guid: 133e459386745f049b2eb1ddef8bb1fa
+  - enabled: 0
     path: Assets/Scenes/LevelPack2/Level2.2.unity
-  - enabled: 1
+    guid: ec2c0a7d00c809641b8948c6902b97f3
+  - enabled: 0
     path: Assets/Scenes/LevelPack2/Level2.3.unity
-  - enabled: 1
+    guid: dba8261f2ded610418e55c432f40c838
+  - enabled: 0
     path: Assets/Scenes/LevelPack3/Level3.1.unity
-  - enabled: 1
+    guid: 28d50809e83c33c4684539af6f923940
+  - enabled: 0
     path: Assets/Scenes/LevelPack3/Level3.2.unity
+    guid: b0dc8cec340e7964eb4481b623acbafd
+  m_configObjects: {}

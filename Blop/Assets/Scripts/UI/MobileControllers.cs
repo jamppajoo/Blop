@@ -8,7 +8,7 @@ using System;
 public class MobileControllers : MonoBehaviour
 {
     public Button changeView, up, down, left, right, back, restartButton;
-    
+
     public bool canPress = true;
 
     private CameraMovement cameraMovement;
@@ -42,7 +42,7 @@ public class MobileControllers : MonoBehaviour
         left.interactable = canBePressed;
         right.interactable = canBePressed;
     }
-    
+
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
@@ -68,6 +68,9 @@ public class MobileControllers : MonoBehaviour
             LeftPressed();
         if (Input.GetAxisRaw("Horizontal") > 0.5f)
             RightPressed();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            ViewChange();
     }
 
     private void Initialize()
@@ -109,28 +112,41 @@ public class MobileControllers : MonoBehaviour
 
     public void ViewChange()
     {
-        cameraMovement.viewChanged = true;
+        EventManager.ChangeViewPressed();
+        EventManager.ButtonPressed();
 
     }
     public void UpPressed()
     {
         if (canPress)
+        {
             EventManager.UpPressed();
+            EventManager.ButtonPressed();
+        }
     }
     public void DownPressed()
     {
         if (canPress)
+        {
             EventManager.DownPressed();
+            EventManager.ButtonPressed();
+        }
     }
     public void LeftPressed()
     {
         if (canPress)
+        {
             EventManager.LeftPressed();
+            EventManager.ButtonPressed();
+        }
     }
     public void RightPressed()
     {
         if (canPress)
+        {
             EventManager.RightPressed();
+            EventManager.ButtonPressed();
+        }
     }
     public void GoToMenu()
     {

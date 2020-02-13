@@ -212,7 +212,7 @@ public class BlopMovement : MonoBehaviour
     //Movement script
     IEnumerator Move(Vector3 direction, float Scale, float movementTime)
     {
-        //Check that player moves whole block, if so, add buttonpresses.
+        ////Check that player moves whole block, if so, add buttonpresses.
         if (Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
         {
             buttonPresses++;

@@ -1,22 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CameraMovement : MonoBehaviour
 {
     private Animator animator;
     public bool isUp, isDown, rotatedUp, rotatedDown;
-    public bool viewChanged = false;
     public bool cameraRotate = false;
     public bool onMenu = false;
     private BlopMovement playerMovement;
     private GameObject mainCameraObject;
     public float speed = 5f;
-
-    private MobileControllers mobileControllers;
-    private void Awake()
+    
+    private void OnEnable()
     {
-        mobileControllers = FindObjectOfType<MobileControllers>();
+        EventManager.OnChangeViewPressed += ChangeCameraView;
+
     }
+
+    private void OnDisable()
+    {
+        EventManager.OnChangeViewPressed -= ChangeCameraView;
+
+    }
+
+    private void ChangeCameraView()
+    {
+        EventManager.DisableIngameButtons();
+        if (!cameraRotate)
+        {
+            if (!isUp)
+                animator.SetBool("ToUp", true);
+            else if (!isDown)
+                animator.SetBool("ToDown", true);
+        }
+        else if (cameraRotate)
+        {
+            if (!rotatedUp)
+                animator.SetBool("RotateToUp", true);
+            else if (!rotatedDown)
+                animator.SetBool("RotateToDown", true);
+        }
+        BlopMovement.buttonPresses++;
+    }
+    
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,33 +54,7 @@ public class CameraMovement : MonoBehaviour
         isDown = true;
         rotatedDown = true;
     }
-
-    private void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Space) || viewChanged)
-        {
-            BlopMovement.buttonPresses++;
-            EventManager.DisableIngameButtons();
-            if (!cameraRotate)
-            {
-                if (!isUp)
-                    animator.SetBool("ToUp", true);
-                else if (!isDown)
-                    animator.SetBool("ToDown", true);
-            }
-            else if (cameraRotate)
-            {
-                if (!rotatedUp)
-                    animator.SetBool("RotateToUp", true);
-                else if (!rotatedDown)
-                    animator.SetBool("RotateToDown", true);
-            }
-            EventManager.ChangeViewPressed();
-        }
-        viewChanged = false;
-    }
-
+    
     //Move camera to players position
     public void FixedUpdate()
     {

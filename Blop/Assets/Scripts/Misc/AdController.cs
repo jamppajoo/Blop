@@ -105,6 +105,7 @@ public class AdController : MonoBehaviour
         GameManager.Instance.hintsLeft++;
         SaveAndLoad.Instance.Save();
         GameManager.Instance.HintUsed();
+        EventManager.WatchedAd();
         DisappearMenu();
     }
 }

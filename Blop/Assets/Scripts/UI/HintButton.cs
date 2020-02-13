@@ -15,6 +15,20 @@ public class HintButton : MonoBehaviour
     private HintSystem hintSystem;
     private AdController adController;
 
+    private void OnEnable()
+    {
+        EventManager.OnWatchedAd += WatchedAd;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnWatchedAd -= WatchedAd;
+    }
+
+    private void WatchedAd()
+    {
+        myButtonText.text = howToUseText;
+    }
+
     private void Awake()
     {
         myButton = gameObject.GetComponent<Button>();
@@ -48,7 +62,6 @@ public class HintButton : MonoBehaviour
         else if(!GameManager.Instance.hintActive)
         {
             ShowAdMenu();
-            myButtonText.text = howToUseText;
         }
 
 

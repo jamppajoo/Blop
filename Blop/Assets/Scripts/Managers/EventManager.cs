@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour
         if (OnUpPressed != null)
         {
             OnUpPressed();
-            ButtonPressed();
+            //ButtonPressed();
         }
     }
     public static void DownPressed()
@@ -30,7 +30,7 @@ public class EventManager : MonoBehaviour
         if (OnDownPressed != null)
         {
             OnDownPressed();
-            ButtonPressed();
+            //ButtonPressed();
         }
     }
     public static void LeftPressed()
@@ -38,7 +38,7 @@ public class EventManager : MonoBehaviour
         if (OnLeftPressed != null)
         {
             OnLeftPressed();
-            ButtonPressed();
+            //ButtonPressed();
         }
     }
     public static void RightPressed()
@@ -46,7 +46,7 @@ public class EventManager : MonoBehaviour
         if (OnRightPressed != null)
         {
             OnRightPressed();
-            ButtonPressed();
+            //ButtonPressed();
         }
     }
     public static void ChangeViewPressed()
@@ -54,13 +54,15 @@ public class EventManager : MonoBehaviour
         if (OnChangeViewPressed != null)
         {
             OnChangeViewPressed();
-            ButtonPressed();
+            //ButtonPressed();
         }
     }
     public static void ButtonPressed()
     {
         if (OnButtonPressed != null)
+        {
             OnButtonPressed();
+        }
     }
     #endregion
 
@@ -70,6 +72,8 @@ public class EventManager : MonoBehaviour
 
     public static event GeneralEvent OnDisableIngameButtons;
     public static event GeneralEvent OnEnableIngameButtons;
+    public static event GeneralEvent OnWatchedAd;
+
 
     public static void DisableIngameButtons()
     {
@@ -83,6 +87,13 @@ public class EventManager : MonoBehaviour
         if (OnEnableIngameButtons != null)
         {
             OnEnableIngameButtons();
+        }
+    }
+    public static void WatchedAd()
+    {
+        if (OnWatchedAd != null)
+        {
+            OnWatchedAd();
         }
     }
 
