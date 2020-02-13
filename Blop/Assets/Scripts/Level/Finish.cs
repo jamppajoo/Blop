@@ -30,15 +30,17 @@ public class Finish : MonoBehaviour
         //Rotate finish block
         transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
     }
-    void OnTriggerEnter(Collider c)
+    void OnTriggerEnter(Collider collider)
     {
+        if(collider.tag != "Player")
+            return;
         //Assing star amount to GameManager if star amount is bigger than in there.
         if (levelPack1)
             if (GameManager.Instance.levelPack1Stars[activeSceneBuildIndex - 1] < (levelStarSystem.stars))
             {
                 if (levelStarSystem.stars == 3)
                 {
-                    //Add new system to reward player
+                    GameManager.Instance.AddHint();
                 }
 
                 GameManager.Instance.levelPack1Stars[activeSceneBuildIndex - 1] = (levelStarSystem.stars);
@@ -52,7 +54,7 @@ public class Finish : MonoBehaviour
             {
                 if (levelStarSystem.stars == 3)
                 {
-                    //Add new system to reward player
+                    GameManager.Instance.AddHint();
                 }
                 GameManager.Instance.levelPack2Stars[activeSceneBuildIndex - 21] = (levelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
@@ -66,7 +68,7 @@ public class Finish : MonoBehaviour
             {
                 if (levelStarSystem.stars == 3)
                 {
-                    //Add new system to reward player
+                    GameManager.Instance.AddHint();
                 }
                 GameManager.Instance.levelPack3Stars[activeSceneBuildIndex - 24] = (levelStarSystem.stars);
                 //if next levels star amount is over 3, make it zero
@@ -76,6 +78,7 @@ public class Finish : MonoBehaviour
             }
 
         levelStarSystem.ShowLevelPassedScreen();
+        GameManager.Instance.hintActive = false;
         SaveAndLoad.Instance.Save();
     }
     public void NextLevel()

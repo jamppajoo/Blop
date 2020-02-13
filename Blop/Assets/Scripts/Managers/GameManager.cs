@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     
     public void LoadMenu()
     {
+        hintActive = false;
         SceneManager.LoadScene("Menu");
     }
     public void HintUsed()
@@ -89,6 +90,11 @@ public class GameManager : MonoBehaviour
         hintsLeft--;
         SaveAndLoad.Instance.Save();
         hintActive = true;
+    }
+    public void AddHint()
+    {
+        hintsLeft++;
+        SaveAndLoad.Instance.Save();
     }
 }
 

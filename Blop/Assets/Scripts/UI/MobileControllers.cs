@@ -134,7 +134,7 @@ public class MobileControllers : MonoBehaviour
     }
     public void GoToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        GameManager.Instance.LoadMenu();
     }
     public void RestartCurrentLevel()
     {

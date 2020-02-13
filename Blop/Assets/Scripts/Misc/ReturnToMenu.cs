@@ -12,7 +12,7 @@ public class ReturnToMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("Menu");
+            GameManager.Instance.LoadMenu();
             if (Input.GetKeyDown(KeyCode.R))
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
