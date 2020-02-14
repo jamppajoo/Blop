@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
         #endregion
+        SaveAndLoad.Instance.Load();
     }
     private void OnEnable()
     {
@@ -53,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SaveAndLoad.Instance.Load();
     }
 
     public int ReturnTotalStarAmount()
