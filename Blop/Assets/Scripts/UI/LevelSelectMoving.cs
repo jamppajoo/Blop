@@ -18,7 +18,7 @@ public class LevelSelectMoving : MonoBehaviour
     private float levelSelectVelocitySpeed = 0.04f;
 
     [SerializeField]
-    private Vector2 maxMovingAmountMin, maxMovingAmountMax;
+    private Vector2 movingAmountMin, movingAmountMax;
 
     private GameObject mainCamera;
 
@@ -105,7 +105,7 @@ public class LevelSelectMoving : MonoBehaviour
     private void MoveLevelSelect()
     {
         Vector3 newPosition = gameObject.transform.localPosition + new Vector3(touchOffset.x, 0, touchOffset.y) * movingSpeed;
-        if (newPosition.x > maxMovingAmountMin.x && newPosition.x < maxMovingAmountMax.x && newPosition.z > maxMovingAmountMin.y && newPosition.z < maxMovingAmountMax.y)
+        if (newPosition.x > movingAmountMin.x && newPosition.x < movingAmountMax.x && newPosition.z > movingAmountMin.y && newPosition.z < movingAmountMax.y)
             gameObject.transform.localPosition = newPosition;
 
     }
@@ -141,7 +141,7 @@ public class LevelSelectMoving : MonoBehaviour
         {
             currentVelocity -= currentVelocity / levelSelectVelocityDampening;
             Vector3 newPosition = gameObject.transform.localPosition + (new Vector3(currentVelocity.x, 0, currentVelocity.y) * levelSelectVelocitySpeed);
-            if (newPosition.x > maxMovingAmountMin.x && newPosition.x < maxMovingAmountMax.x && newPosition.z > maxMovingAmountMin.y && newPosition.z < maxMovingAmountMax.y)
+            if (newPosition.x > movingAmountMin.x && newPosition.x < movingAmountMax.x && newPosition.z > movingAmountMin.y && newPosition.z < movingAmountMax.y)
                 gameObject.transform.localPosition = newPosition;
             yield return 0;
         }

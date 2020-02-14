@@ -22,8 +22,8 @@ public class LevelSelectButton : MonoBehaviour
     private Material activatedMaterial, deActivatedMaterial;
 
     private Button myButton;
-
-    private LevelSelect2 levelSelect;
+    private Text myText;
+    private LevelSelect levelSelect;
 
     private int myStarAmount = 4;
 
@@ -32,11 +32,14 @@ public class LevelSelectButton : MonoBehaviour
     private void Awake()
     {
         myButton = GetComponentInChildren<Button>();
-        levelSelect = FindObjectOfType<LevelSelect2>();
+        myText = GetComponentInChildren<Text>();
+
+        levelSelect = FindObjectOfType<LevelSelect>();
         myRenderer = GetComponent<Renderer>();
 
         myLevelName = gameObject.name;
         GetMyLevelNumbers();
+        SetMyLevelNumberText();
         SetStarAmount(4);
 
         myButton.onClick.AddListener(StartLevel);
@@ -103,6 +106,9 @@ public class LevelSelectButton : MonoBehaviour
     {
         Int32.TryParse(myLevelName.Split('.')[0], out myLevelpackNumber);
         Int32.TryParse(myLevelName.Split('.')[1], out myLevelNumber);
-
+    }
+    private void SetMyLevelNumberText()
+    {
+        myText.text = (myLevelpackNumber * myLevelNumber).ToString();
     }
 }

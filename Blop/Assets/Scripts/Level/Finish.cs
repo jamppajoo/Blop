@@ -50,9 +50,9 @@ public class Finish : MonoBehaviour
         int currentLevel = int.Parse(currentLevelText[1]);
 
         //If next level can be loaded, load that. If not, load main menu
-        if (Application.CanStreamedLevelBeLoaded(currentLevelText[0] + '.' + currentLevel + 1.ToString()))
+        if (Application.CanStreamedLevelBeLoaded(currentLevelText[0] + '.' + (currentLevel + 1).ToString()))
         {
-            SceneManager.LoadScene(currentLevelText[0] + '.' + currentLevel + 1.ToString());
+            SceneManager.LoadScene(currentLevelText[0] + '.' + (currentLevel + 1).ToString());
         }
         else
             GameManager.Instance.LoadMenu();
