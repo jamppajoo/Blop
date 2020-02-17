@@ -1,29 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
-using System;
 
 public class Finish : MonoBehaviour
 {
-    //public string sceneToLoad;
     public int rotationSpeed;
     private LevelStarSystem levelStarSystem;
-    private bool levelPack1 = false, levelPack2 = false, levelPack3 = false;
     private int activeSceneBuildIndex;
-
 
     void Start()
     {
         levelStarSystem = FindObjectOfType<LevelStarSystem>();
 
         activeSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
-        //Check what levelpack player is playing
-        if (activeSceneBuildIndex <= 20)
-            levelPack1 = true;
-        else if (activeSceneBuildIndex >= 21 && SceneManager.GetActiveScene().buildIndex <= 23)
-            levelPack2 = true;
-        else if (activeSceneBuildIndex > 23)
-            levelPack3 = true;
     }
     void Update()
     {
@@ -32,50 +20,24 @@ public class Finish : MonoBehaviour
     }
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag != "Player")
+        //If not colliding with player, dont run anything
+        if (collider.tag != "Player")
             return;
+
         //Assing star amount to GameManager if star amount is bigger than in there.
-        if (levelPack1)
-            if (GameManager.Instance.levelPack1Stars[activeSceneBuildIndex - 1] < (levelStarSystem.stars))
+        if (GameManager.Instance.levelsStarAmount[activeSceneBuildIndex - 1] < (levelStarSystem.stars))
+        {
+            if (levelStarSystem.stars == 3)
             {
-                if (levelStarSystem.stars == 3)
-                {
-                    GameManager.Instance.AddHint();
-                }
+                GameManager.Instance.AddHint();
+            }
 
-                GameManager.Instance.levelPack1Stars[activeSceneBuildIndex - 1] = (levelStarSystem.stars);
-                //if next levels star amount is over 3, make it zero
-                if (activeSceneBuildIndex != GameManager.Instance.levelPack1Stars.Length)
-                    if (GameManager.Instance.levelPack1Stars[activeSceneBuildIndex] > 3)
-                        GameManager.Instance.levelPack1Stars[activeSceneBuildIndex] = 0;
-            }
-        if (levelPack2)
-            if (GameManager.Instance.levelPack2Stars[activeSceneBuildIndex - 21] < (levelStarSystem.stars))
-            {
-                if (levelStarSystem.stars == 3)
-                {
-                    GameManager.Instance.AddHint();
-                }
-                GameManager.Instance.levelPack2Stars[activeSceneBuildIndex - 21] = (levelStarSystem.stars);
-                //if next levels star amount is over 3, make it zero
-                if (activeSceneBuildIndex - 20 != GameManager.Instance.levelPack2Stars.Length)
-                    if (GameManager.Instance.levelPack2Stars[activeSceneBuildIndex - 20] > 3)
-                        GameManager.Instance.levelPack2Stars[activeSceneBuildIndex - 20] = 0;
-
-            }
-        if (levelPack3)
-            if (GameManager.Instance.levelPack3Stars[activeSceneBuildIndex - 24] < (levelStarSystem.stars))
-            {
-                if (levelStarSystem.stars == 3)
-                {
-                    GameManager.Instance.AddHint();
-                }
-                GameManager.Instance.levelPack3Stars[activeSceneBuildIndex - 24] = (levelStarSystem.stars);
-                //if next levels star amount is over 3, make it zero
-                if (activeSceneBuildIndex - 23 != GameManager.Instance.levelPack3Stars.Length)
-                    if (GameManager.Instance.levelPack3Stars[activeSceneBuildIndex - 23] > 3)
-                        GameManager.Instance.levelPack3Stars[activeSceneBuildIndex - 23] = 0;
-            }
+            GameManager.Instance.levelsStarAmount[activeSceneBuildIndex - 1] = (levelStarSystem.stars);
+            //if next levels star amount is over 3, make it zero to indicate that level is unlocked
+            if (activeSceneBuildIndex != GameManager.Instance.levelsStarAmount.Length)
+                if (GameManager.Instance.levelsStarAmount[activeSceneBuildIndex] > 3)
+                    GameManager.Instance.levelsStarAmount[activeSceneBuildIndex] = 0;
+        }
 
         levelStarSystem.ShowLevelPassedScreen();
         GameManager.Instance.hintActive = false;
@@ -86,14 +48,14 @@ public class Finish : MonoBehaviour
         //If next level is pressed on the levelpassedpanel, load new scene
         string[] currentLevelText = SceneManager.GetActiveScene().name.Split('.');
         int currentLevel = int.Parse(currentLevelText[1]);
-        currentLevel++;
 
-        if (Application.CanStreamedLevelBeLoaded(currentLevelText[0] + '.' + currentLevel.ToString()))
+        //If next level can be loaded, load that. If not, load main menu
+        if (Application.CanStreamedLevelBeLoaded(currentLevelText[0] + '.' + (currentLevel + 1).ToString()))
         {
-            SceneManager.LoadScene(currentLevelText[0] + '.' + currentLevel.ToString());
+            SceneManager.LoadScene(currentLevelText[0] + '.' + (currentLevel + 1).ToString());
         }
         else
             GameManager.Instance.LoadMenu();
-        
+
     }
 }

@@ -20,9 +20,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public int[] levelPack1Stars;
-    public int[] levelPack2Stars;
-    public int[] levelPack3Stars;
+    public int[] levelsStarAmount;
 
     public string levelName;
 
@@ -40,6 +38,7 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
         #endregion
+        SaveAndLoad.Instance.Load();
     }
     private void OnEnable()
     {
@@ -55,27 +54,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SaveAndLoad.Instance.Load();
     }
 
     public int ReturnTotalStarAmount()
     {
         totalStarAmount = 0;
 
-        for (int i = 0; i < levelPack1Stars.Length; i++)
+        for (int i = 0; i < levelsStarAmount.Length; i++)
         {
-            if (levelPack1Stars[i] != 4)
-                totalStarAmount += levelPack1Stars[i];
-        }
-        for (int i = 0; i < levelPack2Stars.Length; i++)
-        {
-            if (levelPack2Stars[i] != 4)
-                totalStarAmount += levelPack2Stars[i];
-        }
-        for (int i = 0; i < levelPack3Stars.Length; i++)
-        {
-            if (levelPack3Stars[i] != 4)
-                totalStarAmount += levelPack3Stars[i];
+            if (levelsStarAmount[i] != 4)
+                totalStarAmount += levelsStarAmount[i];
         }
         return totalStarAmount;
     }

@@ -36,6 +36,7 @@ public class MobileControllers : MonoBehaviour
 
     private void SetButtonsActive(bool canBePressed)
     {
+        canPress = canBePressed;
         changeView.interactable = canBePressed;
         up.interactable = canBePressed;
         down.interactable = canBePressed;

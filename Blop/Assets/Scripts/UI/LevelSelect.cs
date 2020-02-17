@@ -1,143 +1,31 @@
-﻿using UnityEngine;
+﻿using MEC;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-/*
-    Handles LevelPack1 and LevelPack2 buttons and buttons stars. Also loads scene when button is pressed.
-*/
+public class LevelSelect : MonoBehaviour
+{
 
-public class LevelSelect : MonoBehaviour {
+    private LevelSelectButton[] levelButtons;
 
-    public List<Button> levels = new List<Button>();
-    
-    private Text levelStars;
-    
-    public void Start()
+    private void Awake()
     {
-
-        //Get every child object in "Image" gameobject in Menu scene.
-        int i = 0;
-        foreach(Transform child in transform)
+        levelButtons = gameObject.GetComponentsInChildren<LevelSelectButton>();   
+    }
+    private void Start()
+    {
+        for (int i = 0; i < levelButtons.Length; i++)
         {
-            if (child.gameObject.transform.name.StartsWith("Level1")) // If they are Level1.x buttons
+            if((levelButtons[i].myLevelNumber* levelButtons[i].myLevelpackNumber)-1 == i)
             {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.levelPack1Stars[i].ToString();
-                levels.Add(child.GetComponent<Button>());             //Add them to levels list. Creates list to inspector as well
-                if (child.GetChild(1).GetComponent<Text>().text != 4.ToString()) // If star amount is not 4 (what is used to appear level has not finised)
-                {
-                    child.GetComponent<Button>().interactable = true;
-                }
-                else child.GetComponent<Button>().interactable = false;
-                
-                //Make stars appear below level button, shitty code but works.
-                switch (GameManager.Instance.levelPack1Stars[i])
-                {
-                    case 1:
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-                    case 2:
-                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-                    case 3:
-                        child.GetChild(1).GetChild(4).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(5).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-
-                }
-                i++;
-
-
+                levelButtons[i].SetStarAmount(GameManager.Instance.levelsStarAmount[i]);
             }
-            else if (child.gameObject.transform.name.StartsWith("Level2")) // Do same thing to Levels 2.x
-            {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.levelPack2Stars[i].ToString();
-                levels.Add(child.GetComponent<Button>());
-                if (child.GetChild(1).GetComponent<Text>().text != 4.ToString()  )
-                {
-                    child.GetComponent<Button>().interactable = true;
-                }
-                else  child.GetComponent<Button>().interactable = false;
-                switch (GameManager.Instance.levelPack2Stars[i])
-                {
-                    case 1:
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-                    case 2:
-                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-                    case 3:
-                        child.GetChild(1).GetChild(4).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(5).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-
-                }
-                i++;
-            }
-            else if (child.gameObject.transform.name.StartsWith("Level3")) // Do same thing to Levels 3.x
-            {
-                child.GetChild(1).GetComponent<Text>().text = GameManager.Instance.levelPack3Stars[i].ToString();
-                levels.Add(child.GetComponent<Button>());
-                if (child.GetChild(1).GetComponent<Text>().text != 4.ToString())
-                {
-                    child.GetComponent<Button>().interactable = true;
-                }
-                else child.GetComponent<Button>().interactable = false;
-                switch (GameManager.Instance.levelPack3Stars[i])
-                {
-                    case 1:
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-                    case 2:
-                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-                    case 3:
-                        child.GetChild(1).GetChild(4).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(2).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(0).GetComponent<Image>().enabled = false;
-                        child.GetChild(1).GetChild(5).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(3).GetComponent<Image>().enabled = true;
-                        child.GetChild(1).GetChild(1).GetComponent<Image>().enabled = true;
-                        break;
-
-                }
-                i++;
-            }
-
-
         }
-        foreach (Button b in levels)
-        {   
-            //Add listeners to every button, so that they work.
-            string temp = b.gameObject.transform.name;
-            b.onClick.AddListener(() => LoadScene(temp));
-        }
-        
     }
-
-	public void LoadScene(string SceneName)
+    public void StartScene(string levelName)
     {
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene(levelName);
     }
+
 }
