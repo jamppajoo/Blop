@@ -31,7 +31,7 @@ public class LevelSelectButton : MonoBehaviour
 
     private void Awake()
     {
-        myButton = GetComponentInChildren<Button>();
+        //myButton = GetComponentInChildren<Button>();
         myText = GetComponentInChildren<Text>();
 
         levelSelect = FindObjectOfType<LevelSelect>();
@@ -42,8 +42,20 @@ public class LevelSelectButton : MonoBehaviour
         SetMyLevelNumberText();
         SetStarAmount(4);
 
-        myButton.onClick.AddListener(StartLevel);
+        //myButton.onClick.AddListener(StartLevel);
     }
+
+    private void OnMouseUpAsButton()
+    {
+        StartLevel();
+
+    }
+
+    private void OnMouseUp()
+    {
+    }
+
+
 
 
     private void StartLevel()
@@ -89,17 +101,17 @@ public class LevelSelectButton : MonoBehaviour
                 DeactivateObject();
                 break;
         }
-        
+
     }
     private void DeactivateObject()
     {
-        myButton.interactable = false;
+        //myButton.interactable = false;
         myRenderer.material = deActivatedMaterial;
     }
     private void ActivateObject()
     {
-        myButton.interactable = true;
-        myRenderer.material = activatedMaterial;    
+        //myButton.interactable = true;
+        myRenderer.material = activatedMaterial;
     }
 
     private void GetMyLevelNumbers()
