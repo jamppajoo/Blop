@@ -636,11 +636,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 6089495006438679378, guid: 16927e97f257ee74097bd4cd6ea87451,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5533775224927784711, guid: 16927e97f257ee74097bd4cd6ea87451,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -821,11 +816,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4212054088423708374, guid: e624cebce6f5c83479fec36ce9140c84,
-        type: 3}
-      propertyPath: cameraRotate
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e624cebce6f5c83479fec36ce9140c84, type: 3}
 --- !u!4 &391580782365143833 stripped
@@ -970,11 +960,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StarSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030196249405470320, guid: de0b2c264d5fff2418260d3a95a9f57f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7284682260472125989, guid: de0b2c264d5fff2418260d3a95a9f57f,
         type: 3}
