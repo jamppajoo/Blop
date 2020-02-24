@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 6508218}
   - component: {fileID: 11439022}
   m_Layer: 0
-  m_Name: FrontWallTile
+  m_Name: BackWallTile
   m_TagString: BackWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967294
   m_IsActive: 1
 --- !u!4 &408106
 Transform:
