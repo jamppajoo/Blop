@@ -4,6 +4,10 @@ public class FPSDisplay : MonoBehaviour
 {
     float deltaTime = 0.0f;
 
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
     void Update()
     {
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
