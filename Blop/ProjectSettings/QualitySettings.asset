@@ -8,11 +8,11 @@ QualitySettings:
   m_QualitySettings:
   - serializedVersion: 2
     name: Mobile
-    pixelLightCount: 0
+    pixelLightCount: 2
     shadows: 1
     shadowResolution: 1
     shadowProjection: 1
-    shadowCascades: 1
+    shadowCascades: 2
     shadowDistance: 30
     shadowNearPlaneOffset: 3
     shadowCascade2Split: 0.33333334
@@ -76,4 +76,6 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality: {}
+  m_PerPlatformDefaultQuality:
+    Android: 0
+    Standalone: 0
