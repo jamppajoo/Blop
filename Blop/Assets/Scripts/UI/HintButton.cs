@@ -49,9 +49,7 @@ public class HintButton : MonoBehaviour
     }
     private void Start()
     {
-        if (!GameManager.Instance.hintActive)
-            myButtonText.text += ": " + GameManager.Instance.hintsLeft.ToString();
-        else
+        if (GameManager.Instance.hintActive)
             myButtonText.text = howToUseText;
 
     }
@@ -62,13 +60,7 @@ public class HintButton : MonoBehaviour
         {
             hintSystem.ShowMenu(true);
         }
-        //If player has hints left
-        if (GameManager.Instance.hintsLeft > 0 && !GameManager.Instance.hintActive)
-        {
-            GameManager.Instance.HintUsed();
-            myButtonText.text = howToUseText;
-        }
-        else if(!GameManager.Instance.hintActive)
+        else
         {
             ShowAdMenu();
         }

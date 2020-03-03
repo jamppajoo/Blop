@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dfc70d653b23a4da3ae5fd1f8215c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 0
   adsMenuAcceptAdButton: {fileID: 5314741584233002622}
   adsMenuDeclineAdButton: {fileID: 97817270824606864}
 --- !u!1 &97817270831097684
@@ -429,7 +430,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Seems that you are out of hints. Want to watch an ad to activate hint?
+  m_Text: Want to watch an ad to activate hint?
 --- !u!1 &5897337381318068399
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,7 +102,6 @@ public class AdController : MonoBehaviour
 
     private void AddHint()
     {
-        GameManager.Instance.hintsLeft++;
         SaveAndLoad.Instance.Save();
         GameManager.Instance.HintUsed();
         EventManager.WatchedAd();

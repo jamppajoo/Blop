@@ -24,8 +24,7 @@ public class GameManager : MonoBehaviour
 
     public string levelName;
     public int levelNumber;
-
-    public int hintsLeft = 3;
+    
     public bool hintActive = false;
     private int totalStarAmount;
     private void Awake()
@@ -79,13 +78,11 @@ public class GameManager : MonoBehaviour
     }
     public void HintUsed()
     {
-        hintsLeft--;
         SaveAndLoad.Instance.Save();
         hintActive = true;
     }
     public void AddHint()
     {
-        hintsLeft++;
         SaveAndLoad.Instance.Save();
     }
 }

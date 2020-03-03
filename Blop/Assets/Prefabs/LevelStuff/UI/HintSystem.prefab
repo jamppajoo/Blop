@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6089495006452460060}
   m_Layer: 5
-  m_Name: LevelPassedPanel
+  m_Name: HintSystemPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640d67c0eb33ce3438b116b9542607b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShowing: 0
   backButton: {fileID: 6089495006448843868}
 --- !u!1 &6882200008150645005
 GameObject:
