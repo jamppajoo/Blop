@@ -51,13 +51,6 @@ public class LevelSelectButton : MonoBehaviour
 
     }
 
-    private void OnMouseUp()
-    {
-    }
-
-
-
-
     private void StartLevel()
     {
         if (myStarAmount != 4)

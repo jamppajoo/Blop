@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cbf0c928858ff4fa2412d1d8f0aca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Level1.2
   rotationSpeed: 50
 --- !u!114 &931483382206852642
 MonoBehaviour:

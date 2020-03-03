@@ -23,9 +23,11 @@ public class GameManager : MonoBehaviour
     public int[] levelsStarAmount;
 
     public string levelName;
+    public int levelNumber;
 
     public int hintsLeft = 3;
     public bool hintActive = false;
+    private int totalStarAmount;
     private void Awake()
     {
         #region Singleton
@@ -40,22 +42,6 @@ public class GameManager : MonoBehaviour
         #endregion
         SaveAndLoad.Instance.Load();
     }
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += NewSceneLoaded;
-    }
-
-    private void NewSceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        levelName = SceneManager.GetActiveScene().name;
-    }
-
-    private int totalStarAmount;
-
-    private void Start()
-    {
-    }
-
     public int ReturnTotalStarAmount()
     {
         totalStarAmount = 0;
@@ -67,11 +53,29 @@ public class GameManager : MonoBehaviour
         }
         return totalStarAmount;
     }
-    
+
     public void LoadMenu()
     {
         hintActive = false;
         SceneManager.LoadScene("Menu");
+    }
+    public void RestartScene()
+    {
+        FindObjectOfType<LevelsManager>().RestartLevel();
+        //Restart movement counter
+    }
+    public void LoadLevel(string levelName, bool fromMenu)
+    {
+        this.levelName = levelName;
+        string[] currentLevelText = levelName.Split('.');
+        levelNumber = int.Parse(currentLevelText[1])-1;
+        if (fromMenu)
+            SceneManager.LoadScene(1);
+        else
+        {
+            FindObjectOfType<LevelsManager>().LoadLevel(levelName);
+            EventManager.LevelLoaded();
+        }
     }
     public void HintUsed()
     {

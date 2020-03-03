@@ -5,13 +5,13 @@ public class Finish : MonoBehaviour
 {
     public int rotationSpeed;
     private LevelStarSystem levelStarSystem;
-    private int activeSceneBuildIndex;
+    private int activeLevel;
 
     void Start()
     {
         levelStarSystem = FindObjectOfType<LevelStarSystem>();
 
-        activeSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+        activeLevel = GameManager.Instance.levelNumber;
     }
     void Update()
     {
@@ -25,37 +25,22 @@ public class Finish : MonoBehaviour
             return;
 
         //Assing star amount to GameManager if star amount is bigger than in there.
-        if (GameManager.Instance.levelsStarAmount[activeSceneBuildIndex - 1] < (levelStarSystem.stars))
+        if (GameManager.Instance.levelsStarAmount[activeLevel] < (levelStarSystem.stars))
         {
             if (levelStarSystem.stars == 3)
             {
                 GameManager.Instance.AddHint();
             }
 
-            GameManager.Instance.levelsStarAmount[activeSceneBuildIndex - 1] = (levelStarSystem.stars);
+            GameManager.Instance.levelsStarAmount[activeLevel] = (levelStarSystem.stars);
             //if next levels star amount is over 3, make it zero to indicate that level is unlocked
-            if (activeSceneBuildIndex != GameManager.Instance.levelsStarAmount.Length)
-                if (GameManager.Instance.levelsStarAmount[activeSceneBuildIndex] > 3)
-                    GameManager.Instance.levelsStarAmount[activeSceneBuildIndex] = 0;
+            if (activeLevel + 1 != GameManager.Instance.levelsStarAmount.Length)
+                if (GameManager.Instance.levelsStarAmount[activeLevel + 1] > 3)
+                    GameManager.Instance.levelsStarAmount[activeLevel + 1] = 0;
         }
 
         levelStarSystem.ShowLevelPassedScreen();
         GameManager.Instance.hintActive = false;
         SaveAndLoad.Instance.Save();
-    }
-    public void NextLevel()
-    {
-        //If next level is pressed on the levelpassedpanel, load new scene
-        string[] currentLevelText = SceneManager.GetActiveScene().name.Split('.');
-        int currentLevel = int.Parse(currentLevelText[1]);
-
-        //If next level can be loaded, load that. If not, load main menu
-        if (Application.CanStreamedLevelBeLoaded(currentLevelText[0] + '.' + (currentLevel + 1).ToString()))
-        {
-            SceneManager.LoadScene(currentLevelText[0] + '.' + (currentLevel + 1).ToString());
-        }
-        else
-            GameManager.Instance.LoadMenu();
-
     }
 }

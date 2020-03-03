@@ -34,6 +34,11 @@ public class ButtonPressesText : MonoBehaviour
         myText.text = BlopMovement.buttonPresses.ToString();
     }
 
+    public void RestartButtonPresses()
+    {
+        myText.text = BlopMovement.buttonPresses.ToString();
+    }
+
 
    
 }

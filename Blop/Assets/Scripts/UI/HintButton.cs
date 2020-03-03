@@ -11,6 +11,7 @@ public class HintButton : MonoBehaviour
 
     private Button myButton;
     private Text myButtonText;
+    private string originalText;
 
     private HintSystem hintSystem;
     private AdController adController;
@@ -18,10 +19,17 @@ public class HintButton : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnWatchedAd += WatchedAd;
+        EventManager.OnNewLevelLoaded += NewLevelLoaded;
     }
     private void OnDisable()
     {
         EventManager.OnWatchedAd -= WatchedAd;
+        EventManager.OnNewLevelLoaded -= NewLevelLoaded;
+    }
+
+    private void NewLevelLoaded()
+    {
+        myButtonText.text = originalText;
     }
 
     private void WatchedAd()
@@ -35,6 +43,7 @@ public class HintButton : MonoBehaviour
         myButtonText = gameObject.GetComponentInChildren<Text>();
         myButton.onClick.AddListener(HintButtonPressed);
 
+        originalText = myButtonText.text;
         hintSystem = FindObjectOfType<HintSystem>();
         adController = FindObjectOfType<AdController>();
     }

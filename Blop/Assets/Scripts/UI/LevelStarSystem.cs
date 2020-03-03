@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
 
 /*
     Main function of this scipt is to find every component relative to LevelPassedPanel
@@ -27,16 +25,30 @@ public class LevelStarSystem : MonoBehaviour
         finish = FindObjectOfType<Finish>();
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
-        nextLevel.GetComponent<Button>().onClick.AddListener(finish.NextLevel);
+        nextLevel.GetComponent<Button>().onClick.AddListener(NextLevel);
         restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
     }
+    private void OnEnable()
+    {
+        EventManager.OnNewLevelLoaded += NewLevelLoaded;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnNewLevelLoaded -= NewLevelLoaded;
+    }
+
     private void Start()
     {
         levelPassedPanel.SetActive(false);
+        NewLevelLoaded();
+    }
+    private void NewLevelLoaded()
+    {
         levelStats = Resources.Load<LevelStats>(GameManager.Instance.levelName);
         twoStarMovementAmount = levelStats.twoStarMovementAmount;
         threeStarMovementAmount = levelStats.threeStarMovementAmount;
     }
+    
     private void Update()
     {
         //Check how many times any button has been pressed since level started
@@ -71,12 +83,29 @@ public class LevelStarSystem : MonoBehaviour
     {
         levelPassedPanel.SetActive(true);
         mobileControllers.gameObject.SetActive(false);
-
     }
 
     //Restart button on levelpassPanel
-    public void Restart()
+    private void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.RestartScene();
+    }
+    private void NextLevel()
+    {
+        mobileControllers.gameObject.SetActive(true);
+        levelPassedPanel.SetActive(false);
+        //If next level is pressed on the levelpassedpanel, load new scene
+        string[] currentLevelText = GameManager.Instance.levelName.Split('.');
+        int currentLevel = int.Parse(currentLevelText[1]);
+
+        //If next level can be loaded, load that. If not, load main menu
+        if ((currentLevel + 1) <= 20)
+        {
+            GameManager.Instance.LoadLevel(currentLevelText[0] + '.' + (currentLevel + 1).ToString(), false);
+            twoStar.SetActive(true);
+            threeStar.SetActive(true);
+        }
+        else
+            GameManager.Instance.LoadMenu();
     }
 }

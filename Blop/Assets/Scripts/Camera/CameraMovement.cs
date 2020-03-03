@@ -5,13 +5,14 @@ using System;
 public class CameraMovement : MonoBehaviour
 {
     private Animator animator;
-    public bool isUp, isDown, rotatedUp, rotatedDown;
+    public bool isUp, isDown, rotatedIsUp, rotatedIsDown;
     public bool cameraRotate = false;
     public bool onMenu = false;
     private BlopMovement playerMovement;
     private GameObject mainCameraObject;
     public float speed = 5f;
-    
+    private Quaternion originalRotation;
+
     private void OnEnable()
     {
         EventManager.OnChangeViewPressed += ChangeCameraView;
@@ -30,42 +31,51 @@ public class CameraMovement : MonoBehaviour
         if (!cameraRotate)
         {
             if (!isUp)
-                animator.SetBool("ToUp", true);
+                animator.SetTrigger("ToUp");
             else if (!isDown)
-                animator.SetBool("ToDown", true);
+                animator.SetTrigger("ToDown");
         }
         else if (cameraRotate)
         {
-            if (!rotatedUp)
-                animator.SetBool("RotateToUp", true);
-            else if (!rotatedDown)
-                animator.SetBool("RotateToDown", true);
+            if (!rotatedIsUp)
+                animator.SetTrigger("RotateToUp");
+            else if (!rotatedIsDown)
+                animator.SetTrigger("RotateToDown");
         }
         BlopMovement.buttonPresses++;
     }
-    
+
     private void Start()
     {
+        originalRotation = gameObject.transform.rotation;
         animator = GetComponent<Animator>();
         playerMovement = FindObjectOfType<BlopMovement>();
         mainCameraObject = gameObject.transform.parent.gameObject;
         isUp = false;
-        rotatedUp = false;
+        rotatedIsUp = false;
         isDown = true;
-        rotatedDown = true;
+        rotatedIsDown = true;
     }
-    
+
     //Move camera to players position
     public void FixedUpdate()
     {
-       mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, playerMovement.gameObject.transform.position, speed * Time.deltaTime);
+        mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, playerMovement.gameObject.transform.position, speed * Time.deltaTime);
+    }
+    public void RestartCamera()
+    {
+        if (!isDown)
+            animator.SetTrigger("ToDown");
+        isDown = true;
+        rotatedIsDown = true;
+        isUp = false;
+        rotatedIsUp = false;
     }
     //Functions are ran from cameras animation events
     private void IsUp()
     {
         isUp = true;
         isDown = false;
-        animator.SetBool("ToUp", false);
         EventManager.EnableIngameButtons();
     }
 
@@ -73,27 +83,25 @@ public class CameraMovement : MonoBehaviour
     {
         isUp = false;
         isDown = true;
-        animator.SetBool("ToDown", false);
         EventManager.EnableIngameButtons();
     }
 
     private void RotatedIsUp()
     {
-        rotatedUp = true;
-        rotatedDown = false;
+        rotatedIsUp = true;
+        rotatedIsDown = false;
         isDown = false;
-        animator.SetBool("RotateToUp", false);
         EventManager.EnableIngameButtons();
 
     }
 
     private void RotatedIsDown()
     {
-        rotatedUp = false;
-        rotatedDown = true;
+        rotatedIsUp = false;
+        rotatedIsDown = true;
         isDown = true;
-        animator.SetBool("RotateToDown", false);
         EventManager.EnableIngameButtons();
-
     }
+
+
 }
