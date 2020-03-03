@@ -65,7 +65,7 @@ public class CameraMovement : MonoBehaviour
     public void RestartCamera()
     {
         if (!isDown)
-            animator.SetTrigger("ToDown");
+            animator.SetTrigger("ForceDown");
         isDown = true;
         rotatedIsDown = true;
         isUp = false;
