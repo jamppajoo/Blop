@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         FindObjectOfType<LevelsManager>().RestartLevel();
-        //Restart movement counter
     }
     public void LoadLevel(string levelName, bool fromMenu)
     {

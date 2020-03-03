@@ -89,6 +89,8 @@ public class LevelStarSystem : MonoBehaviour
     private void Restart()
     {
         GameManager.Instance.RestartScene();
+        levelPassedPanel.SetActive(false);
+        mobileControllers.gameObject.SetActive(true);
     }
     private void NextLevel()
     {
