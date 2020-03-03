@@ -211,9 +211,9 @@ public class BlopMovement : MonoBehaviour
 
     }
 
-    public void RestartPlayer()
+    public void RestartPlayer(Vector3 offset)
     {
-        gameObject.transform.position = playerOriginalPosition;
+        gameObject.transform.position = playerOriginalPosition + offset;
         playerRb.velocity = Vector3.zero;
         buttonPresses = 0;
     }

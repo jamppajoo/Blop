@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         this.levelName = levelName;
         string[] currentLevelText = levelName.Split('.');
-        levelNumber = int.Parse(currentLevelText[1])-1;
+        levelNumber = int.Parse(currentLevelText[1]);
         if (fromMenu)
             SceneManager.LoadScene(1);
         else

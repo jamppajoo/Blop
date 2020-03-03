@@ -9,6 +9,7 @@ public class LevelsManager : MonoBehaviour
     private BlopMovement playerMovement;
     private CameraMovement cameraMovement;
     private ButtonPressesText buttonPressesText;
+    private GameObject currentLevel;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class LevelsManager : MonoBehaviour
     }
     private void Start()
     {
-        LoadLevel(GameManager.Instance.levelName);
+        GameManager.Instance.LoadLevel(GameManager.Instance.levelName, false);
     }
 
     public void LoadLevel(string levelName)
@@ -31,6 +32,7 @@ public class LevelsManager : MonoBehaviour
             if (levels[i].levelName == levelName)
             {
                 levels[i].LoadLevel();
+                currentLevel = levels[i].gameObject;
                 RestartLevel();
             }
             else
@@ -39,7 +41,7 @@ public class LevelsManager : MonoBehaviour
     }
     public void RestartLevel()
     {
-        playerMovement.RestartPlayer();
+        playerMovement.RestartPlayer(currentLevel.transform.localPosition);
         cameraMovement.RestartCamera();
         buttonPressesText.RestartButtonPresses();
     }

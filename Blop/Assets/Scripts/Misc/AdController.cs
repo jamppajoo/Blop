@@ -75,7 +75,6 @@ public class AdController : MonoBehaviour
 
     private void ShowAd()
     {
-        Debug.Log("Player watched an ad");
         AddHint();
         //if (string.IsNullOrEmpty(zoneId))
         //    zoneId = null;

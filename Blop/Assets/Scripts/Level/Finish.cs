@@ -11,7 +11,6 @@ public class Finish : MonoBehaviour
     {
         levelStarSystem = FindObjectOfType<LevelStarSystem>();
 
-        activeLevel = GameManager.Instance.levelNumber;
     }
     void Update()
     {
@@ -23,20 +22,16 @@ public class Finish : MonoBehaviour
         //If not colliding with player, dont run anything
         if (collider.tag != "Player")
             return;
+        activeLevel = GameManager.Instance.levelNumber;
 
         //Assing star amount to GameManager if star amount is bigger than in there.
-        if (GameManager.Instance.levelsStarAmount[activeLevel] < (levelStarSystem.stars))
+        if (GameManager.Instance.levelsStarAmount[activeLevel-1l] < (levelStarSystem.stars))
         {
-            if (levelStarSystem.stars == 3)
-            {
-                GameManager.Instance.AddHint();
-            }
-
-            GameManager.Instance.levelsStarAmount[activeLevel] = (levelStarSystem.stars);
+            GameManager.Instance.levelsStarAmount[activeLevel-1] = (levelStarSystem.stars);
             //if next levels star amount is over 3, make it zero to indicate that level is unlocked
-            if (activeLevel + 1 != GameManager.Instance.levelsStarAmount.Length)
-                if (GameManager.Instance.levelsStarAmount[activeLevel + 1] > 3)
-                    GameManager.Instance.levelsStarAmount[activeLevel + 1] = 0;
+            if (activeLevel != GameManager.Instance.levelsStarAmount.Length)
+                if (GameManager.Instance.levelsStarAmount[activeLevel] > 3)
+                    GameManager.Instance.levelsStarAmount[activeLevel] = 0;
         }
 
         levelStarSystem.ShowLevelPassedScreen();
