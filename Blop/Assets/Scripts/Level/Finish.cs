@@ -25,7 +25,7 @@ public class Finish : MonoBehaviour
         activeLevel = GameManager.Instance.levelNumber;
 
         //Assing star amount to GameManager if star amount is bigger than in there.
-        if (GameManager.Instance.levelsStarAmount[activeLevel-1l] < (levelStarSystem.stars))
+        if (GameManager.Instance.levelsStarAmount[activeLevel-1] < (levelStarSystem.stars))
         {
             GameManager.Instance.levelsStarAmount[activeLevel-1] = (levelStarSystem.stars);
             //if next levels star amount is over 3, make it zero to indicate that level is unlocked

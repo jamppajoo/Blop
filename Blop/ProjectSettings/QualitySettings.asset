@@ -8,7 +8,7 @@ QualitySettings:
   m_QualitySettings:
   - serializedVersion: 2
     name: Mobile
-    pixelLightCount: 2
+    pixelLightCount: 1
     shadows: 1
     shadowResolution: 1
     shadowProjection: 1

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public string levelName;
     public int levelNumber;
-    
+
     public bool hintActive = false;
     private int totalStarAmount;
     private void Awake()
@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         #endregion
         SaveAndLoad.Instance.Load();
+        Application.targetFrameRate = 60;
     }
     public int ReturnTotalStarAmount()
     {
@@ -68,7 +69,9 @@ public class GameManager : MonoBehaviour
         string[] currentLevelText = levelName.Split('.');
         levelNumber = int.Parse(currentLevelText[1]);
         if (fromMenu)
+        {
             SceneManager.LoadScene(1);
+        }
         else
         {
             FindObjectOfType<LevelsManager>().LoadLevel(levelName);

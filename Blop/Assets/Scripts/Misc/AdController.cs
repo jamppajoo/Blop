@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class AdController : MonoBehaviour
 {
-    #region Singleton
+    //#region Singleton
 
-    private static AdController _instance;
+    //private static AdController _instance;
 
-    public static AdController Instance { get { return _instance; } }
+    //public static AdController Instance { get { return _instance; } }
 
-    #endregion
+    //#endregion
 
     public bool isShowing = false;
 
@@ -22,16 +22,16 @@ public class AdController : MonoBehaviour
 
     private void Awake()
     {
-        #region Singleton
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
+        //#region Singleton
+        //if (_instance != null && _instance != this)
+        //{
+        //    Destroy(this.gameObject);
+        //    return;
+        //}
 
-        _instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        #endregion
+        //_instance = this;
+        //DontDestroyOnLoad(this.gameObject);
+        //#endregion
 
         adsMenuAcceptAdButton.onClick.AddListener(ShowAd);
         adsMenuDeclineAdButton.onClick.AddListener(DeclineAd);

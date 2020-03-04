@@ -125,6 +125,7 @@ public class CameraHintRotation : MonoBehaviour
 
             yield return 0;
         }
+        gameObject.transform.rotation = startingRotation;
         EventManager.EnableIngameButtons();
         touchOffset = Vector3.zero;
         touchCurrentPosition = Vector3.zero;

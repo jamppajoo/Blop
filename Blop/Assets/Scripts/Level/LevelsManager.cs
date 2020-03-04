@@ -33,11 +33,11 @@ public class LevelsManager : MonoBehaviour
             {
                 levels[i].LoadLevel();
                 currentLevel = levels[i].gameObject;
-                RestartLevel();
             }
             else
                 levels[i].UnLoadLevel();
         }
+        RestartLevel();
     }
     public void RestartLevel()
     {
