@@ -72,10 +72,6 @@ public class CameraMovement : MonoBehaviour
     {
         if (!isDown)
             Timing.RunCoroutine(RotateCamera(downRotation, rotateTime), cameraMovementCoroutine);
-        isDown = true;
-        rotatedIsDown = true;
-        isUp = false;
-        rotatedIsUp = false;
     }
     private IEnumerator<float> RotateCamera(Vector3 toRotation, float timeToRotate)
     {

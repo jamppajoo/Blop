@@ -112,7 +112,6 @@ public class CameraHintRotation : MonoBehaviour
     }
     private void RepositionCamera()
     {
-            Debug.Log("Repositioning camera");
         Timing.RunCoroutine(_RepositionCamera(repositionTime), repositionCameraCoroutineName);
 
     }
