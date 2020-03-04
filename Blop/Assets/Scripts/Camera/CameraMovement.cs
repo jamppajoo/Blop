@@ -1,28 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using MEC;
+using System.Collections.Generic;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Animator animator;
+    public Quaternion currentCameraIntendedRotation = Quaternion.identity;
+
     public bool isUp, isDown, rotatedIsUp, rotatedIsDown;
     public bool cameraRotate = false;
     public bool onMenu = false;
     private BlopMovement playerMovement;
-    private GameObject mainCameraObject;
     public float speed = 5f;
+    public float rotateTime = 0.5f;
     private Quaternion originalRotation;
+
+    private const string cameraMovementCoroutine = "CameraMovementCoroutine";
+
+    private Vector3 downRotation = Vector3.zero, upRotation = new Vector3(90, 0, 0);
+
+
 
     private void OnEnable()
     {
         EventManager.OnChangeViewPressed += ChangeCameraView;
-
     }
 
     private void OnDisable()
     {
         EventManager.OnChangeViewPressed -= ChangeCameraView;
-
     }
 
     private void ChangeCameraView()
@@ -30,17 +37,18 @@ public class CameraMovement : MonoBehaviour
         EventManager.DisableIngameButtons();
         if (!cameraRotate)
         {
+            Timing.KillCoroutines(cameraMovementCoroutine);
             if (!isUp)
-                animator.SetTrigger("ToUp");
+                Timing.RunCoroutine(RotateCamera(upRotation, rotateTime), cameraMovementCoroutine);
             else if (!isDown)
-                animator.SetTrigger("ToDown");
+                Timing.RunCoroutine(RotateCamera(downRotation, rotateTime), cameraMovementCoroutine);
         }
         else if (cameraRotate)
         {
-            if (!rotatedIsUp)
-                animator.SetTrigger("RotateToUp");
-            else if (!rotatedIsDown)
-                animator.SetTrigger("RotateToDown");
+            //if (!rotatedIsUp)
+            //    animator.SetTrigger("RotateToUp");
+            //else if (!rotatedIsDown)
+            //    animator.SetTrigger("RotateToDown");
         }
         BlopMovement.buttonPresses++;
     }
@@ -48,9 +56,7 @@ public class CameraMovement : MonoBehaviour
     private void Start()
     {
         originalRotation = gameObject.transform.rotation;
-        animator = GetComponent<Animator>();
         playerMovement = FindObjectOfType<BlopMovement>();
-        mainCameraObject = gameObject.transform.parent.gameObject;
         isUp = false;
         rotatedIsUp = false;
         isDown = true;
@@ -60,47 +66,33 @@ public class CameraMovement : MonoBehaviour
     //Move camera to players position
     public void FixedUpdate()
     {
-        mainCameraObject.transform.position = Vector3.Lerp(mainCameraObject.transform.position, playerMovement.gameObject.transform.position, speed * Time.deltaTime);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, playerMovement.gameObject.transform.position, speed * Time.deltaTime);
     }
     public void RestartCamera()
     {
         if (!isDown)
-            animator.SetTrigger("ForceDown");
+            Timing.RunCoroutine(RotateCamera(downRotation, rotateTime), cameraMovementCoroutine);
         isDown = true;
         rotatedIsDown = true;
         isUp = false;
         rotatedIsUp = false;
     }
-    //Functions are ran from cameras animation events
-    private void IsUp()
+    private IEnumerator<float> RotateCamera(Vector3 toRotation, float timeToRotate)
     {
-        isUp = true;
-        isDown = false;
-        EventManager.EnableIngameButtons();
-    }
+        float time = 0;
+        currentCameraIntendedRotation = Quaternion.Euler(toRotation);
+        while (time < timeToRotate)
+        {
+            transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, Quaternion.Euler(toRotation), time / timeToRotate);
+            time += Time.deltaTime;
+            yield return 0;
+        }
 
-    private void IsDown()
-    {
-        isUp = false;
-        isDown = true;
-        EventManager.EnableIngameButtons();
-    }
-
-    private void RotatedIsUp()
-    {
-        rotatedIsUp = true;
-        rotatedIsDown = false;
-        isDown = false;
+        transform.rotation = Quaternion.Euler(toRotation);
+        isUp = !isUp;
+        isDown = !isDown;
         EventManager.EnableIngameButtons();
 
-    }
-
-    private void RotatedIsDown()
-    {
-        rotatedIsUp = false;
-        rotatedIsDown = true;
-        isDown = true;
-        EventManager.EnableIngameButtons();
     }
 
 

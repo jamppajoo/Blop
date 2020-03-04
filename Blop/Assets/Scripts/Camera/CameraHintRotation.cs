@@ -12,13 +12,15 @@ public class CameraHintRotation : MonoBehaviour
     private float width, height;
     private bool touchMoved = false;
     private Vector2 currentPos;
-
-    private Quaternion startingRotation;
+    private bool uiControlsInUse = false;
+    
     private const string repositionCameraCoroutineName = "RepositionCameraCoroutine";
+
+    private CameraMovement cameraMovement;
 
     private void Awake()
     {
-        startingRotation = gameObject.transform.rotation;
+        cameraMovement = gameObject.GetComponent<CameraMovement>();
     }
 
     private void Update()
@@ -37,7 +39,8 @@ public class CameraHintRotation : MonoBehaviour
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
 
-        bool noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
+        //noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
+        uiControlsInUse = EventSystem.current.IsPointerOverGameObject();
 
         if (Input.touchCount > 0)
         {
@@ -45,13 +48,12 @@ public class CameraHintRotation : MonoBehaviour
 
             currentPos = touch.position;
 
-            if (touch.phase == TouchPhase.Began && noUIcontrolsInUse)
+            if (touch.phase == TouchPhase.Began && !uiControlsInUse)
             {
                 Timing.KillCoroutines(repositionCameraCoroutineName);
-
             }
             // Move the cube if the screen has the finger moving.
-            if (touch.phase == TouchPhase.Moved && noUIcontrolsInUse)
+            if (touch.phase == TouchPhase.Moved)
             {
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
@@ -61,13 +63,13 @@ public class CameraHintRotation : MonoBehaviour
             else
                 touchMoved = false;
 
-            if (touch.phase == TouchPhase.Ended && noUIcontrolsInUse)
+            if (touch.phase == TouchPhase.Ended && !uiControlsInUse)
                 RepositionCamera();
         }
 
         currentPos = Input.mousePosition;
 
-        if (Input.GetMouseButtonDown(0) && noUIcontrolsInUse)
+        if (Input.GetMouseButtonDown(0) && !uiControlsInUse)
         {
             Timing.KillCoroutines(repositionCameraCoroutineName);
             currentPos.x = (currentPos.x - width) / width;
@@ -76,7 +78,7 @@ public class CameraHintRotation : MonoBehaviour
             touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
         }
 
-        else if (Input.GetMouseButton(0) && noUIcontrolsInUse)
+        else if (Input.GetMouseButton(0) && !uiControlsInUse)
         {
             currentPos.x = (currentPos.x - width) / width;
             currentPos.y = (currentPos.y - height) / height;
@@ -88,7 +90,7 @@ public class CameraHintRotation : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0) && noUIcontrolsInUse)
+        if (Input.GetMouseButtonUp(0) && !uiControlsInUse)
         {
             touchMoved = false;
             RepositionCamera();
@@ -110,6 +112,7 @@ public class CameraHintRotation : MonoBehaviour
     }
     private void RepositionCamera()
     {
+            Debug.Log("Repositioning camera");
         Timing.RunCoroutine(_RepositionCamera(repositionTime), repositionCameraCoroutineName);
 
     }
@@ -119,13 +122,13 @@ public class CameraHintRotation : MonoBehaviour
         float time = 0;
         while (time < timeToMove)
         {
-            gameObject.transform.rotation = Quaternion.Lerp(currentRotation, startingRotation, time / timeToMove);
+            gameObject.transform.rotation = Quaternion.Lerp(currentRotation, cameraMovement.currentCameraIntendedRotation, time / timeToMove);
             time += Time.deltaTime;
             EventManager.DisableIngameButtons();
 
             yield return 0;
         }
-        gameObject.transform.rotation = startingRotation;
+        gameObject.transform.rotation = cameraMovement.currentCameraIntendedRotation;
         EventManager.EnableIngameButtons();
         touchOffset = Vector3.zero;
         touchCurrentPosition = Vector3.zero;

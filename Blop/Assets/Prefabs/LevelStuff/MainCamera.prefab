@@ -194,8 +194,6 @@ GameObject:
   - component: {fileID: 4212054088428965424}
   - component: {fileID: 4212054088422568832}
   - component: {fileID: 4212054088435545214}
-  - component: {fileID: 4212054088420207524}
-  - component: {fileID: 4212054088423708374}
   - component: {fileID: 435079511}
   m_Layer: 0
   m_Name: Camera
@@ -277,44 +275,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4212054088429662788}
   m_Enabled: 1
---- !u!95 &4212054088420207524
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4212054088429662788}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 68cddfa3e13ff1e42ae7caa342a4a980, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4212054088423708374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4212054088429662788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fbca992b87ffb45a3f55db52d34256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isUp: 0
-  isDown: 0
-  rotatedIsUp: 0
-  rotatedIsDown: 0
-  cameraRotate: 0
-  onMenu: 0
-  speed: 7
 --- !u!114 &435079511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4212054088429557556}
   - component: {fileID: 2333395629730236850}
+  - component: {fileID: 1384084520}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged
@@ -420,5 +381,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59cbdd0d8d672e747bb41ad2d68945be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 90
+  speed: 180
   repositionTime: 0.5
+--- !u!114 &1384084520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212054088429822042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00fbca992b87ffb45a3f55db52d34256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCameraIntendedRotation: {x: 0, y: 0, z: 0, w: 1}
+  isUp: 0
+  isDown: 0
+  rotatedIsUp: 0
+  rotatedIsDown: 0
+  cameraRotate: 0
+  onMenu: 0
+  speed: 5
+  rotateTime: 0.8
