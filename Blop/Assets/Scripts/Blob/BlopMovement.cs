@@ -9,12 +9,12 @@ public class BlopMovement : MonoBehaviour
     private bool canMove = true;
     private Rigidbody playerRb;
     private bool inAir = false;
-    public float moveScale = 1f;
     public float timeToMove;
     public static int buttonPresses = 0;
     private CameraMovement cameraMovement;
     private MobileControllers mobileControllers;
     private RaycastHit hit;
+    private Vector3 playerOriginalPosition;
     private void OnEnable()
     {
         EventManager.OnUpPressed += UpPressed;
@@ -59,6 +59,7 @@ public class BlopMovement : MonoBehaviour
         buttonPresses = 0;
         cameraMovement = FindObjectOfType<CameraMovement>();
         mobileControllers = FindObjectOfType<MobileControllers>();
+        playerOriginalPosition = gameObject.transform.position;
     }
     void Start()
     {
@@ -98,11 +99,11 @@ public class BlopMovement : MonoBehaviour
             }
             if (hit.transform.gameObject.tag == "LeftWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), moveScale, timeToMove / 2));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
             if (horizontalMovement < 0 && (cameraMovement.isDown || cameraMovement.isUp))
                 horizontalMovement = 0;
-            if (verticalMovement < 0 && cameraMovement.rotatedUp)
+            if (verticalMovement < 0 && cameraMovement.rotatedIsUp)
                 verticalMovement = 0;
         }
 
@@ -115,12 +116,12 @@ public class BlopMovement : MonoBehaviour
             }
             if (hit.transform.gameObject.tag == "RightWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), moveScale, timeToMove / 2));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
 
             if (horizontalMovement > 0 && (cameraMovement.isUp || cameraMovement.isDown))
                 horizontalMovement = 0;
-            if (verticalMovement > 0 && cameraMovement.rotatedUp)
+            if (verticalMovement > 0 && cameraMovement.rotatedIsUp)
                 verticalMovement = 0;
         }
 
@@ -134,12 +135,12 @@ public class BlopMovement : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "FrontWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), moveScale, timeToMove / 2));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
 
             if (verticalMovement > 0 && cameraMovement.isUp)
                 verticalMovement = 0;
-            if (horizontalMovement > 0 && cameraMovement.rotatedUp)
+            if (horizontalMovement > 0 && cameraMovement.rotatedIsUp)
                 horizontalMovement = 0;
         }
 
@@ -153,11 +154,11 @@ public class BlopMovement : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "BackWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), moveScale, timeToMove / 2));
+                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
             if (verticalMovement < 0 && cameraMovement.isUp)
                 verticalMovement = 0;
-            if (horizontalMovement < 0 && cameraMovement.rotatedUp)
+            if (horizontalMovement < 0 && cameraMovement.rotatedIsUp)
                 horizontalMovement = 0;
         }
 
@@ -176,15 +177,15 @@ public class BlopMovement : MonoBehaviour
         }
         //Check movement and other things
         if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.isDown)
-            StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0), moveScale, timeToMove));
+            StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0), timeToMove));
         //Same but check if camera is rotated only up or up & 90 degrees
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0))
         {
-            if (cameraMovement.rotatedUp)
-                StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), moveScale, timeToMove));
+            if (cameraMovement.rotatedIsUp)
+                StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), timeToMove));
 
             else if (cameraMovement.isUp)
-                StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), moveScale, timeToMove));
+                StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), timeToMove));
         }
         horizontalMovement = 0;
         verticalMovement = 0;
@@ -209,8 +210,15 @@ public class BlopMovement : MonoBehaviour
 
 
     }
+
+    public void RestartPlayer(Vector3 offset)
+    {
+        gameObject.transform.position = playerOriginalPosition + offset;
+        playerRb.velocity = Vector3.zero;
+        buttonPresses = 0;
+    }
     //Movement script
-    IEnumerator Move(Vector3 direction, float Scale, float movementTime)
+    IEnumerator Move(Vector3 direction, float movementTime)
     {
         ////Check that player moves whole block, if so, add buttonpresses.
         if (Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)

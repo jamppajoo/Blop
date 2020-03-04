@@ -100,7 +100,7 @@ public class LevelSelectMoving : MonoBehaviour
 
     private void AddVelocityToLevelSelect()
     {
-        Timing.RunCoroutine(_LevelSelectVelocityMovement(GetVelocityEstimate()), levelSelectVelocityMovementCoroutine);
+        Timing.RunCoroutine(_LevelSelectVelocityMovement(GetVelocityEstimate()).CancelWith(gameObject), levelSelectVelocityMovementCoroutine);
     }
     private void MoveLevelSelect()
     {

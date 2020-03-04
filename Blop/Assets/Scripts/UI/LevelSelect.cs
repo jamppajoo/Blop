@@ -25,7 +25,7 @@ public class LevelSelect : MonoBehaviour
     }
     public void StartScene(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        GameManager.Instance.LoadLevel(levelName, true);
     }
 
 }

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System;
 
@@ -23,7 +22,7 @@ public class MobileControllers : MonoBehaviour
         EventManager.OnDisableIngameButtons -= DisableButtons;
         EventManager.OnEnableIngameButtons -= EnableButtons;
     }
-
+    
     private void EnableButtons()
     {
         SetButtonsActive(true);
@@ -43,12 +42,7 @@ public class MobileControllers : MonoBehaviour
         left.interactable = canBePressed;
         right.interactable = canBePressed;
     }
-
-
-    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        Initialize();
-    }
+    
     private void Awake()
     {
         cameraMovement = FindObjectOfType<CameraMovement>();
@@ -155,7 +149,7 @@ public class MobileControllers : MonoBehaviour
     }
     public void RestartCurrentLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.RestartScene();
     }
 
 }

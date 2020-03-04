@@ -73,7 +73,7 @@ public class EventManager : MonoBehaviour
     public static event GeneralEvent OnDisableIngameButtons;
     public static event GeneralEvent OnEnableIngameButtons;
     public static event GeneralEvent OnWatchedAd;
-
+    public static event GeneralEvent OnNewLevelLoaded;
 
     public static void DisableIngameButtons()
     {
@@ -96,8 +96,13 @@ public class EventManager : MonoBehaviour
             OnWatchedAd();
         }
     }
-
-
+    public static void LevelLoaded()
+    {
+        if (OnNewLevelLoaded!= null)
+        {
+            OnNewLevelLoaded();
+        }
+    }
     #endregion
 
 }
