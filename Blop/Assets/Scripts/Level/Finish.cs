@@ -37,5 +37,7 @@ public class Finish : MonoBehaviour
         levelStarSystem.ShowLevelPassedScreen();
         GameManager.Instance.hintActive = false;
         SaveAndLoad.Instance.Save();
+        AnalyticsManager.Instance.SetStarAmount(levelStarSystem.stars);
+        AnalyticsManager.Instance.SendLevelPassingAnalytics();
     }
 }

@@ -145,6 +145,7 @@ public class MobileControllers : MonoBehaviour
     }
     public void GoToMenu()
     {
+        AnalyticsManager.Instance.SendRageQuitAnalytics();
         GameManager.Instance.LoadMenu();
     }
     public void RestartCurrentLevel()

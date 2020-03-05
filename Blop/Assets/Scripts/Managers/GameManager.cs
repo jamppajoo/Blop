@@ -58,10 +58,12 @@ public class GameManager : MonoBehaviour
     {
         hintActive = false;
         SceneManager.LoadScene("Menu");
+        AnalyticsManager.Instance.RestartValues();
     }
     public void RestartScene()
     {
         FindObjectOfType<LevelsManager>().RestartLevel();
+        AnalyticsManager.Instance.AddRestartAmount();
     }
     public void LoadLevel(string levelName, bool fromMenu)
     {
@@ -77,15 +79,14 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<LevelsManager>().LoadLevel(levelName);
             EventManager.LevelLoaded();
         }
+        AnalyticsManager.Instance.RestartValues();
+        AnalyticsManager.Instance.SetLevelName(levelName);
+        AnalyticsManager.Instance.SendLevelStartedAnalytics();
     }
     public void HintUsed()
     {
         SaveAndLoad.Instance.Save();
         hintActive = true;
-    }
-    public void AddHint()
-    {
-        SaveAndLoad.Instance.Save();
     }
 }
 
