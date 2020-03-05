@@ -23,7 +23,7 @@ public class Finish : MonoBehaviour
         if (collider.tag != "Player")
             return;
         activeLevel = GameManager.Instance.levelNumber;
-
+        GameManager.Instance.levelPlayedAmount[activeLevel - 1]++;
         //Assing star amount to GameManager if star amount is bigger than in there.
         if (GameManager.Instance.levelsStarAmount[activeLevel-1] < (levelStarSystem.stars))
         {
@@ -37,6 +37,7 @@ public class Finish : MonoBehaviour
         levelStarSystem.ShowLevelPassedScreen();
         GameManager.Instance.hintActive = false;
         SaveAndLoad.Instance.Save();
+        AnalyticsManager.Instance.SetPlayedAmount(GameManager.Instance.levelPlayedAmount[activeLevel - 1]);
         AnalyticsManager.Instance.SetStarAmount(levelStarSystem.stars);
         AnalyticsManager.Instance.SendLevelPassingAnalytics();
     }

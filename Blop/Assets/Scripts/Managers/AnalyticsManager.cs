@@ -25,6 +25,7 @@ public class AnalyticsManager : MonoBehaviour
     private byte starAmount = 0;
     private uint movementAmount = 0;
     private uint rotationAmount = 0;
+    private uint playedAmount = 0;
     #endregion
 
     private float currentTime = 0;
@@ -87,7 +88,8 @@ public class AnalyticsManager : MonoBehaviour
         starAmount = 0;
         movementAmount = 0;
         rotationAmount = 0;
-        Timing.RunCoroutine(_TimeUsedTimer(), timerCoroutine);
+        playedAmount = 0;
+    Timing.RunCoroutine(_TimeUsedTimer(), timerCoroutine);
 
     }
     public void SetLevelName(string levelName)
@@ -110,6 +112,10 @@ public class AnalyticsManager : MonoBehaviour
     {
         this.starAmount = (byte)starAmount;
     }
+    public void SetPlayedAmount(int playedAmount)
+    {
+        this.playedAmount = (uint)playedAmount;
+    }
 
     public void SendLevelPassingAnalytics()
     {
@@ -126,7 +132,8 @@ public class AnalyticsManager : MonoBehaviour
                 { "restarts", restartAmount }, // 12 byte
                 { "stars", starAmount }, // 6 byte
                 { "movement", movementAmount }, // 12 byte
-                { "rotations", rotationAmount } // 13 byte
+                { "rotations", rotationAmount }, // 13 byte
+                { "playedAmount", playedAmount } // 16 byte
             });
         }
         else
@@ -138,7 +145,8 @@ public class AnalyticsManager : MonoBehaviour
                 "\n Restarts: " + restartAmount +
                 "\n Stars: " + starAmount +
                 "\n Movements: " + movementAmount +
-                "\n Rotations: " + rotationAmount);
+                "\n Rotations: " + rotationAmount+
+                "\n PlayedAmount: " + playedAmount);
 
         }
     }

@@ -40,6 +40,8 @@ public class SaveAndLoad : MonoBehaviour
 
         for (int i = 0; i < GameManager.Instance.levelsStarAmount.Length; i++)
             data.LevelsStarAmount[i] = GameManager.Instance.levelsStarAmount[i];
+        for (int i = 0; i < GameManager.Instance.levelPlayedAmount.Length; i++)
+            data.LevelPlayedAmount[i] = GameManager.Instance.levelPlayedAmount[i];
 
         bf.Serialize(file, data);
 
@@ -57,6 +59,8 @@ public class SaveAndLoad : MonoBehaviour
 
             for (int i = 0; i < data.LevelsStarAmount.Length; i++)
                 GameManager.Instance.levelsStarAmount[i] = data.LevelsStarAmount[i];
+            for (int i = 0; i < data.LevelPlayedAmount.Length; i++)
+                GameManager.Instance.levelPlayedAmount[i] = data.LevelPlayedAmount[i];
         }
     }
     
@@ -77,6 +81,7 @@ public class SaveAndLoad : MonoBehaviour
     class PlayerData
     {
         public int[] LevelsStarAmount = new int[GameManager.Instance.levelsStarAmount.Length];
+        public int[] LevelPlayedAmount = new int[GameManager.Instance.levelPlayedAmount.Length];
     }
 
 }

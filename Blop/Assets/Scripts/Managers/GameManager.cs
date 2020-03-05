@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public int[] levelsStarAmount;
+    public int[] levelPlayedAmount;
 
     public string levelName;
     public int levelNumber;
