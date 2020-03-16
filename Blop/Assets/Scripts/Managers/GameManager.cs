@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public int[] levelsStarAmount;
     public int[] levelPlayedAmount;
+    public uint totalGameTime;
+    public uint timeSinceGameOpened;
 
     public string levelName;
     public int levelNumber;
@@ -41,7 +43,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         #endregion
         SaveAndLoad.Instance.Load();
+        timeSinceGameOpened = (uint)Time.time;
+        totalGameTime = SaveAndLoad.Instance.loadedGameTime + timeSinceGameOpened;
         Application.targetFrameRate = 60;
+    }
+    private void Update()
+    {
+        timeSinceGameOpened = (uint)Time.time;
+        totalGameTime = SaveAndLoad.Instance.loadedGameTime + timeSinceGameOpened;
     }
     public int ReturnTotalStarAmount()
     {
@@ -88,6 +97,10 @@ public class GameManager : MonoBehaviour
     {
         SaveAndLoad.Instance.Save();
         hintActive = true;
+    }
+    private void OnApplicationQuit()
+    {
+        AnalyticsManager.Instance.SendRageQuitAnalytics();
     }
 }
 

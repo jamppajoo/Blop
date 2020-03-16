@@ -20,6 +20,7 @@ public class AnalyticsManager : MonoBehaviour
     #region dataToSend
     private string levelName = "Menu";
     private uint timeUsed = 0;
+    private uint totalGameTime = 0;
     private bool hintUsed = false;
     private uint restartAmount = 0;
     private byte starAmount = 0;
@@ -89,7 +90,7 @@ public class AnalyticsManager : MonoBehaviour
         movementAmount = 0;
         rotationAmount = 0;
         playedAmount = 0;
-    Timing.RunCoroutine(_TimeUsedTimer(), timerCoroutine);
+        Timing.RunCoroutine(_TimeUsedTimer(), timerCoroutine);
 
     }
     public void SetLevelName(string levelName)
@@ -121,13 +122,15 @@ public class AnalyticsManager : MonoBehaviour
     {
         Timing.KillCoroutines(timerCoroutine);
         timeUsed = (uint)currentTime;
+        totalGameTime = GameManager.Instance.totalGameTime;
 
         if (sendAnalytics)
         {
             Analytics.CustomEvent("levelPassed", new Dictionary<string, object>
             {
                 { "level", levelName }, // 14 byte
-                { "time", timeUsed }, // 8 byte
+                { "levelTime", timeUsed }, // 13 byte
+                { "totalTime", totalGameTime }, // 13 byte
                 { "hint", hintUsed }, // 5 byte
                 { "restarts", restartAmount }, // 12 byte
                 { "stars", starAmount }, // 6 byte
@@ -140,33 +143,34 @@ public class AnalyticsManager : MonoBehaviour
         {
             Debug.Log("Send level passing analytics" +
                 "\n Level: " + levelName +
-                "\n Time: " + timeUsed +
+                "\n levelTime: " + timeUsed +
+                "\n totalGameTime " + totalGameTime +
                 "\n Hint: " + hintUsed +
                 "\n Restarts: " + restartAmount +
                 "\n Stars: " + starAmount +
                 "\n Movements: " + movementAmount +
-                "\n Rotations: " + rotationAmount+
+                "\n Rotations: " + rotationAmount +
                 "\n PlayedAmount: " + playedAmount);
 
         }
     }
     public void SendLevelStartedAnalytics()
     {
-        uint timeSinceGameStarted = (uint)Time.time;
+        totalGameTime = GameManager.Instance.totalGameTime;
 
         if (sendAnalytics)
         {
             Analytics.CustomEvent("levelStarted", new Dictionary<string, object>
             {
                 { "level", levelName },
-                { "time", timeSinceGameStarted }
+                { "time", totalGameTime }
             });
         }
         else
         {
             Debug.Log("Send level started analytics" +
                 "\n Level: " + levelName +
-                "\n Time: " + timeSinceGameStarted);
+                "\n Time: " + totalGameTime);
         }
     }
 
@@ -174,12 +178,15 @@ public class AnalyticsManager : MonoBehaviour
     {
         Timing.KillCoroutines(timerCoroutine);
         timeUsed = (uint)currentTime;
-        if(sendAnalytics)
+        totalGameTime = GameManager.Instance.totalGameTime;
+
+        if (sendAnalytics)
         {
             Analytics.CustomEvent("levelQuitted", new Dictionary<string, object>
             {
                 { "level", levelName }, // 14 byte
-                { "time", timeUsed }, // 8 byte
+                { "levelTime", timeUsed }, // 8 byte
+                { "totalTime", totalGameTime }, // 8 byte
                 { "hint", hintUsed }, // 5 byte
                 { "restarts", restartAmount }, // 12 byte
                 { "movement", movementAmount }, // 12 byte
@@ -198,10 +205,6 @@ public class AnalyticsManager : MonoBehaviour
                 "\n Rotations: " + rotationAmount);
         }
 
-    }
-    private void OnApplicationQuit()
-    {
-        SendRageQuitAnalytics();
     }
     private IEnumerator<float> _TimeUsedTimer()
     {

@@ -16,6 +16,7 @@ public class SaveAndLoad : MonoBehaviour
 
     #endregion
 
+    public uint loadedGameTime =0;
 
     private void Awake()
     {
@@ -43,6 +44,8 @@ public class SaveAndLoad : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.levelPlayedAmount.Length; i++)
             data.LevelPlayedAmount[i] = GameManager.Instance.levelPlayedAmount[i];
 
+        data.TotalGameTime = loadedGameTime + GameManager.Instance.timeSinceGameOpened;
+
         bf.Serialize(file, data);
 
         file.Close();
@@ -61,6 +64,8 @@ public class SaveAndLoad : MonoBehaviour
                 GameManager.Instance.levelsStarAmount[i] = data.LevelsStarAmount[i];
             for (int i = 0; i < data.LevelPlayedAmount.Length; i++)
                 GameManager.Instance.levelPlayedAmount[i] = data.LevelPlayedAmount[i];
+
+            loadedGameTime = data.TotalGameTime;
         }
     }
     
@@ -82,6 +87,7 @@ public class SaveAndLoad : MonoBehaviour
     {
         public int[] LevelsStarAmount = new int[GameManager.Instance.levelsStarAmount.Length];
         public int[] LevelPlayedAmount = new int[GameManager.Instance.levelPlayedAmount.Length];
+        public uint TotalGameTime = 0;
     }
 
 }

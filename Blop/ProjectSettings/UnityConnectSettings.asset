@@ -25,13 +25,13 @@ UnityConnectSettings:
   UnityAdsSettings:
     m_Enabled: 0
     m_InitializeOnStartup: 1
-    m_TestMode: 1
+    m_TestMode: 0
     m_IosGameId: 1174183
     m_AndroidGameId: 1174182
     m_GameIds:
       AndroidPlayer: 
       iPhonePlayer: 
-      tvOSPlayer: 1174183
+      tvOSPlayer: 
     m_GameId: 
   PerformanceReportingSettings:
     m_Enabled: 0
