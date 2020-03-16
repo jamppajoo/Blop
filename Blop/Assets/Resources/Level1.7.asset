@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31925f977a32bb45ba4b69ec0e00d92, type: 3}
   m_Name: Level1.7
   m_EditorClassIdentifier: 
-  threeStarMovementAmount: 28
-  twoStarMovementAmount: 40
+  threeStarMovementAmount: 17
+  twoStarMovementAmount: 28
