@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public int[] levelsStarAmount;
+    public int[] levelPlayedAmount;
+    public uint totalGameTime;
+    public uint timeSinceGameOpened;
 
     public string levelName;
     public int levelNumber;
@@ -40,7 +43,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         #endregion
         SaveAndLoad.Instance.Load();
+        timeSinceGameOpened = (uint)Time.time;
+        totalGameTime = SaveAndLoad.Instance.loadedGameTime + timeSinceGameOpened;
         Application.targetFrameRate = 60;
+    }
+    private void Update()
+    {
+        timeSinceGameOpened = (uint)Time.time;
+        totalGameTime = SaveAndLoad.Instance.loadedGameTime + timeSinceGameOpened;
     }
     public int ReturnTotalStarAmount()
     {
@@ -58,10 +68,12 @@ public class GameManager : MonoBehaviour
     {
         hintActive = false;
         SceneManager.LoadScene("Menu");
+        AnalyticsManager.Instance.RestartValues();
     }
     public void RestartScene()
     {
         FindObjectOfType<LevelsManager>().RestartLevel();
+        AnalyticsManager.Instance.AddRestartAmount();
     }
     public void LoadLevel(string levelName, bool fromMenu)
     {
@@ -77,15 +89,18 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<LevelsManager>().LoadLevel(levelName);
             EventManager.LevelLoaded();
         }
+        AnalyticsManager.Instance.RestartValues();
+        AnalyticsManager.Instance.SetLevelName(levelName);
+        AnalyticsManager.Instance.SendLevelStartedAnalytics();
     }
     public void HintUsed()
     {
         SaveAndLoad.Instance.Save();
         hintActive = true;
     }
-    public void AddHint()
+    private void OnApplicationQuit()
     {
-        SaveAndLoad.Instance.Save();
+        AnalyticsManager.Instance.SendRageQuitAnalytics();
     }
 }
 

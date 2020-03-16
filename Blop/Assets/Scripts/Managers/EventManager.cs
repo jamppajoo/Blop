@@ -74,6 +74,8 @@ public class EventManager : MonoBehaviour
     public static event GeneralEvent OnEnableIngameButtons;
     public static event GeneralEvent OnWatchedAd;
     public static event GeneralEvent OnNewLevelLoaded;
+    public static event GeneralEvent OnNewMovement;
+    public static event GeneralEvent OnNewRotation;
 
     public static void DisableIngameButtons()
     {
@@ -101,6 +103,20 @@ public class EventManager : MonoBehaviour
         if (OnNewLevelLoaded!= null)
         {
             OnNewLevelLoaded();
+        }
+    }
+    public static void AddMovement()
+    {
+        if (OnNewMovement != null)
+        {
+            OnNewMovement();
+        }
+    }
+    public static void AddRotation()
+    {
+        if (OnNewRotation != null)
+        {
+            OnNewRotation();
         }
     }
     #endregion

@@ -51,6 +51,7 @@ public class CameraMovement : MonoBehaviour
             //    animator.SetTrigger("RotateToDown");
         }
         BlopMovement.buttonPresses++;
+        EventManager.AddRotation();
     }
 
     private void Start()
