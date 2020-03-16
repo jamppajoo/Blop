@@ -513,4 +513,6 @@ MonoBehaviour:
     If you go back to menu, new you need to use another hint.
 
 
+    NOTE: You cannot pass level with 3 stars if you use hint!
+
     Good luck!'

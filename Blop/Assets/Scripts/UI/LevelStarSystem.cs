@@ -55,9 +55,9 @@ public class LevelStarSystem : MonoBehaviour
         buttonPressesAmount = BlopMovement.buttonPresses;
 
         stars = 1;
-        if (buttonPressesAmount > threeStarMovementAmount && buttonPressesAmount <= twoStarMovementAmount)
+        if (buttonPressesAmount <= twoStarMovementAmount && (buttonPressesAmount > threeStarMovementAmount || GameManager.Instance.hintActive))
             stars = 2;
-        else if (buttonPressesAmount <= threeStarMovementAmount)
+        else if (buttonPressesAmount <= threeStarMovementAmount  && !GameManager.Instance.hintActive)
             stars = 3;
 
         LevelPassed(stars);
