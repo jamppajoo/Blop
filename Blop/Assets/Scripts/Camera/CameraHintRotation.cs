@@ -39,10 +39,7 @@ public class CameraHintRotation : MonoBehaviour
     {
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
-
-        //noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
-
-
+        
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -50,7 +47,6 @@ public class CameraHintRotation : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began && !uiControlsInUse)
             {
-                //uiControlsInUse = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
                 Timing.KillCoroutines(repositionCameraCoroutineName);
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
@@ -58,7 +54,7 @@ public class CameraHintRotation : MonoBehaviour
                 touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
             }
             // Move the cube if the screen has the finger moving.
-            if (touch.phase == TouchPhase.Moved )//&& !uiControlsInUse)
+            if (touch.phase == TouchPhase.Moved )
             {
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
@@ -76,8 +72,7 @@ public class CameraHintRotation : MonoBehaviour
         else
         {
             currentPos = Input.mousePosition;
-
-            //uiControlsInUse = EventSystem.current.IsPointerOverGameObject();
+            
             if (Input.GetMouseButtonDown(0) && !uiControlsInUse)
             {
                 Timing.KillCoroutines(repositionCameraCoroutineName);
