@@ -786,10 +786,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: dfdb7ce7-330b-4b6b-a269-d7a312284a23
+  cloudProjectId: 7ea36859-6706-47ff-a07d-9f05d03d3e29
   framebufferDepthMemorylessMode: 0
   projectName: Blop
-  organizationId: jan-julin
+  organizationId: janjulin
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
