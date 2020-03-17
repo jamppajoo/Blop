@@ -55,9 +55,9 @@ public class LevelStarSystem : MonoBehaviour
         buttonPressesAmount = BlopMovement.buttonPresses;
 
         stars = 1;
-        if (buttonPressesAmount > threeStarMovementAmount && buttonPressesAmount <= twoStarMovementAmount)
+        if (buttonPressesAmount <= twoStarMovementAmount && (buttonPressesAmount > threeStarMovementAmount || GameManager.Instance.hintActive))
             stars = 2;
-        else if (buttonPressesAmount <= threeStarMovementAmount)
+        else if (buttonPressesAmount <= threeStarMovementAmount  && !GameManager.Instance.hintActive)
             stars = 3;
 
         LevelPassed(stars);
@@ -88,9 +88,15 @@ public class LevelStarSystem : MonoBehaviour
     //Restart button on levelpassPanel
     private void Restart()
     {
-        GameManager.Instance.RestartScene();
-        levelPassedPanel.SetActive(false);
         mobileControllers.gameObject.SetActive(true);
+        levelPassedPanel.SetActive(false);
+        twoStar.SetActive(true);
+        threeStar.SetActive(true);
+        GameManager.Instance.LoadLevel(GameManager.Instance.levelName, false);
+        //GameManager.Instance.RestartScene();
+        //AnalyticsManager.Instance.RestartValues();
+        //levelPassedPanel.SetActive(false);
+        //mobileControllers.gameObject.SetActive(true);
     }
     private void NextLevel()
     {

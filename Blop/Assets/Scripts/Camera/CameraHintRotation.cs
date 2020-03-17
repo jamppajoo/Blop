@@ -10,10 +10,10 @@ public class CameraHintRotation : MonoBehaviour
     public float repositionTime = 1f;
     private Vector3 touchCurrentPosition, touchOldPosition, touchOffset;
     private float width, height;
-    private bool touchMoved = false;
+    private bool touchMoved = false, cameraMoved = false;
     private Vector2 currentPos;
     private bool uiControlsInUse = false;
-    
+
     private const string repositionCameraCoroutineName = "RepositionCameraCoroutine";
 
     private CameraMovement cameraMovement;
@@ -27,6 +27,7 @@ public class CameraHintRotation : MonoBehaviour
     {
         if (GameManager.Instance.hintActive)
         {
+            uiControlsInUse = IsPointerOverUIObject();
             GetTouchPosition();
             if (touchMoved)
                 GetTouchOffset();
@@ -38,22 +39,22 @@ public class CameraHintRotation : MonoBehaviour
     {
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
-
-        //noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
-        uiControlsInUse = EventSystem.current.IsPointerOverGameObject();
-
+        
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
             currentPos = touch.position;
 
             if (touch.phase == TouchPhase.Began && !uiControlsInUse)
             {
                 Timing.KillCoroutines(repositionCameraCoroutineName);
+                currentPos.x = (currentPos.x - width) / width;
+                currentPos.y = (currentPos.y - height) / height;
+                touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+                touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
             }
             // Move the cube if the screen has the finger moving.
-            if (touch.phase == TouchPhase.Moved)
+            if (touch.phase == TouchPhase.Moved )
             {
                 currentPos.x = (currentPos.x - width) / width;
                 currentPos.y = (currentPos.y - height) / height;
@@ -63,37 +64,41 @@ public class CameraHintRotation : MonoBehaviour
             else
                 touchMoved = false;
 
-            if (touch.phase == TouchPhase.Ended && !uiControlsInUse)
+            if (touch.phase == TouchPhase.Ended && cameraMoved)
+            {
                 RepositionCamera();
+            }
         }
-
-        currentPos = Input.mousePosition;
-
-        if (Input.GetMouseButtonDown(0) && !uiControlsInUse)
+        else
         {
-            Timing.KillCoroutines(repositionCameraCoroutineName);
-            currentPos.x = (currentPos.x - width) / width;
-            currentPos.y = (currentPos.y - height) / height;
-            touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
-            touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
-        }
+            currentPos = Input.mousePosition;
+            
+            if (Input.GetMouseButtonDown(0) && !uiControlsInUse)
+            {
+                Timing.KillCoroutines(repositionCameraCoroutineName);
+                currentPos.x = (currentPos.x - width) / width;
+                currentPos.y = (currentPos.y - height) / height;
+                touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+                touchOldPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+            }
 
-        else if (Input.GetMouseButton(0) && !uiControlsInUse)
-        {
-            currentPos.x = (currentPos.x - width) / width;
-            currentPos.y = (currentPos.y - height) / height;
-            touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
-            if ((touchCurrentPosition - touchOldPosition).magnitude > 0)
-                touchMoved = true;
-            else
+            else if (Input.GetMouseButton(0) && !uiControlsInUse)
+            {
+                currentPos.x = (currentPos.x - width) / width;
+                currentPos.y = (currentPos.y - height) / height;
+                touchCurrentPosition = new Vector3(currentPos.x, currentPos.y, 0.0f);
+                if ((touchCurrentPosition - touchOldPosition).magnitude > 0)
+                    touchMoved = true;
+                else
+                    touchMoved = false;
+
+            }
+
+            if (Input.GetMouseButtonUp(0) && cameraMoved)
+            {
                 touchMoved = false;
-
-        }
-
-        if (Input.GetMouseButtonUp(0) && !uiControlsInUse)
-        {
-            touchMoved = false;
-            RepositionCamera();
+                RepositionCamera();
+            }
         }
     }
 
@@ -108,10 +113,12 @@ public class CameraHintRotation : MonoBehaviour
     {
         touchOffset *= speed;
         gameObject.transform.rotation *= Quaternion.Euler(-touchOffset.y, touchOffset.x, touchOffset.z);
+        cameraMoved = true;
         EventManager.DisableIngameButtons();
     }
     private void RepositionCamera()
     {
+        cameraMoved = false;
         Timing.RunCoroutine(_RepositionCamera(repositionTime), repositionCameraCoroutineName);
 
     }
@@ -131,5 +138,14 @@ public class CameraHintRotation : MonoBehaviour
         EventManager.EnableIngameButtons();
         touchOffset = Vector3.zero;
         touchCurrentPosition = Vector3.zero;
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }

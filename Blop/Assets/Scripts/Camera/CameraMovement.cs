@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
 
     private Vector3 downRotation = Vector3.zero, upRotation = new Vector3(90, 0, 0);
 
-
+    private bool currentlyRotating = false;
 
     private void OnEnable()
     {
@@ -71,12 +71,20 @@ public class CameraMovement : MonoBehaviour
     }
     public void RestartCamera()
     {
+        if (currentlyRotating)
+        {
+            Timing.KillCoroutines(cameraMovementCoroutine);
+            Timing.RunCoroutine(RotateCamera(downRotation, rotateTime), cameraMovementCoroutine);
+            return;
+        }
+
         if (!isDown)
             Timing.RunCoroutine(RotateCamera(downRotation, rotateTime), cameraMovementCoroutine);
     }
     private IEnumerator<float> RotateCamera(Vector3 toRotation, float timeToRotate)
     {
         float time = 0;
+        currentlyRotating = true;
         currentCameraIntendedRotation = Quaternion.Euler(toRotation);
         while (time < timeToRotate)
         {
@@ -86,8 +94,18 @@ public class CameraMovement : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(toRotation);
-        isUp = !isUp;
-        isDown = !isDown;
+        if (toRotation == downRotation)
+        {
+            isDown = true;
+            isUp = false;
+        }
+        else
+        {
+            isDown = false;
+            isUp = true;
+        }
+        
+        currentlyRotating = false;
         EventManager.EnableIngameButtons();
 
     }
