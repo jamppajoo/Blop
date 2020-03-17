@@ -15,6 +15,9 @@ public class BlopMovement : MonoBehaviour
     private MobileControllers mobileControllers;
     private RaycastHit hit;
     private Vector3 playerOriginalPosition;
+
+    private bool raycastHitting = false;
+
     private void OnEnable()
     {
         EventManager.OnUpPressed += UpPressed;
@@ -63,12 +66,12 @@ public class BlopMovement : MonoBehaviour
     }
     void Start()
     {
-        playerRb = GameObject.Find("Blop").transform.gameObject.GetComponent<Rigidbody>();
+        playerRb = gameObject.GetComponent<Rigidbody>();
     }
     private void CheckRaycasts()
     {
         //Raycast to every direction
-
+        raycastHitting = false;
         playerRb.isKinematic = false;
         Ray raycastHitUp = new Ray(transform.position, Vector3.up);
         Ray raycastHitLeft = new Ray(transform.position, Vector3.left);
@@ -83,6 +86,7 @@ public class BlopMovement : MonoBehaviour
             if (hit.transform.gameObject.tag == "UpWall")
             {
                 playerRb.isKinematic = true;
+                raycastHitting = true;
                 if (verticalMovement > 0 && cameraMovement.isDown)
                     verticalMovement = 0;
             }
@@ -96,6 +100,7 @@ public class BlopMovement : MonoBehaviour
             if (hit.transform.gameObject.tag == "LeftWall")
             {
                 playerRb.isKinematic = true;
+                raycastHitting = true;
             }
             if (hit.transform.gameObject.tag == "LeftWall" && inAir)
             {
@@ -113,6 +118,7 @@ public class BlopMovement : MonoBehaviour
             if (hit.transform.gameObject.tag == "RightWall")
             {
                 playerRb.isKinematic = true;
+                raycastHitting = true;
             }
             if (hit.transform.gameObject.tag == "RightWall" && inAir)
             {
@@ -131,6 +137,7 @@ public class BlopMovement : MonoBehaviour
             if (hit.transform.gameObject.tag == "FrontWall")
             {
                 playerRb.isKinematic = true;
+                raycastHitting = true;
             }
 
             if (hit.transform.gameObject.tag == "FrontWall" && inAir)
@@ -150,6 +157,7 @@ public class BlopMovement : MonoBehaviour
             if (hit.transform.gameObject.tag == "BackWall")
             {
                 playerRb.isKinematic = true;
+                raycastHitting = true;
             }
 
             if (hit.transform.gameObject.tag == "BackWall" && inAir)
@@ -165,6 +173,7 @@ public class BlopMovement : MonoBehaviour
         //Check to down
         if ((Physics.Raycast(raycastHitDown, out hit)) && hit.distance < 1)
         {
+            raycastHitting = true;
             if (verticalMovement < 0 && cameraMovement.isDown)
                 verticalMovement = 0;
 
@@ -176,7 +185,7 @@ public class BlopMovement : MonoBehaviour
             }
         }
         //Check movement and other things
-        if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.isDown)
+        if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.isDown && raycastHitting)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0), timeToMove));
         //Same but check if camera is rotated only up or up & 90 degrees
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0))
@@ -194,14 +203,14 @@ public class BlopMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (playerRb.velocity.y != 0)
+        //if (Mathf.Abs(playerRb.velocity.y) >= 0.2f)
+        if (playerRb.velocity.y != 0 && canMove)
             inAir = true;
         else inAir = false;
         if (inAir)
             CheckRaycasts();
 
-        //Check if the y velocity is too much, if so, restart level, teleport stuff
+        //Check if the y velocity is too much, if so, restart level, teleport level stuff
         if (playerRb.velocity.y < -15)
         {
             mobileControllers.restartButton.gameObject.SetActive(true);
@@ -230,8 +239,15 @@ public class BlopMovement : MonoBehaviour
         canMove = false;
         float elapsedtime = 0;
 
-        Vector3 startPoint = gameObject.transform.position;
-        Vector3 nextPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
+        Vector3 startPoint = new Vector3(
+            Mathf.Round(gameObject.transform.position.x / 0.5f) * 0.5f,
+            Mathf.Round(gameObject.transform.position.y / 0.5f) * 0.5f,
+            Mathf.Round(gameObject.transform.position.z / 0.5f) * 0.5f
+            );
+        //Vector3 startPoint = gameObject.transform.position;
+        Vector3 nextPoint = startPoint + direction;
+
+        //Vector3 nextPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
 
         while (elapsedtime < movementTime)
         {
