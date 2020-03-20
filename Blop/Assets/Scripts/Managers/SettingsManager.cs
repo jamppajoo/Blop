@@ -27,5 +27,6 @@ public class SettingsManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         #endregion
     }
+    
 
 }
