@@ -7,6 +7,10 @@ public class BlopSeeThrough : MonoBehaviour
     public Material seeThroughMaterial;
 
     private bool hintActive = false;
+    private void Awake()
+    {
+        ToggleSeeThrough(false);
+    }
     private void Update()
     {
         //So we dont toggle it every frame, made this way instead of event purely because it's easier, since hintActive value might be toggled elsewhere too
@@ -21,7 +25,6 @@ public class BlopSeeThrough : MonoBehaviour
     }
     public void ToggleSeeThrough(bool active)
     {
-        Debug.Log("Toggle hint");
         if (active)
         {
             seeThroughMaterial.SetFloat("_AllowSeeThrough", 1);
