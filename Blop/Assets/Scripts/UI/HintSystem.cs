@@ -16,7 +16,9 @@ public class HintSystem : MonoBehaviour
     }
     private void Start()
     {
-        DisappearMenu();
+        //Disappear menu without activating vibrate
+        isShowing = false;
+        gameObject.SetActive(false);
 
     }
     public void ShowMenu(bool show)
@@ -29,6 +31,7 @@ public class HintSystem : MonoBehaviour
     }
     private void DisappearMenu()
     {
+        GameManager.Instance.SmallVibrate();
         isShowing = false;
         gameObject.SetActive(false);
     }

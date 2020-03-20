@@ -9,7 +9,6 @@ public class MobileControllers : MonoBehaviour
     public Button changeView, up, down, left, right, back, restartButton;
 
     public bool canPress = true;
-
     private CameraMovement cameraMovement;
 
     private void OnEnable()
@@ -22,7 +21,7 @@ public class MobileControllers : MonoBehaviour
         EventManager.OnDisableIngameButtons -= DisableButtons;
         EventManager.OnEnableIngameButtons -= EnableButtons;
     }
-    
+
     private void EnableButtons()
     {
         SetButtonsActive(true);
@@ -42,7 +41,7 @@ public class MobileControllers : MonoBehaviour
         left.interactable = canBePressed;
         right.interactable = canBePressed;
     }
-    
+
     private void Awake()
     {
         cameraMovement = FindObjectOfType<CameraMovement>();
@@ -73,7 +72,6 @@ public class MobileControllers : MonoBehaviour
         changeView.onClick.AddListener(() => ViewChange());
         back.onClick.AddListener(() => GoToMenu());
         restartButton.onClick.AddListener(() => RestartCurrentLevel());
-        restartButton.gameObject.SetActive(false);
 
         EventTrigger upTrigger = up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();
@@ -107,9 +105,9 @@ public class MobileControllers : MonoBehaviour
 
     public void ViewChange()
     {
+        GameManager.Instance.SmallVibrate();
         EventManager.ChangeViewPressed();
         EventManager.ButtonPressed();
-
     }
     public void UpPressed()
     {
@@ -146,10 +144,12 @@ public class MobileControllers : MonoBehaviour
     public void GoToMenu()
     {
         AnalyticsManager.Instance.SendRageQuitAnalytics();
+        GameManager.Instance.SmallVibrate();
         GameManager.Instance.LoadMenu();
     }
     public void RestartCurrentLevel()
     {
+        GameManager.Instance.SmallVibrate();
         GameManager.Instance.RestartScene();
     }
 

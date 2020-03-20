@@ -70,11 +70,13 @@ public class AdController : MonoBehaviour
 
     private void DeclineAd()
     {
+        GameManager.Instance.SmallVibrate();
         DisappearMenu();
     }
 
     private void ShowAd()
     {
+        GameManager.Instance.SmallVibrate();
         AddHint();
         //if (string.IsNullOrEmpty(zoneId))
         //    zoneId = null;

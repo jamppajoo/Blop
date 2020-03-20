@@ -46,6 +46,8 @@ public class SaveAndLoad : MonoBehaviour
 
         data.TotalGameTime = loadedGameTime + GameManager.Instance.timeSinceGameOpened;
 
+        data.UsingVibrate = SettingsManager.Instance.usingVibrate;
+
         bf.Serialize(file, data);
 
         file.Close();
@@ -66,6 +68,7 @@ public class SaveAndLoad : MonoBehaviour
                 GameManager.Instance.levelPlayedAmount[i] = data.LevelPlayedAmount[i];
 
             loadedGameTime = data.TotalGameTime;
+            SettingsManager.Instance.usingVibrate = data.UsingVibrate;
         }
     }
     
@@ -88,6 +91,7 @@ public class SaveAndLoad : MonoBehaviour
         public int[] LevelsStarAmount = new int[GameManager.Instance.levelsStarAmount.Length];
         public int[] LevelPlayedAmount = new int[GameManager.Instance.levelPlayedAmount.Length];
         public uint TotalGameTime = 0;
+        public bool UsingVibrate = true;
     }
 
 }
