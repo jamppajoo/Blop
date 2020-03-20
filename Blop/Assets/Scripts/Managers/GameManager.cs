@@ -102,5 +102,15 @@ public class GameManager : MonoBehaviour
     {
         AnalyticsManager.Instance.SendRageQuitAnalytics();
     }
+
+    public void SmallVibrate()
+    {
+        if (Application.isEditor)
+            return;
+#if UNITY_ANDROID
+        if (SettingsManager.Instance.usingVibrate)
+            Vibration.SmallVibrate();
+#endif
+    }
 }
 

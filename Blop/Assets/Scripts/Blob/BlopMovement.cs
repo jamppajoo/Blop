@@ -232,6 +232,7 @@ public class BlopMovement : MonoBehaviour
         {
             buttonPresses++;
             EventManager.AddMovement();
+            GameManager.Instance.SmallVibrate();
         }
 
         canMove = false;

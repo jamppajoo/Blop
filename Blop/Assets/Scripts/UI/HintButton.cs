@@ -55,6 +55,7 @@ public class HintButton : MonoBehaviour
     }
     private void HintButtonPressed()
     {
+        GameManager.Instance.SmallVibrate();
         //if hint is already active and player presses button again, show tutorial on how to use hint
         if (GameManager.Instance.hintActive)
         {

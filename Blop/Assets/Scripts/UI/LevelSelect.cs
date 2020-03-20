@@ -25,6 +25,7 @@ public class LevelSelect : MonoBehaviour
     }
     public void StartScene(string levelName)
     {
+        GameManager.Instance.SmallVibrate();
         AnalyticsManager.Instance.SendLevelPassingAnalytics();
         GameManager.Instance.LoadLevel(levelName, true);
     }

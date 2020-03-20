@@ -27,7 +27,7 @@ public class LevelStarSystem : MonoBehaviour
         mobileControllers = FindObjectOfType<MobileControllers>();
         nextLevel.GetComponent<Button>().onClick.AddListener(NextLevel);
         restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
-        menuButton.GetComponent<Button>().onClick.AddListener(GameManager.Instance.LoadMenu);
+        menuButton.GetComponent<Button>().onClick.AddListener(LoadMenu);
     }
     private void OnEnable()
     {
@@ -89,6 +89,7 @@ public class LevelStarSystem : MonoBehaviour
     //Restart button on levelpassPanel
     private void Restart()
     {
+        GameManager.Instance.SmallVibrate();
         mobileControllers.gameObject.SetActive(true);
         levelPassedPanel.SetActive(false);
         twoStar.SetActive(true);
@@ -101,6 +102,7 @@ public class LevelStarSystem : MonoBehaviour
     }
     private void NextLevel()
     {
+        GameManager.Instance.SmallVibrate();
         mobileControllers.gameObject.SetActive(true);
         levelPassedPanel.SetActive(false);
         //If next level is pressed on the levelpassedpanel, load new scene
@@ -116,5 +118,10 @@ public class LevelStarSystem : MonoBehaviour
         }
         else
             GameManager.Instance.LoadMenu();
+    }
+    private void LoadMenu()
+    {
+        GameManager.Instance.SmallVibrate();
+        GameManager.Instance.LoadMenu();
     }
 }
