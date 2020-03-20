@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class LevelStarSystem : MonoBehaviour
 {
     private int threeStarMovementAmount, twoStarMovementAmount;
-    public Button nextLevel, restartLevel;
+    public Button nextLevel, restartLevel, menuButton;
     public GameObject oneStar, twoStar, threeStar, levelPassedPanel;
     private int buttonPressesAmount = 0;
     [HideInInspector]
@@ -27,6 +27,7 @@ public class LevelStarSystem : MonoBehaviour
         mobileControllers = FindObjectOfType<MobileControllers>();
         nextLevel.GetComponent<Button>().onClick.AddListener(NextLevel);
         restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
+        menuButton.GetComponent<Button>().onClick.AddListener(GameManager.Instance.LoadMenu);
     }
     private void OnEnable()
     {

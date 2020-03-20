@@ -73,7 +73,6 @@ public class MobileControllers : MonoBehaviour
         changeView.onClick.AddListener(() => ViewChange());
         back.onClick.AddListener(() => GoToMenu());
         restartButton.onClick.AddListener(() => RestartCurrentLevel());
-        restartButton.gameObject.SetActive(false);
 
         EventTrigger upTrigger = up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();

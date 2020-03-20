@@ -181,7 +181,6 @@ public class BlopMovement : MonoBehaviour
             {
                 horizontalMovement = 0;
                 verticalMovement = 0;
-                mobileControllers.restartButton.gameObject.SetActive(true);
             }
         }
         //Check movement and other things
@@ -213,7 +212,6 @@ public class BlopMovement : MonoBehaviour
         //Check if the y velocity is too much, if so, restart level, teleport level stuff
         if (playerRb.velocity.y < -15)
         {
-            mobileControllers.restartButton.gameObject.SetActive(true);
             playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 15);
         }
 
