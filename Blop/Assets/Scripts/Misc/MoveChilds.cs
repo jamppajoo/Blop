@@ -29,15 +29,15 @@ public class MoveChilds : MonoBehaviour
     }
 
 }
-[CustomEditor(typeof(MoveChilds))]
-public class MyPlayerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        MoveChilds myScript = (MoveChilds)target;
-        if (GUILayout.Button("Add spacing"))
-            myScript.AddSpacing();
-    }
+//[CustomEditor(typeof(MoveChilds))]
+//public class MyPlayerEditor : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        DrawDefaultInspector();
+//        MoveChilds myScript = (MoveChilds)target;
+//        if (GUILayout.Button("Add spacing"))
+//            myScript.AddSpacing();
+//    }
 
-}
+//}
