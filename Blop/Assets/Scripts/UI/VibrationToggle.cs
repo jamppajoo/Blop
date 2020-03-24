@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Toggle vibration value and save the data
+/// </summary>
 public class VibrationToggle : MonoBehaviour
 {
     private Toggle myToggle;

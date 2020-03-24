@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,30 +6,33 @@ public class LevelSelectButton : MonoBehaviour
 {
     [HideInInspector]
     public string myLevelName;
-
+    [HideInInspector]
     public int myLevelNumber;
+    [HideInInspector]
     public int myLevelpackNumber;
 
+    [Tooltip("Star images")]
     [SerializeField]
     private Image oneStar, twoStar, threeStar;
 
+    [Tooltip("Star images to place on the positions")]
     [SerializeField]
     private Sprite starSprite, starPlaceSprite;
 
+    [Tooltip("Materials to show player that is button pressable or not")]
     [SerializeField]
     private Material activatedMaterial, deActivatedMaterial;
 
-    private Button myButton;
-    private Text myText;
-    private LevelSelect levelSelect;
-
     private int myStarAmount = 4;
 
+    private Button myButton;
+    private Text myText;
     private Renderer myRenderer;
+
+    private LevelSelect levelSelect;
 
     private void Awake()
     {
-        //myButton = GetComponentInChildren<Button>();
         myText = GetComponentInChildren<Text>();
 
         levelSelect = FindObjectOfType<LevelSelect>();
@@ -41,14 +42,11 @@ public class LevelSelectButton : MonoBehaviour
         GetMyLevelNumbers();
         SetMyLevelNumberText();
         SetStarAmount(4);
-
-        //myButton.onClick.AddListener(StartLevel);
     }
 
     private void OnMouseUpAsButton()
     {
         StartLevel();
-
     }
 
     private void StartLevel()
@@ -96,22 +94,23 @@ public class LevelSelectButton : MonoBehaviour
         }
 
     }
+
     private void DeactivateObject()
     {
-        //myButton.interactable = false;
         myRenderer.material = deActivatedMaterial;
     }
+
     private void ActivateObject()
     {
-        //myButton.interactable = true;
         myRenderer.material = activatedMaterial;
     }
-
+    //Get level numbers by parsing buttons name
     private void GetMyLevelNumbers()
     {
         Int32.TryParse(myLevelName.Split('.')[0], out myLevelpackNumber);
         Int32.TryParse(myLevelName.Split('.')[1], out myLevelNumber);
     }
+
     private void SetMyLevelNumberText()
     {
         myText.text = (myLevelpackNumber * myLevelNumber).ToString();

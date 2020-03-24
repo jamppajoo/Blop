@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-/*
-    Main function of this scipt is to find every component relative to LevelPassedPanel
-    and make it work (stars, buttons ect). Also displays how many times any button has
-    been pressed to the screen. But that's only for dev purposes.
-*/
+/// <summary>
+/// Handle showing stars at the end of the level, and keeping track on how many stars currently player is getting
+/// </summary>
 
 public class LevelStarSystem : MonoBehaviour
 {
-    private int threeStarMovementAmount, twoStarMovementAmount;
-    public Button nextLevel, restartLevel, menuButton;
-    public GameObject oneStar, twoStar, threeStar, levelPassedPanel;
-    private int buttonPressesAmount = 0;
     [HideInInspector]
     public int stars;
+
+    [SerializeField]
+    private Button nextLevel, restartLevel, menuButton;
+    [SerializeField]
+    private GameObject oneStar, twoStar, threeStar, levelPassedPanel;
+
+    private int threeStarMovementAmount, twoStarMovementAmount;
+    private int buttonPressesAmount = 0;
+
     private MobileControllers mobileControllers;
     private Finish finish;
     private LevelStats levelStats;
@@ -55,6 +57,7 @@ public class LevelStarSystem : MonoBehaviour
         //Check how many times any button has been pressed since level started
         buttonPressesAmount = BlopMovement.buttonPresses;
 
+        //Player always gets at least one star
         stars = 1;
         if (buttonPressesAmount <= twoStarMovementAmount && (buttonPressesAmount > threeStarMovementAmount || GameManager.Instance.hintActive))
             stars = 2;
@@ -86,7 +89,6 @@ public class LevelStarSystem : MonoBehaviour
         mobileControllers.gameObject.SetActive(false);
     }
 
-    //Restart button on levelpassPanel
     private void Restart()
     {
         GameManager.Instance.SmallVibrate();
@@ -95,11 +97,8 @@ public class LevelStarSystem : MonoBehaviour
         twoStar.SetActive(true);
         threeStar.SetActive(true);
         GameManager.Instance.LoadLevel(GameManager.Instance.levelName, false);
-        //GameManager.Instance.RestartScene();
-        //AnalyticsManager.Instance.RestartValues();
-        //levelPassedPanel.SetActive(false);
-        //mobileControllers.gameObject.SetActive(true);
     }
+
     private void NextLevel()
     {
         GameManager.Instance.SmallVibrate();
@@ -119,6 +118,7 @@ public class LevelStarSystem : MonoBehaviour
         else
             GameManager.Instance.LoadMenu();
     }
+
     private void LoadMenu()
     {
         GameManager.Instance.SmallVibrate();

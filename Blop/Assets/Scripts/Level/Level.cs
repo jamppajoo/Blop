@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Enable and disable level
+/// </summary>
 public class Level : MonoBehaviour
 {
     [HideInInspector]

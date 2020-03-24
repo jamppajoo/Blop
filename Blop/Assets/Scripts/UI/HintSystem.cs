@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handle the hint system how to use menu
+/// </summary>
 public class HintSystem : MonoBehaviour
 {
     public bool isShowing = false;
+
     [SerializeField]
     private Button backButton;
-
 
     private void Awake()
     {

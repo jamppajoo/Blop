@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles storing in-game settings
+/// </summary>
 public class SettingsManager : MonoBehaviour
 {
     #region Singleton
