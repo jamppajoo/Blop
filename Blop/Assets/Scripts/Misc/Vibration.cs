@@ -13,7 +13,7 @@ public class Vibration : MonoBehaviour
     {
         // Trick Unity into giving the App vibration permission when it builds.
         // This check will always be false, but the compiler doesn't know that.
-        //if (Application.isEditor) Handheld.Vibrate();
+        if (Application.isEditor) Handheld.Vibrate();
     }
     public static void SmallVibrate()
     {
