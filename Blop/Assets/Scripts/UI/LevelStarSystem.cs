@@ -21,9 +21,14 @@ public class LevelStarSystem : MonoBehaviour
     private MobileControllers mobileControllers;
     private Finish finish;
     private LevelStats levelStats;
+    private RectTransform myRectTransform;
+
+    private Vector3 rectTransformOriginalPosition;
+
 
     private void Awake()
     {
+        myRectTransform = gameObject.GetComponent<RectTransform>();
         finish = FindObjectOfType<Finish>();
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
@@ -42,7 +47,7 @@ public class LevelStarSystem : MonoBehaviour
 
     private void Start()
     {
-        levelPassedPanel.SetActive(false);
+        rectTransformOriginalPosition = myRectTransform.localPosition;
         NewLevelLoaded();
     }
     private void NewLevelLoaded()
@@ -85,7 +90,7 @@ public class LevelStarSystem : MonoBehaviour
 
     public void ShowLevelPassedScreen()
     {
-        levelPassedPanel.SetActive(true);
+        myRectTransform.localPosition = Vector3.zero;
         mobileControllers.gameObject.SetActive(false);
     }
 
@@ -93,7 +98,8 @@ public class LevelStarSystem : MonoBehaviour
     {
         GameManager.Instance.SmallVibrate();
         mobileControllers.gameObject.SetActive(true);
-        levelPassedPanel.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
+
         twoStar.SetActive(true);
         threeStar.SetActive(true);
         GameManager.Instance.LoadLevel(GameManager.Instance.levelName, false);
@@ -103,7 +109,7 @@ public class LevelStarSystem : MonoBehaviour
     {
         GameManager.Instance.SmallVibrate();
         mobileControllers.gameObject.SetActive(true);
-        levelPassedPanel.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
         //If next level is pressed on the levelpassedpanel, load new scene
         string[] currentLevelText = GameManager.Instance.levelName.Split('.');
         int currentLevel = int.Parse(currentLevelText[1]);

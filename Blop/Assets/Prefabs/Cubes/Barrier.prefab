@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 479322}
   - component: {fileID: 6580004}
   m_Layer: 0
-  m_Name: TransparentBarrier
+  m_Name: Barrier
   m_TagString: solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &479322
 Transform:

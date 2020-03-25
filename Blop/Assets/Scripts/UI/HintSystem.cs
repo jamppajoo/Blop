@@ -11,16 +11,19 @@ public class HintSystem : MonoBehaviour
     [SerializeField]
     private Button backButton;
 
+    private RectTransform myRectTransform;
+    private Vector3 rectTransformOriginalPosition;
+
     private void Awake()
     {
+        myRectTransform = gameObject.GetComponent<RectTransform>();
         backButton.onClick.AddListener(DisappearMenu);
     }
     private void Start()
     {
         //Disappear menu without activating vibrate
         isShowing = false;
-        gameObject.SetActive(false);
-
+        rectTransformOriginalPosition = myRectTransform.localPosition;
     }
     public void ShowMenu(bool show)
     {
@@ -34,7 +37,7 @@ public class HintSystem : MonoBehaviour
     {
         GameManager.Instance.SmallVibrate();
         isShowing = false;
-        gameObject.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
     }
     private void ShowMenu()
     {
@@ -45,6 +48,6 @@ public class HintSystem : MonoBehaviour
         }
 
         isShowing = true;
-        gameObject.SetActive(true);
+        myRectTransform.localPosition = Vector3.zero;
     }
 }
