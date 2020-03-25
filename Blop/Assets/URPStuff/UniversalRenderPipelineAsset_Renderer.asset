@@ -36,7 +36,7 @@ MonoBehaviour:
     passOperation: 0
     failOperation: 0
     zFailOperation: 0
-  m_ShadowTransparentReceive: 1
+  m_ShadowTransparentReceive: 0
 --- !u!114 &1092116344383198156
 MonoBehaviour:
   m_ObjectHideFlags: 0
