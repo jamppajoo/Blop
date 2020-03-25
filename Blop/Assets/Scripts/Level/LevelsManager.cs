@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Keep track on all levels and load/unload them
+/// </summary>
 public class LevelsManager : MonoBehaviour
 {
     private Level[] levels;

@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
 
+/// <summary>
+/// Handles mobile controller button presses and sends event accordingly
+/// </summary>
 public class MobileControllers : MonoBehaviour
 {
-    public Button changeView, up, down, left, right, back, restartButton;
+    [SerializeField]
+    private Button changeView, up, down, left, right, back, restartButton;
 
-    public bool canPress = true;
+    private bool canPress = true;
     private CameraMovement cameraMovement;
 
     private void OnEnable()
@@ -54,6 +56,7 @@ public class MobileControllers : MonoBehaviour
 
     private void Update()
     {
+        //Handle PC input
         if (Input.GetAxisRaw("Vertical") > 0.5f)
             UpPressed();
         if (Input.GetAxisRaw("Vertical") < -0.5f)
@@ -72,6 +75,8 @@ public class MobileControllers : MonoBehaviour
         changeView.onClick.AddListener(() => ViewChange());
         back.onClick.AddListener(() => GoToMenu());
         restartButton.onClick.AddListener(() => RestartCurrentLevel());
+
+        //Customised EventTriggers to make button presses feel better and to registerate instantly
 
         EventTrigger upTrigger = up.GetComponent<EventTrigger>();
         EventTrigger.Entry upEntry = new EventTrigger.Entry();
@@ -102,6 +107,8 @@ public class MobileControllers : MonoBehaviour
     {
         Debug.Log(data);
     }
+
+    #region Send events on button presses
 
     public void ViewChange()
     {
@@ -141,6 +148,8 @@ public class MobileControllers : MonoBehaviour
             EventManager.ButtonPressed();
         }
     }
+    #endregion
+
     public void GoToMenu()
     {
         AnalyticsManager.Instance.SendRageQuitAnalytics();

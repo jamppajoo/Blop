@@ -1,22 +1,25 @@
 ﻿using MEC;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles moving the level selection, currently very WIP and the movement does not feel natural
+/// </summary>
 public class LevelSelectMoving : MonoBehaviour
 {
+    [Tooltip("How fast should the level move in relation to finger movement amount")]
     [SerializeField]
     private float movingSpeed;
 
-    [SerializeField]
     [Tooltip("Amount that velocity is reduced when player releases touch")]
+    [SerializeField]
     private float levelSelectVelocityDampening = 60;
 
-    [SerializeField]
     [Tooltip("Levelselect velocity moving speed")]
+    [SerializeField]
     private float levelSelectVelocitySpeed = 0.04f;
 
+    [Tooltip("Vectors to make borders on movement")]
     [SerializeField]
     private Vector2 movingAmountMin, movingAmountMax;
 
@@ -146,8 +149,5 @@ public class LevelSelectMoving : MonoBehaviour
             yield return 0;
         }
     }
-    //Handle movement system based on touch or mouse dragging
-    //Handle all level buttons and their assigns to correct levels
-    //Handle stars showed on top of the levels
 
 }

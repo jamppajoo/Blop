@@ -6,6 +6,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Handles saving and loading all permanent data (Stars, game-times, replayability amount, settings)
+/// </summary>
 public class SaveAndLoad : MonoBehaviour
 {
     #region Singleton

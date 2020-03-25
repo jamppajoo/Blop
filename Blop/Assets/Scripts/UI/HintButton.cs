@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handle hint button functionality, showing ad menu and how to use hint menu
+/// </summary>
 public class HintButton : MonoBehaviour
 {
-
     private string howToUseText = "How to \n use";
+    private string originalText;
 
     private Button myButton;
     private Text myButtonText;
-    private string originalText;
 
     private HintSystem hintSystem;
     private AdController adController;
@@ -51,7 +50,6 @@ public class HintButton : MonoBehaviour
     {
         if (GameManager.Instance.hintActive)
             myButtonText.text = howToUseText;
-
     }
     private void HintButtonPressed()
     {

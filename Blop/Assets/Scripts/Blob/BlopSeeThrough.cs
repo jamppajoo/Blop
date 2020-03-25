@@ -1,10 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Handles players vibility through objects by toggling boolean on shader
+/// </summary>
 public class BlopSeeThrough : MonoBehaviour
 {
-    public Material seeThroughMaterial;
+    [Tooltip("Material to make player visible through objects")]
+    [SerializeField]
+    private Material seeThroughMaterial;
 
     private bool hintActive = false;
     private void Awake()
@@ -20,8 +23,6 @@ public class BlopSeeThrough : MonoBehaviour
 
             hintActive = GameManager.Instance.hintActive;
         }
-
-
     }
     public void ToggleSeeThrough(bool active)
     {
