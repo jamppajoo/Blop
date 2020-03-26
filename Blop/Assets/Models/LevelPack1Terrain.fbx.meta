@@ -380,7 +380,7 @@ ModelImporter:
     second: ImportLogs
   externalObjects: {}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

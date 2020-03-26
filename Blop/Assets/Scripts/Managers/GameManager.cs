@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         SaveAndLoad.Instance.Load();
         timeSinceGameOpened = (uint)Time.time;
         totalGameTime = SaveAndLoad.Instance.loadedGameTime + timeSinceGameOpened;
-        Application.targetFrameRate =120;
+        Application.targetFrameRate =500;
     }
     private void Update()
     {
