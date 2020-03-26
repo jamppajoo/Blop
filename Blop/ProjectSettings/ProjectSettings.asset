@@ -163,7 +163,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.Jumuvirma.Blop
+    Android: com.jumuvirma.blop
     Standalone: unity.com.jumuvirma.Blop.Blop
     iOS: com.Jumuvirma.Blop
     tvOS: com.Jumuvirma.Blop

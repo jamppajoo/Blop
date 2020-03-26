@@ -24,6 +24,7 @@ public class HintSystem : MonoBehaviour
         //Disappear menu without activating vibrate
         isShowing = false;
         rectTransformOriginalPosition = myRectTransform.localPosition;
+        myRectTransform.gameObject.SetActive(false);
     }
     public void ShowMenu(bool show)
     {
@@ -38,6 +39,7 @@ public class HintSystem : MonoBehaviour
         GameManager.Instance.SmallVibrate();
         isShowing = false;
         myRectTransform.localPosition = rectTransformOriginalPosition;
+        myRectTransform.gameObject.SetActive(false);
     }
     private void ShowMenu()
     {
@@ -49,5 +51,6 @@ public class HintSystem : MonoBehaviour
 
         isShowing = true;
         myRectTransform.localPosition = Vector3.zero;
+        myRectTransform.gameObject.SetActive(true);
     }
 }

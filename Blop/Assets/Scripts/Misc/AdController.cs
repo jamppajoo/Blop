@@ -35,6 +35,7 @@ public class AdController : MonoBehaviour
     private void Start()
     {
         rectTransformOriginalPosition = myRectTransform.localPosition;
+        myRectTransform.gameObject.SetActive(false);
         DisappearMenu();
 
     }
@@ -50,6 +51,7 @@ public class AdController : MonoBehaviour
     {
         isShowing = false;
         myRectTransform.localPosition = rectTransformOriginalPosition;
+        myRectTransform.gameObject.SetActive(false);
     }
     private void ShowMenu()
     {
@@ -61,6 +63,7 @@ public class AdController : MonoBehaviour
 
         isShowing = true;
         myRectTransform.localPosition = Vector3.zero;
+        myRectTransform.gameObject.SetActive(true);
     }
 
     private void DeclineAd()
