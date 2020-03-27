@@ -1,12 +1,10 @@
-﻿using MEC;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
+/// <summary>
+/// Set up all star amounts to level select buttons. Starts scene when button is pressed
+/// </summary>
 public class LevelSelect : MonoBehaviour
 {
-
     private LevelSelectButton[] levelButtons;
 
     private void Awake()
@@ -25,6 +23,7 @@ public class LevelSelect : MonoBehaviour
     }
     public void StartScene(string levelName)
     {
+        GameManager.Instance.SmallVibrate();
         AnalyticsManager.Instance.SendLevelPassingAnalytics();
         GameManager.Instance.LoadLevel(levelName, true);
     }

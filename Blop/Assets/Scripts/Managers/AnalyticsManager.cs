@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
 using MEC;
-using System;
 
+/// <summary>
+/// Handles collecting, sending and restarting all custom events.
+/// </summary>
 public class AnalyticsManager : MonoBehaviour
 {
     #region Singleton
@@ -70,11 +71,6 @@ public class AnalyticsManager : MonoBehaviour
     }
     private void Start()
     {
-        //SetLevelName("Level1.1");
-        //SetTimeUsed(100);
-        //HintUsed();
-        //SetDeathAmount(23);
-        //SetStarAmount(2);
         RestartValues();
         SendLevelStartedAnalytics();
     }

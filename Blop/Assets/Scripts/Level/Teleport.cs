@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Teleport blop back up if it hits this trigger
+/// </summary>
 public class Teleport : MonoBehaviour {
 
     private GameObject upperTeleport;

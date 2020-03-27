@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using System;
 
 /*
-    Handles stars and saves them to the file when Save() function is called. When Load() function is called, it loads information from file.
     This Gameobject is singleton, so it's always running on background.
-    Everything in GameManager has to be in specific order in Unity becouse of GetChild() methods.
+    Handles storing all non permanent data
+    Handles going to different levels and/or scenes
 */
 
 public class GameManager : MonoBehaviour
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    [Header("Bunch of data that will be overwritten by SaveAndLoad.cs and/or game scripts")]
     public int[] levelsStarAmount;
     public int[] levelPlayedAmount;
     public uint totalGameTime;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
         SaveAndLoad.Instance.Load();
         timeSinceGameOpened = (uint)Time.time;
         totalGameTime = SaveAndLoad.Instance.loadedGameTime + timeSinceGameOpened;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate =500;
     }
     private void Update()
     {
@@ -101,6 +102,16 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         AnalyticsManager.Instance.SendRageQuitAnalytics();
+    }
+
+    public void SmallVibrate()
+    {
+        if (Application.isEditor)
+            return;
+#if UNITY_ANDROID
+        if (SettingsManager.Instance.usingVibrate)
+            Vibration.SmallVibrate();
+#endif
     }
 }
 

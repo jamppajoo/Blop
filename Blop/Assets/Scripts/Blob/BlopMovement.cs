@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using System;
 
+/// <summary>
+/// Handles Blop's movement by lerping the current position to next one depending on the current camera angle.
+/// </summary>
 public class BlopMovement : MonoBehaviour
 {
-    private float horizontalMovement, verticalMovement;
-    private bool canMove = true;
-    private Rigidbody playerRb;
-    private bool inAir = false;
-    public float timeToMove;
+    [Tooltip("Time in seconds that blop takes to move to next block")]
+    [SerializeField]
+    private float timeToMove;
+
     public static int buttonPresses = 0;
+
+    private bool canMove = true;
+    private bool inAir = false;
+    private bool raycastHitting = false;
+    private float horizontalMovement, verticalMovement;
+    private Vector3 playerOriginalPosition;
+    private Rigidbody playerRb;
     private CameraMovement cameraMovement;
     private MobileControllers mobileControllers;
     private RaycastHit hit;
-    private Vector3 playerOriginalPosition;
 
-    private bool raycastHitting = false;
-
+    //Check all events on button presses from mobile controllers or on keyboard
     private void OnEnable()
     {
         EventManager.OnUpPressed += UpPressed;
@@ -33,6 +38,7 @@ public class BlopMovement : MonoBehaviour
         EventManager.OnRightPressed -= RightPressed;
     }
 
+    #region ButtonPressedEvents
     private void UpPressed()
     {
         verticalMovement = 1;
@@ -56,6 +62,7 @@ public class BlopMovement : MonoBehaviour
         horizontalMovement = 1;
         CheckRaycasts();
     }
+    #endregion
 
     private void Awake()
     {
@@ -63,14 +70,12 @@ public class BlopMovement : MonoBehaviour
         cameraMovement = FindObjectOfType<CameraMovement>();
         mobileControllers = FindObjectOfType<MobileControllers>();
         playerOriginalPosition = gameObject.transform.position;
-    }
-    void Start()
-    {
         playerRb = gameObject.GetComponent<Rigidbody>();
     }
+
+    //Check raycast to all directions, restrinct movmenent based on that, and handle moving blop to correct position if blop falls down
     private void CheckRaycasts()
     {
-        //Raycast to every direction
         raycastHitting = false;
         playerRb.isKinematic = false;
         Ray raycastHitUp = new Ray(transform.position, Vector3.up);
@@ -80,21 +85,23 @@ public class BlopMovement : MonoBehaviour
         Ray raycastHitBack = new Ray(transform.position, Vector3.back);
         //Down needs to be checked last, because magic
         Ray raycastHitDown = new Ray(transform.position, Vector3.down);
-        //Check to up
+        
+        #region Raycasts
+        //Raycast to up
         if (Physics.Raycast(raycastHitUp, out hit) && hit.distance < 1)
         {
             if (hit.transform.gameObject.tag == "UpWall")
             {
                 playerRb.isKinematic = true;
                 raycastHitting = true;
-                if (verticalMovement > 0 && cameraMovement.isDown)
+                if (verticalMovement > 0 && cameraMovement.IsDown())
                     verticalMovement = 0;
             }
-            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 && cameraMovement.isDown)
+            else if (hit.transform.gameObject.tag != "UpWall" && verticalMovement > 0 && cameraMovement.IsDown())
                 verticalMovement = 0;
         }
 
-        //Check to left
+        //Raycast to left
         if ((Physics.Raycast(raycastHitLeft, out hit)) && hit.distance < 1)
         {
             if (hit.transform.gameObject.tag == "LeftWall")
@@ -102,17 +109,18 @@ public class BlopMovement : MonoBehaviour
                 playerRb.isKinematic = true;
                 raycastHitting = true;
             }
+            //Handles moving half a block if blop falls down
             if (hit.transform.gameObject.tag == "LeftWall" && inAir)
             {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
-            if (horizontalMovement < 0 && (cameraMovement.isDown || cameraMovement.isUp))
+            if (horizontalMovement < 0 && (cameraMovement.IsDown() || cameraMovement.IsUp()))
                 horizontalMovement = 0;
-            if (verticalMovement < 0 && cameraMovement.rotatedIsUp)
+            if (verticalMovement < 0 && cameraMovement.RotatedIsUp())
                 verticalMovement = 0;
         }
 
-        //Check to right
+        //Raycast to right
         if ((Physics.Raycast(raycastHitRight, out hit)) && hit.distance < 1)
         {
             if (hit.transform.gameObject.tag == "RightWall")
@@ -125,13 +133,13 @@ public class BlopMovement : MonoBehaviour
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
 
-            if (horizontalMovement > 0 && (cameraMovement.isUp || cameraMovement.isDown))
+            if (horizontalMovement > 0 && (cameraMovement.IsUp() || cameraMovement.IsDown()))
                 horizontalMovement = 0;
-            if (verticalMovement > 0 && cameraMovement.rotatedIsUp)
+            if (verticalMovement > 0 && cameraMovement.RotatedIsUp())
                 verticalMovement = 0;
         }
 
-        //Check to front
+        //Raycast to front
         if ((Physics.Raycast(raycastHitForward, out hit)) && hit.distance < 1)
         {
             if (hit.transform.gameObject.tag == "FrontWall")
@@ -145,13 +153,13 @@ public class BlopMovement : MonoBehaviour
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
 
-            if (verticalMovement > 0 && cameraMovement.isUp)
+            if (verticalMovement > 0 && cameraMovement.IsUp())
                 verticalMovement = 0;
-            if (horizontalMovement > 0 && cameraMovement.rotatedIsUp)
+            if (horizontalMovement > 0 && cameraMovement.RotatedIsUp())
                 horizontalMovement = 0;
         }
 
-        //Check to back
+        //Raycast to back
         if ((Physics.Raycast(raycastHitBack, out hit)) && hit.distance < 1)
         {
             if (hit.transform.gameObject.tag == "BackWall")
@@ -164,62 +172,59 @@ public class BlopMovement : MonoBehaviour
             {
                 StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
             }
-            if (verticalMovement < 0 && cameraMovement.isUp)
+            if (verticalMovement < 0 && cameraMovement.IsUp())
                 verticalMovement = 0;
-            if (horizontalMovement < 0 && cameraMovement.rotatedIsUp)
+            if (horizontalMovement < 0 && cameraMovement.RotatedIsUp())
                 horizontalMovement = 0;
         }
 
-        //Check to down
+        //Raycast to down
         if ((Physics.Raycast(raycastHitDown, out hit)) && hit.distance < 1)
         {
             raycastHitting = true;
-            if (verticalMovement < 0 && cameraMovement.isDown)
+            if (verticalMovement < 0 && cameraMovement.IsDown())
                 verticalMovement = 0;
 
             else if (hit.transform.gameObject.tag != "Floor" && hit.transform.gameObject.name != "Restart" && hit.transform.gameObject.name != "Teleport" && playerRb.isKinematic == false)
             {
                 horizontalMovement = 0;
                 verticalMovement = 0;
-                mobileControllers.restartButton.gameObject.SetActive(true);
             }
         }
-        //Check movement and other things
-        if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.isDown && raycastHitting)
+        #endregion
+
+        //Move blop based on horizontalMovement and verticalMovement values if camera is currently down
+        if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.IsDown() && raycastHitting)
             StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0), timeToMove));
-        //Same but check if camera is rotated only up or up & 90 degrees
+        //Same but check if camera is rotated only up or rotated up
         else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0))
         {
-            if (cameraMovement.rotatedIsUp)
+            if (cameraMovement.RotatedIsUp())
                 StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), timeToMove));
 
-            else if (cameraMovement.isUp)
+            else if (cameraMovement.IsUp())
                 StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), timeToMove));
         }
         horizontalMovement = 0;
         verticalMovement = 0;
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
+    
+    private void FixedUpdate()
     {
-        //if (Mathf.Abs(playerRb.velocity.y) >= 0.2f)
         if (playerRb.velocity.y != 0 && canMove)
             inAir = true;
         else inAir = false;
         if (inAir)
             CheckRaycasts();
 
-        //Check if the y velocity is too much, if so, restart level, teleport level stuff
+        //Check if the y velocity is too much, clamp velocity to make sure game does not glitch. Levelpack3 teleport stuff
         if (playerRb.velocity.y < -15)
         {
-            mobileControllers.restartButton.gameObject.SetActive(true);
             playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 15);
         }
-
-
     }
 
+    //Ran if scene is "restarted", resets all values to original
     public void RestartPlayer(Vector3 offset)
     {
         gameObject.transform.position = playerOriginalPosition + offset;
@@ -229,25 +234,25 @@ public class BlopMovement : MonoBehaviour
     //Movement script
     IEnumerator Move(Vector3 direction, float movementTime)
     {
-        ////Check that player moves whole block, if so, add buttonpresses.
+        canMove = false;
+        float elapsedtime = 0;
+     
+        //Check that blop moves whole block, if so, add buttonpress. So we dont add button press if blop falls down
         if (Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
         {
             buttonPresses++;
             EventManager.AddMovement();
+            GameManager.Instance.SmallVibrate();
         }
 
-        canMove = false;
-        float elapsedtime = 0;
-
+        //Round starting point to nearest 0.5f
         Vector3 startPoint = new Vector3(
             Mathf.Round(gameObject.transform.position.x / 0.5f) * 0.5f,
             Mathf.Round(gameObject.transform.position.y / 0.5f) * 0.5f,
             Mathf.Round(gameObject.transform.position.z / 0.5f) * 0.5f
             );
-        //Vector3 startPoint = gameObject.transform.position;
-        Vector3 nextPoint = startPoint + direction;
 
-        //Vector3 nextPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z + direction.z);
+        Vector3 nextPoint = startPoint + direction;
 
         while (elapsedtime < movementTime)
         {
@@ -260,6 +265,5 @@ public class BlopMovement : MonoBehaviour
         canMove = true;
         CheckRaycasts();
         yield return null;
-
     }
 }

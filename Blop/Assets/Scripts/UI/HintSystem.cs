@@ -1,23 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handle the hint system how to use menu
+/// </summary>
 public class HintSystem : MonoBehaviour
 {
     public bool isShowing = false;
+
     [SerializeField]
     private Button backButton;
 
+    private RectTransform myRectTransform;
+    private Vector3 rectTransformOriginalPosition;
 
     private void Awake()
     {
+        myRectTransform = gameObject.GetComponent<RectTransform>();
         backButton.onClick.AddListener(DisappearMenu);
     }
     private void Start()
     {
-        DisappearMenu();
-
+        //Disappear menu without activating vibrate
+        isShowing = false;
+        rectTransformOriginalPosition = myRectTransform.localPosition;
+        myRectTransform.gameObject.SetActive(false);
     }
     public void ShowMenu(bool show)
     {
@@ -29,8 +36,10 @@ public class HintSystem : MonoBehaviour
     }
     private void DisappearMenu()
     {
+        GameManager.Instance.SmallVibrate();
         isShowing = false;
-        gameObject.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
+        myRectTransform.gameObject.SetActive(false);
     }
     private void ShowMenu()
     {
@@ -41,6 +50,7 @@ public class HintSystem : MonoBehaviour
         }
 
         isShowing = true;
-        gameObject.SetActive(true);
+        myRectTransform.localPosition = Vector3.zero;
+        myRectTransform.gameObject.SetActive(true);
     }
 }

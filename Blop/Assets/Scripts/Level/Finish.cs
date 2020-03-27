@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handle level finish stuff, adding stars, trigger showing menus, trigger sending analytics etc.
+/// </summary>
 public class Finish : MonoBehaviour
 {
-    public int rotationSpeed;
-    private LevelStarSystem levelStarSystem;
+    [Tooltip("How fast should the finish block rotate (angles in frames)")]
+    [SerializeField]
+    private int rotationSpeed;
     private int activeLevel;
 
-    void Start()
+    private LevelStarSystem levelStarSystem;
+    private void Awake()
     {
         levelStarSystem = FindObjectOfType<LevelStarSystem>();
-
     }
-    void Update()
+    private void Update()
     {
         //Rotate finish block
         transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
     }
-    void OnTriggerEnter(Collider collider)
+
+    private void OnTriggerEnter(Collider collider)
     {
         //If not colliding with player, dont run anything
         if (collider.tag != "Player")
@@ -37,6 +41,7 @@ public class Finish : MonoBehaviour
         levelStarSystem.ShowLevelPassedScreen();
         GameManager.Instance.hintActive = false;
         SaveAndLoad.Instance.Save();
+        //Set analytics and send them
         AnalyticsManager.Instance.SetPlayedAmount(GameManager.Instance.levelPlayedAmount[activeLevel - 1]);
         AnalyticsManager.Instance.SetStarAmount(levelStarSystem.stars);
         AnalyticsManager.Instance.SendLevelPassingAnalytics();

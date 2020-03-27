@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 public class AdController : MonoBehaviour
 {
-    //#region Singleton
-
-    //private static AdController _instance;
-
-    //public static AdController Instance { get { return _instance; } }
-
-    //#endregion
 
     public bool isShowing = false;
 
     public Button adsMenuAcceptAdButton, adsMenuDeclineAdButton;
     private string zoneId;
+
+    private RectTransform myRectTransform;
+    private Vector3 rectTransformOriginalPosition;
 
     private void Awake()
     {
@@ -33,6 +26,7 @@ public class AdController : MonoBehaviour
         //DontDestroyOnLoad(this.gameObject);
         //#endregion
 
+        myRectTransform = gameObject.GetComponent<RectTransform>();
         adsMenuAcceptAdButton.onClick.AddListener(ShowAd);
         adsMenuDeclineAdButton.onClick.AddListener(DeclineAd);
 
@@ -40,6 +34,8 @@ public class AdController : MonoBehaviour
 
     private void Start()
     {
+        rectTransformOriginalPosition = myRectTransform.localPosition;
+        myRectTransform.gameObject.SetActive(false);
         DisappearMenu();
 
     }
@@ -54,7 +50,8 @@ public class AdController : MonoBehaviour
     private void DisappearMenu()
     {
         isShowing = false;
-        gameObject.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
+        myRectTransform.gameObject.SetActive(false);
     }
     private void ShowMenu()
     {
@@ -65,16 +62,19 @@ public class AdController : MonoBehaviour
         }
 
         isShowing = true;
-        gameObject.SetActive(true);
+        myRectTransform.localPosition = Vector3.zero;
+        myRectTransform.gameObject.SetActive(true);
     }
 
     private void DeclineAd()
     {
+        GameManager.Instance.SmallVibrate();
         DisappearMenu();
     }
 
     private void ShowAd()
     {
+        GameManager.Instance.SmallVibrate();
         AddHint();
         //if (string.IsNullOrEmpty(zoneId))
         //    zoneId = null;

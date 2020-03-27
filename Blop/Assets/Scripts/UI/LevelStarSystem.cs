@@ -1,32 +1,40 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-/*
-    Main function of this scipt is to find every component relative to LevelPassedPanel
-    and make it work (stars, buttons ect). Also displays how many times any button has
-    been pressed to the screen. But that's only for dev purposes.
-*/
+/// <summary>
+/// Handle showing stars at the end of the level, and keeping track on how many stars currently player is getting
+/// </summary>
 
 public class LevelStarSystem : MonoBehaviour
 {
-    private int threeStarMovementAmount, twoStarMovementAmount;
-    public Button nextLevel, restartLevel;
-    public GameObject oneStar, twoStar, threeStar, levelPassedPanel;
-    private int buttonPressesAmount = 0;
     [HideInInspector]
     public int stars;
+
+    [SerializeField]
+    private Button nextLevel, restartLevel, menuButton;
+    [SerializeField]
+    private GameObject oneStar, twoStar, threeStar, levelPassedPanel;
+
+    private int threeStarMovementAmount, twoStarMovementAmount;
+    private int buttonPressesAmount = 0;
+
     private MobileControllers mobileControllers;
     private Finish finish;
     private LevelStats levelStats;
+    private RectTransform myRectTransform;
+
+    private Vector3 rectTransformOriginalPosition;
+
 
     private void Awake()
     {
+        myRectTransform = gameObject.GetComponent<RectTransform>();
         finish = FindObjectOfType<Finish>();
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
         nextLevel.GetComponent<Button>().onClick.AddListener(NextLevel);
         restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
+        menuButton.GetComponent<Button>().onClick.AddListener(LoadMenu);
     }
     private void OnEnable()
     {
@@ -39,7 +47,8 @@ public class LevelStarSystem : MonoBehaviour
 
     private void Start()
     {
-        levelPassedPanel.SetActive(false);
+        rectTransformOriginalPosition = myRectTransform.localPosition;
+        myRectTransform.gameObject.SetActive(false);
         NewLevelLoaded();
     }
     private void NewLevelLoaded()
@@ -54,6 +63,7 @@ public class LevelStarSystem : MonoBehaviour
         //Check how many times any button has been pressed since level started
         buttonPressesAmount = BlopMovement.buttonPresses;
 
+        //Player always gets at least one star
         stars = 1;
         if (buttonPressesAmount <= twoStarMovementAmount && (buttonPressesAmount > threeStarMovementAmount || GameManager.Instance.hintActive))
             stars = 2;
@@ -81,27 +91,29 @@ public class LevelStarSystem : MonoBehaviour
 
     public void ShowLevelPassedScreen()
     {
-        levelPassedPanel.SetActive(true);
+        myRectTransform.localPosition = Vector3.zero;
+        myRectTransform.gameObject.SetActive(true);
         mobileControllers.gameObject.SetActive(false);
     }
 
-    //Restart button on levelpassPanel
     private void Restart()
     {
+        GameManager.Instance.SmallVibrate();
         mobileControllers.gameObject.SetActive(true);
-        levelPassedPanel.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
+        myRectTransform.gameObject.SetActive(false);
+
         twoStar.SetActive(true);
         threeStar.SetActive(true);
         GameManager.Instance.LoadLevel(GameManager.Instance.levelName, false);
-        //GameManager.Instance.RestartScene();
-        //AnalyticsManager.Instance.RestartValues();
-        //levelPassedPanel.SetActive(false);
-        //mobileControllers.gameObject.SetActive(true);
     }
+
     private void NextLevel()
     {
+        GameManager.Instance.SmallVibrate();
         mobileControllers.gameObject.SetActive(true);
-        levelPassedPanel.SetActive(false);
+        myRectTransform.localPosition = rectTransformOriginalPosition;
+        myRectTransform.gameObject.SetActive(false);
         //If next level is pressed on the levelpassedpanel, load new scene
         string[] currentLevelText = GameManager.Instance.levelName.Split('.');
         int currentLevel = int.Parse(currentLevelText[1]);
@@ -115,5 +127,11 @@ public class LevelStarSystem : MonoBehaviour
         }
         else
             GameManager.Instance.LoadMenu();
+    }
+
+    private void LoadMenu()
+    {
+        GameManager.Instance.SmallVibrate();
+        GameManager.Instance.LoadMenu();
     }
 }

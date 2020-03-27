@@ -14,6 +14,7 @@ public class ButtonQuit : MonoBehaviour
     }
     void QuitGame()
     {
+        GameManager.Instance.SmallVibrate();
         Application.Quit();
 
     }
