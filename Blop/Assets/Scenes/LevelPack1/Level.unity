@@ -8652,12 +8652,17 @@ PrefabInstance:
     - target: {fileID: 8170182422934360933, guid: 17b22e5d353418848afce3c404022980,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 4294967294
       objectReference: {fileID: 0}
     - target: {fileID: 8170182423173445660, guid: 17b22e5d353418848afce3c404022980,
         type: 3}
       propertyPath: m_Name
       value: Level1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170182423173445660, guid: 17b22e5d353418848afce3c404022980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170182423173445661, guid: 17b22e5d353418848afce3c404022980,
         type: 3}
