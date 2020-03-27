@@ -2603,6 +2603,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 3785016042891316681, guid: 9d16695557517f145b3faee84a3e8128,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4547250537038121861, guid: 9d16695557517f145b3faee84a3e8128,
         type: 3}
       propertyPath: m_Enabled
@@ -2617,6 +2622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RenderPostProcessing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255802018727426733, guid: 9d16695557517f145b3faee84a3e8128,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d16695557517f145b3faee84a3e8128, type: 3}
@@ -3140,7 +3150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef431a9413835e9428db8d1c66109bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Enable: 1
+  m_Enable: 0
 --- !u!4 &831951469
 Transform:
   m_ObjectHideFlags: 0
