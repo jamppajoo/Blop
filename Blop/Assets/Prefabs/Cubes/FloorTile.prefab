@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3314830}
   - component: {fileID: 2323232}
   - component: {fileID: 6512866}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FloorTile
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -76,7 +76,8 @@ MeshRenderer:
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
+  m_LightmapParameters: {fileID: 111300000, guid: d8fd79f6050ecad4499f3e5e06d7cfa5,
+    type: 2}
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

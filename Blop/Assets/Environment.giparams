@@ -6,13 +6,13 @@ LightmapParameters:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New LightmapParameters
+  m_Name: Environment
   serializedVersion: 3
   resolution: 1
   clusterResolution: 0.5
   irradianceBudget: 128
   irradianceQuality: 8192
-  backFaceTolerance: 0.9
+  backFaceTolerance: 0
   isTransparent: 0
   modellingTolerance: 0.01
   systemTag: -1
@@ -21,7 +21,7 @@ LightmapParameters:
   directLightQuality: 64
   antiAliasingSamples: 8
   pushoff: 0.0001
-  bakedLightmapTag: -1
+  bakedLightmapTag: 1
   limitLightmapCount: 0
   maxLightmapCount: 1
   AOQuality: 256

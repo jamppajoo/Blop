@@ -159,7 +159,7 @@ PlayerSettings:
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000
   targetPixelDensity: 301
-  resolutionScalingMode: 1
+  resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
@@ -182,7 +182,7 @@ PlayerSettings:
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
-  StripUnusedMeshComponents: 0
+  StripUnusedMeshComponents: 1
   VertexChannelCompressionMask: 214
   iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 10.0
@@ -381,6 +381,9 @@ PlayerSettings:
       m_SubKind: 
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
+  - m_BuildTarget: Android
     m_StaticBatching: 1
     m_DynamicBatching: 1
   m_BuildTargetGraphicsJobs:
