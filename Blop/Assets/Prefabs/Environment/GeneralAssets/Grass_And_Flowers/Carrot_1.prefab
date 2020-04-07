@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6234333219685691444}
   - component: {fileID: 3161469451820812802}
   - component: {fileID: 8710879617206761211}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Carrot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,8 +52,8 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4265222063468447727}
   - component: {fileID: 5073896935375322585}
   - component: {fileID: 1537577994073588000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flower_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,8 +52,8 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0

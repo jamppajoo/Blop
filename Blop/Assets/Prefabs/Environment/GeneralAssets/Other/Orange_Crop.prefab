@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7353882235318197228}
   - component: {fileID: 1969544532198253018}
   - component: {fileID: 5217898706823978275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Orange_Crop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
