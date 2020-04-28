@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MEC;
+using System.Collections.Generic;
 
 /// <summary>
 /// Handles Blop's movement by lerping the current position to next one depending on the current camera angle.
@@ -21,6 +23,8 @@ public class BlopMovement : MonoBehaviour
     private CameraMovement cameraMovement;
     private MobileControllers mobileControllers;
     private RaycastHit hit;
+    private Vector3 nextPlayerPos = Vector3.zero;
+    private const string moveCoroutineName = "MoveCoroutine";
 
     //Check all events on button presses from mobile controllers or on keyboard
     private void OnEnable()
@@ -85,7 +89,7 @@ public class BlopMovement : MonoBehaviour
         Ray raycastHitBack = new Ray(transform.position, Vector3.back);
         //Down needs to be checked last, because magic
         Ray raycastHitDown = new Ray(transform.position, Vector3.down);
-        
+
         #region Raycasts
         //Raycast to up
         if (Physics.Raycast(raycastHitUp, out hit) && hit.distance < 1)
@@ -112,7 +116,7 @@ public class BlopMovement : MonoBehaviour
             //Handles moving half a block if blop falls down
             if (hit.transform.gameObject.tag == "LeftWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
+                Timing.RunCoroutine(_Move(new Vector3(0, -0.5f, 0), timeToMove / 2), moveCoroutineName);
             }
             if (horizontalMovement < 0 && (cameraMovement.IsDown() || cameraMovement.IsUp()))
                 horizontalMovement = 0;
@@ -130,7 +134,7 @@ public class BlopMovement : MonoBehaviour
             }
             if (hit.transform.gameObject.tag == "RightWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
+                Timing.RunCoroutine(_Move(new Vector3(0, -0.5f, 0), timeToMove / 2), moveCoroutineName);
             }
 
             if (horizontalMovement > 0 && (cameraMovement.IsUp() || cameraMovement.IsDown()))
@@ -150,7 +154,7 @@ public class BlopMovement : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "FrontWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
+                Timing.RunCoroutine(_Move(new Vector3(0, -0.5f, 0), timeToMove / 2), moveCoroutineName);
             }
 
             if (verticalMovement > 0 && cameraMovement.IsUp())
@@ -170,7 +174,7 @@ public class BlopMovement : MonoBehaviour
 
             if (hit.transform.gameObject.tag == "BackWall" && inAir)
             {
-                StartCoroutine(Move(new Vector3(0, -0.5f, 0), timeToMove / 2));
+                Timing.RunCoroutine(_Move(new Vector3(0, -0.5f, 0), timeToMove / 2), moveCoroutineName);
             }
             if (verticalMovement < 0 && cameraMovement.IsUp())
                 verticalMovement = 0;
@@ -193,29 +197,47 @@ public class BlopMovement : MonoBehaviour
         }
         #endregion
 
+        CheckIfPlayerIsOnAir();
         //Move blop based on horizontalMovement and verticalMovement values if camera is currently down
-        if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.IsDown() && raycastHitting)
-            StartCoroutine(Move(new Vector3(horizontalMovement, verticalMovement, 0), timeToMove));
-        //Same but check if camera is rotated only up or rotated up
-        else if (canMove && !inAir && (horizontalMovement != 0 || verticalMovement != 0))
+        //If currently moving, snap player to new position and start new coroutine. Makes movement faster
+        //when tapping multiple times on the movement button in a row
+        if (!inAir && (horizontalMovement != 0 || verticalMovement != 0) && cameraMovement.IsDown() && raycastHitting)
         {
+            if (!canMove)
+            {
+                Timing.KillCoroutines(moveCoroutineName);
+                SnapToPosition(nextPlayerPos);
+            }
+            Timing.RunCoroutine(_Move(new Vector3(horizontalMovement, verticalMovement, 0), timeToMove), moveCoroutineName);
+        }
+        //Same but check if camera is rotated only up or rotated up
+        else if (!inAir && (horizontalMovement != 0 || verticalMovement != 0) && raycastHitting)
+        {
+            if (!canMove)
+            {
+                Timing.KillCoroutines(moveCoroutineName);
+                SnapToPosition(nextPlayerPos);
+            }
             if (cameraMovement.RotatedIsUp())
-                StartCoroutine(Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), timeToMove));
+                Timing.RunCoroutine(_Move(new Vector3(verticalMovement * -1, 0, horizontalMovement), timeToMove), moveCoroutineName);
 
             else if (cameraMovement.IsUp())
-                StartCoroutine(Move(new Vector3(horizontalMovement, 0, verticalMovement), timeToMove));
+                Timing.RunCoroutine(_Move(new Vector3(horizontalMovement, 0, verticalMovement), timeToMove), moveCoroutineName);
         }
         horizontalMovement = 0;
         verticalMovement = 0;
     }
-    
+
     private void FixedUpdate()
+    {
+        CheckIfPlayerIsOnAir();
+        CheckRaycasts();
+    }
+    private void CheckIfPlayerIsOnAir()
     {
         if (playerRb.velocity.y != 0 && canMove)
             inAir = true;
         else inAir = false;
-        if (inAir)
-            CheckRaycasts();
 
         //Check if the y velocity is too much, clamp velocity to make sure game does not glitch. Levelpack3 teleport stuff
         if (playerRb.velocity.y < -15)
@@ -228,15 +250,23 @@ public class BlopMovement : MonoBehaviour
     public void RestartPlayer(Vector3 offset)
     {
         gameObject.transform.position = playerOriginalPosition + offset;
+        nextPlayerPos = gameObject.transform.position;
         playerRb.velocity = Vector3.zero;
         buttonPresses = 0;
     }
+    private void SnapToPosition(Vector3 newPosition)
+    {
+        gameObject.transform.position = newPosition;
+        canMove = true;
+        CheckIfPlayerIsOnAir();
+        //CheckRaycasts();
+    }
     //Movement script
-    IEnumerator Move(Vector3 direction, float movementTime)
+    private IEnumerator<float> _Move(Vector3 direction, float movementTime)
     {
         canMove = false;
         float elapsedtime = 0;
-     
+
         //Check that blop moves whole block, if so, add buttonpress. So we dont add button press if blop falls down
         if (Mathf.Abs(direction.x) == 1 || Mathf.Abs(direction.y) == 1 || Mathf.Abs(direction.z) == 1)
         {
@@ -252,18 +282,18 @@ public class BlopMovement : MonoBehaviour
             Mathf.Round(gameObject.transform.position.z / 0.5f) * 0.5f
             );
 
-        Vector3 nextPoint = startPoint + direction;
+        nextPlayerPos = startPoint + direction;
 
         while (elapsedtime < movementTime)
         {
-            gameObject.transform.position = Vector3.Lerp(startPoint, nextPoint, (elapsedtime / movementTime));
+            gameObject.transform.position = Vector3.Lerp(startPoint, nextPlayerPos, (elapsedtime / movementTime));
             elapsedtime += Time.deltaTime;
 
-            yield return null;
+            yield return 0;
         }
-        gameObject.transform.position = nextPoint;
+        gameObject.transform.position = nextPlayerPos;
         canMove = true;
-        CheckRaycasts();
-        yield return null;
+        CheckIfPlayerIsOnAir();
+        yield return 0; 
     }
 }

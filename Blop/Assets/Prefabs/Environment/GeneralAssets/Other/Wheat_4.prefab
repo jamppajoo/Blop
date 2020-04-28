@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1997856044914481695}
   - component: {fileID: 7413709779378479145}
   - component: {fileID: 3881611021411572944}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wheat_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

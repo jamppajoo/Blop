@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7534045407334707819}
   - component: {fileID: 1573243765690599517}
   - component: {fileID: 5109828239050536100}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tomato_Crop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

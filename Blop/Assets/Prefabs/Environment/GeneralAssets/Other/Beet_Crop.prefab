@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7708405124670923852}
   - component: {fileID: 1703142556566593146}
   - component: {fileID: 4944475524438909571}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Beet_Crop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

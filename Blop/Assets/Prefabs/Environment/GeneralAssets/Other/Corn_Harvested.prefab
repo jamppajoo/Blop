@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 461305304267475713}
   - component: {fileID: 8880504754649887031}
   - component: {fileID: 2882705558725004750}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Corn_Harvested
   m_TagString: Untagged
   m_Icon: {fileID: 0}

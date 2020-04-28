@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2255897338552067897}
   - component: {fileID: 7067704802409061647}
   - component: {fileID: 3542364201108496886}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Willow_Dead_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,12 +48,12 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2960509230625576234}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0

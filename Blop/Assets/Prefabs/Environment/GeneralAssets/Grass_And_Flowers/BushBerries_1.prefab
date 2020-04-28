@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6819292690827892214}
   - component: {fileID: 2592375934547521472}
   - component: {fileID: 8126025648695284537}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BushBerries_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,8 +52,8 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0

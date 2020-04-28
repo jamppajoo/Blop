@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2621844145772845385}
   - component: {fileID: 6429363332875379583}
   - component: {fileID: 722025682418179974}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lettuce_Crop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

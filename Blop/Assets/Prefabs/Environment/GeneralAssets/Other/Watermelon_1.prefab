@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7132176781296983695}
   - component: {fileID: 2279263697294714041}
   - component: {fileID: 5520598589698086976}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Watermelon_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

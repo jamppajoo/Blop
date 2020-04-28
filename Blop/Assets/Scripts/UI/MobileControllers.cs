@@ -57,14 +57,22 @@ public class MobileControllers : MonoBehaviour
     private void Update()
     {
         //Handle PC input
-        if (Input.GetAxisRaw("Vertical") > 0.5f)
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             UpPressed();
-        if (Input.GetAxisRaw("Vertical") < -0.5f)
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             DownPressed();
-        if (Input.GetAxisRaw("Horizontal") < -0.5f)
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             LeftPressed();
-        if (Input.GetAxisRaw("Horizontal") > 0.5f)
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             RightPressed();
+        //if (Input.GetAxisRaw("Vertical") > 0.5f)
+        //    UpPressed();
+        //if (Input.GetAxisRaw("Vertical") < -0.5f)
+        //    DownPressed();
+        //if (Input.GetAxisRaw("Horizontal") < -0.5f)
+        //    LeftPressed();
+        //if (Input.GetAxisRaw("Horizontal") > 0.5f)
+        //    RightPressed();
 
         if (Input.GetKeyDown(KeyCode.Space))
             ViewChange();

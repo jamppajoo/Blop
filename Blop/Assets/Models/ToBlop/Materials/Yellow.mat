@@ -21,8 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Yellow
-  m_Shader: {fileID: 4800000, guid: 0ca6dca7396eb48e5849247ffd444914, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -62,6 +62,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_1F737658: 1
+    - Vector1_9B6B1302: 1
+    - Vector1_BC76A01F: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -88,7 +91,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_31BE986D: {r: 0, g: 0, b: 0, a: 0}
+    - Color_BD7C042B: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_32C92433: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 0.44797465, g: 0.35473847, b: 0.11264381, a: 1}
     - _Color: {r: 0.44797465, g: 0.35473847, b: 0.11264381, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.1999987, g: 0.1999987, b: 0.1999987, a: 0.293}
+    - _WorldSpaceLightPos0: {r: 0, g: 0, b: 0, a: 0}

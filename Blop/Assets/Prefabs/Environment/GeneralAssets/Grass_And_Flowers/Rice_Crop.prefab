@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2872269084982815304}
   - component: {fileID: 6523287300253913214}
   - component: {fileID: 701389838682188935}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rice_Crop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,8 +52,8 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
