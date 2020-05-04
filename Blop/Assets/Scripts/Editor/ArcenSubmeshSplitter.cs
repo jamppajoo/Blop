@@ -58,6 +58,7 @@ public class ArcenSubmeshSplitter
             meshFromSubmeshGameObject.transform.SetParent(meshFilterComponent.transform);
             meshFromSubmeshGameObject.transform.localPosition = Vector3.zero;
             meshFromSubmeshGameObject.transform.localRotation = Quaternion.identity;
+            meshFromSubmeshGameObject.transform.localScale = Vector3.one;
             MeshFilter meshFromSubmeshFilter = meshFromSubmeshGameObject.AddComponent<MeshFilter>();
             meshFromSubmeshFilter.sharedMesh = meshFromSubmeshes[i].mesh;
             MeshRenderer meshFromSubmeshMeshRendererComponent = meshFromSubmeshGameObject.AddComponent<MeshRenderer>();
