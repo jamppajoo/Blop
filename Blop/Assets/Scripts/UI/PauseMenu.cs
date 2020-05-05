@@ -28,6 +28,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowPauseMenu()
     {
+        GameManager.Instance.SmallVibrate();
         if (showing)
         {
             DisappearPauseMenu();

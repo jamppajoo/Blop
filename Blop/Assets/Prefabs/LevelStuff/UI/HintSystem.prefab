@@ -545,8 +545,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 30.000008}
-  m_SizeDelta: {x: -40, y: -219.99998}
+  m_AnchoredPosition: {x: 0, y: 40.000008}
+  m_SizeDelta: {x: -80, y: -239.99998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9152908395248771013
 CanvasRenderer:
@@ -596,6 +596,7 @@ MonoBehaviour:
 
 
     NOTE: You cannot pass level with 3 stars if you use hint!
+
 
     Good
     luck!'
