@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class MobileControllers : MonoBehaviour
 {
     [SerializeField]
-    private Button changeView, up, down, left, right, back, restartButton;
-
+    private Button changeView, up, down, left, right, pause, restartButton;
+    private PauseMenu pauseMenu;
     private bool canPress = true;
     private CameraMovement cameraMovement;
 
@@ -47,6 +47,7 @@ public class MobileControllers : MonoBehaviour
     private void Awake()
     {
         cameraMovement = FindObjectOfType<CameraMovement>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     private void Start()
@@ -81,7 +82,7 @@ public class MobileControllers : MonoBehaviour
     private void Initialize()
     {
         changeView.onClick.AddListener(() => ViewChange());
-        back.onClick.AddListener(() => GoToMenu());
+        pause.onClick.AddListener(() => PauseGame());
         restartButton.onClick.AddListener(() => RestartCurrentLevel());
 
         //Customised EventTriggers to make button presses feel better and to registerate instantly
@@ -158,11 +159,9 @@ public class MobileControllers : MonoBehaviour
     }
     #endregion
 
-    public void GoToMenu()
+    public void PauseGame()
     {
-        AnalyticsManager.Instance.SendRageQuitAnalytics();
-        GameManager.Instance.SmallVibrate();
-        GameManager.Instance.LoadMenu();
+        pauseMenu.ShowPauseMenu();
     }
     public void RestartCurrentLevel()
     {

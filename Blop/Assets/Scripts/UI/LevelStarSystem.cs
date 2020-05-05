@@ -32,9 +32,9 @@ public class LevelStarSystem : MonoBehaviour
         finish = FindObjectOfType<Finish>();
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
-        nextLevel.GetComponent<Button>().onClick.AddListener(NextLevel);
-        restartLevel.GetComponent<Button>().onClick.AddListener(Restart);
-        menuButton.GetComponent<Button>().onClick.AddListener(LoadMenu);
+        nextLevel.onClick.AddListener(NextLevel);
+        restartLevel.onClick.AddListener(Restart);
+        menuButton.onClick.AddListener(LoadMenu);
     }
     private void OnEnable()
     {

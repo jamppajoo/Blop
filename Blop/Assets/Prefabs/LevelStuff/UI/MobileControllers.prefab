@@ -692,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6049843314353496913
 RectTransform:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ MonoBehaviour:
   down: {fileID: 6027411580444979388}
   left: {fileID: 2014523883024528535}
   right: {fileID: 2233656986151196261}
-  back: {fileID: 5935847762662685825}
+  pause: {fileID: 5935847762662685825}
   restartButton: {fileID: 6049843314360088111}
 --- !u!1 &6049843314366626985
 GameObject:
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back
+  m_Text: Pause
 --- !u!1 &6050253984291436587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 5935847768687057125}
   - component: {fileID: 5935847762662685825}
   m_Layer: 5
-  m_Name: Back
+  m_Name: Pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
