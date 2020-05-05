@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 8b48189e4738b174aaa0dd4b04080040
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Future Square
+  fontNames:
+  - Kenney Future Square
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a36fffb1d0ea7e34f9d50b7d38ac1cb3, type: 3}
+  - {fileID: 12800000, guid: 5b5e34ea645756848bb92d2075f79d2a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

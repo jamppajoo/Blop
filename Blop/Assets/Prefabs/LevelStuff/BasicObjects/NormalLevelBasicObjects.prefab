@@ -551,6 +551,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 415424}
     m_Modifications:
+    - target: {fileID: 4153346634867590135, guid: 4f2bb90471d7a774c849ef9d1bbea198,
+        type: 3}
+      propertyPath: m_LightmapParameters
+      value: 
+      objectReference: {fileID: 111300000, guid: d8fd79f6050ecad4499f3e5e06d7cfa5,
+        type: 2}
     - target: {fileID: 4153346634869731449, guid: 4f2bb90471d7a774c849ef9d1bbea198,
         type: 3}
       propertyPath: m_Name
@@ -559,7 +565,7 @@ PrefabInstance:
     - target: {fileID: 4153346634869731449, guid: 4f2bb90471d7a774c849ef9d1bbea198,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4153346634869943107, guid: 4f2bb90471d7a774c849ef9d1bbea198,
         type: 3}
@@ -694,7 +700,7 @@ PrefabInstance:
     - target: {fileID: 5533775224927784711, guid: 16927e97f257ee74097bd4cd6ea87451,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 838
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 5533775224927784711, guid: 16927e97f257ee74097bd4cd6ea87451,
         type: 3}
@@ -756,6 +762,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 415424}
     m_Modifications:
+    - target: {fileID: 1770581013, guid: e624cebce6f5c83479fec36ce9140c84, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129768356, guid: e624cebce6f5c83479fec36ce9140c84, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129768360, guid: e624cebce6f5c83479fec36ce9140c84, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4212054088429557556, guid: e624cebce6f5c83479fec36ce9140c84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1060,6 +1078,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9030196249395881294, guid: de0b2c264d5fff2418260d3a95a9f57f,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 9030196249405470320, guid: de0b2c264d5fff2418260d3a95a9f57f,
         type: 3}

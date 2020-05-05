@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: c8eec2ecc3dfe7f46a58ed857dce54ef
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney High
+  fontNames:
+  - Kenney High
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 617dede2ad66f7c4ea714775d41aa637, type: 3}
+  - {fileID: 12800000, guid: d0b8f897942b49b44bf27ac174cb817f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

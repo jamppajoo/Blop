@@ -2624,47 +2624,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 391580782363634205, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2564
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920788867088412643, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_LightmapParameters
-      value: 
-      objectReference: {fileID: 111300000, guid: d8fd79f6050ecad4499f3e5e06d7cfa5,
-        type: 2}
-    - target: {fileID: 1920788867090603117, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 3785016042891316681, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4547250537038121861, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4547250537038121865, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4547250537286191160, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8255802018727426733, guid: 9d16695557517f145b3faee84a3e8128,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d16695557517f145b3faee84a3e8128, type: 3}
 --- !u!43 &699872863
