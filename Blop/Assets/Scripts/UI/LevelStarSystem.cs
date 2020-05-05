@@ -80,6 +80,7 @@ public class LevelStarSystem : MonoBehaviour
         {
             case 1:
                 twoStar.SetActive(false);
+                threeStar.SetActive(false);
                 break;
             case 2:
                 threeStar.SetActive(false);

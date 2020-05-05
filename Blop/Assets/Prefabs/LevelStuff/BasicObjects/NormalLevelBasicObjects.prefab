@@ -269,7 +269,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: ae0cb12793d13204fbed86ae73a50c1c, type: 3}
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 0
@@ -1078,11 +1078,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030196249395881294, guid: de0b2c264d5fff2418260d3a95a9f57f,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 9030196249405470320, guid: de0b2c264d5fff2418260d3a95a9f57f,
         type: 3}
