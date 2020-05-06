@@ -45,6 +45,10 @@ public class PauseMenu : MonoBehaviour
         showing = false;
 
     }
+    public void AddStarAmounts(LevelStats levelStats)
+    {
+
+    }
     private void Restart()
     {
         GameManager.Instance.SmallVibrate();

@@ -21,6 +21,7 @@ public class LevelStarSystem : MonoBehaviour
     private MobileControllers mobileControllers;
     private Finish finish;
     private LevelStats levelStats;
+    private PauseMenu pauseMenu;
     private RectTransform myRectTransform;
 
     private Vector3 rectTransformOriginalPosition;
@@ -32,6 +33,7 @@ public class LevelStarSystem : MonoBehaviour
         finish = FindObjectOfType<Finish>();
         stars = 3;
         mobileControllers = FindObjectOfType<MobileControllers>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
         nextLevel.onClick.AddListener(NextLevel);
         restartLevel.onClick.AddListener(Restart);
         menuButton.onClick.AddListener(LoadMenu);
@@ -56,6 +58,7 @@ public class LevelStarSystem : MonoBehaviour
         levelStats = Resources.Load<LevelStats>(GameManager.Instance.levelName);
         twoStarMovementAmount = levelStats.twoStarMovementAmount;
         threeStarMovementAmount = levelStats.threeStarMovementAmount;
+        pauseMenu.AddStarAmounts(levelStats);
     }
     
     private void Update()
