@@ -10,6 +10,7 @@ namespace Menu
         public Button previousLevelPackButton, nextLevelPackButton;
 
         public Text levelPackNameText;
+        public ScrollRect levelsScrollRect;
 
         private LevelSelect levelSelect;
 
@@ -21,10 +22,12 @@ namespace Menu
         }
         private void PreviousLevelPack()
         {
+            levelsScrollRect.verticalNormalizedPosition = 1;
             levelSelect.SetLevelPackNumber(GameManager.Instance.levelPackNumber - 1);
         }
         private void NextLevelPack()
         {
+            levelsScrollRect.verticalNormalizedPosition = 1;
             levelSelect.SetLevelPackNumber(GameManager.Instance.levelPackNumber + 1);
         }
         public void SetLevelPack(int index)

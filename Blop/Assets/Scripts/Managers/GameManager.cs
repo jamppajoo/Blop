@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         levelPackNumber = int.Parse(currentLevelText[0].Replace("Level", ""));
         if (fromMenu)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(levelPackNumber);
         }
         else
         {
