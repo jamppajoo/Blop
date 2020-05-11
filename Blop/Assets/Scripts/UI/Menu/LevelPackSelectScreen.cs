@@ -25,6 +25,10 @@ namespace Menu
             levelPack1Button.onClick.AddListener(delegate { OpenLevelPack(1); });
             levelPack2Button.onClick.AddListener(delegate { OpenLevelPack(2); });
             levelPack3Button.onClick.AddListener(delegate { OpenLevelPack(3); });
+
+            levelPack1Button.GetComponentInChildren<Text>().text = GameManager.Instance.LevelPackNames[0];
+            levelPack2Button.GetComponentInChildren<Text>().text = GameManager.Instance.LevelPackNames[1];
+            levelPack3Button.GetComponentInChildren<Text>().text = GameManager.Instance.LevelPackNames[2];
         }
         private void OpenLevelPack(int levelPackNumber)
         {

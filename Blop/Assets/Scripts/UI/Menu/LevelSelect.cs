@@ -10,29 +10,33 @@ namespace Menu
     {
         private LevelSelectButton[] levelButtons;
 
-        [HideInInspector]
+        private LevelPackSelect levelPackSelect;
+
+        //[HideInInspector]
         public int currentLevelPackNumber = 1;
 
         private void Awake()
         {
             levelButtons = gameObject.GetComponentsInChildren<LevelSelectButton>();
+            levelPackSelect = FindObjectOfType<LevelPackSelect>();
         }
         private void SetLevelStars()
         {
             for (int i = 0; i < levelButtons.Length; i++)
             {
-                if ((levelButtons[i].myLevelNumber * levelButtons[i].myLevelPackNumber) - 1 == i)
-                {
-                    levelButtons[i].SetStarAmount(GameManager.Instance.levelsStarAmount[i]);
-                }
+                //Get levelpack star amounts on 20 pieces chuck. 0-19 for first, 20-39 for second etc.
+                levelButtons[i].SetStarAmount(GameManager.Instance.levelsStarAmount[(i + ((currentLevelPackNumber - 1) * (levelButtons.Length)))]);
+
             }
         }
         public void SetLevelPackNumber(int levelPackNumber)
         {
             currentLevelPackNumber = levelPackNumber;
+            GameManager.Instance.levelPackNumber = currentLevelPackNumber;
+            levelPackSelect.SetLevelPack(currentLevelPackNumber);
             for (int i = 0; i < levelButtons.Length; i++)
             {
-                levelButtons[i].SetLevelPackNumber(levelPackNumber);
+                levelButtons[i].SetLevelPackNumber(currentLevelPackNumber);
             }
             SetLevelStars();
         }

@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public int levelPackNumber;
 
     public bool hintActive = false;
+    public string[] LevelPackNames;
     private int totalStarAmount;
     private void Awake()
     {

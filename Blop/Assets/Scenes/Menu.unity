@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 2632254}
   - component: {fileID: 2632256}
   - component: {fileID: 2632255}
+  - component: {fileID: 2632257}
   m_Layer: 5
   m_Name: LevelPackNamePanel
   m_TagString: Untagged
@@ -158,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31652054, y: 0.6823333}
   m_AnchorMax: {x: 0.68243754, y: 0.74744445}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.9986572, y: -0.61499023}
   m_SizeDelta: {x: 0, y: 46}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2632255
@@ -197,6 +198,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2632253}
   m_CullTransparentMesh: 0
+--- !u!114 &2632257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c759ca765b5ba7a4587d5034199a7ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previousLevelPackButton: {fileID: 896776754}
+  nextLevelPackButton: {fileID: 667237715}
+  levelPackNameText: {fileID: 2089902222}
 --- !u!1001 &10329376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -881,7 +897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2500, y: -1500}
+  m_AnchoredPosition: {x: 2499.1875, y: -1500.1875}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &31101826
@@ -1091,9 +1107,9 @@ RectTransform:
   m_Father: {fileID: 447245132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -451, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 272, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40999808
@@ -3338,8 +3354,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: 0}
-  m_SizeDelta: {x: -70.58968, y: -71.522354}
+  m_AnchoredPosition: {x: 47.800133, y: 0}
+  m_SizeDelta: {x: 95.6, y: -71.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &461529297
 GameObject:
@@ -3546,17 +3562,22 @@ PrefabInstance:
     - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
         type: 3}
       propertyPath: levelsStarAmount.Array.size
-      value: 20
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: LevelPackNames.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
         type: 3}
       propertyPath: levelsStarAmount.Array.data[20]
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
         type: 3}
       propertyPath: levelsStarAmount.Array.data[21]
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
         type: 3}
@@ -3656,6 +3677,211 @@ PrefabInstance:
     - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
         type: 3}
       propertyPath: levelsStarAmount.Array.data[19]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: LevelPackNames.Array.data[0]
+      value: The Forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: LevelPackNames.Array.data[1]
+      value: The Fall
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: LevelPackNames.Array.data[2]
+      value: Wonderland
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[22]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[23]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[24]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[25]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[26]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[27]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[28]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[29]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[30]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[31]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[32]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[33]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[34]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[35]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[36]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[37]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[38]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[39]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[40]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[41]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[42]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[43]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[44]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[45]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[46]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[47]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[48]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[49]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[50]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[51]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[52]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[53]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[54]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[55]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[56]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[57]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[58]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012771755920, guid: 81954bf9adb90e94a81e71a2eae17d4e,
+        type: 3}
+      propertyPath: levelsStarAmount.Array.data[59]
       value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4219,9 +4445,9 @@ RectTransform:
   m_Father: {fileID: 447245132}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 626, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 1349, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &565220883
@@ -5217,9 +5443,9 @@ RectTransform:
   m_Father: {fileID: 447245132}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 89, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 812, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720712582
@@ -10164,7 +10390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.15533447, y: 0}
   m_SizeDelta: {x: 0, y: 600}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1334933931
@@ -15546,7 +15772,7 @@ GameObject:
   - component: {fileID: 2089902223}
   - component: {fileID: 2089902222}
   m_Layer: 5
-  m_Name: LevelSelectText
+  m_Name: LevelPackNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
