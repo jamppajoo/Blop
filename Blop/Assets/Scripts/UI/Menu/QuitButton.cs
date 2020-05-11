@@ -2,14 +2,16 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ButtonQuit : MonoBehaviour
+namespace  Menu
+{ 
+public class QuitButton : MonoBehaviour
 {
-    private Button QuitButton;
+    private Button quitButton;
 
     void Start()
     {
-        QuitButton = gameObject.GetComponent<Button>();
-        QuitButton.onClick.AddListener(() => QuitGame());
+        quitButton = gameObject.GetComponent<Button>();
+        quitButton.onClick.AddListener(() => QuitGame());
 
     }
     void QuitGame()
@@ -19,4 +21,5 @@ public class ButtonQuit : MonoBehaviour
 
     }
 
+}
 }
