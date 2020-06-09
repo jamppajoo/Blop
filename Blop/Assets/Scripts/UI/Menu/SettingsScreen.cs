@@ -7,12 +7,18 @@ namespace Menu
 {
     public class SettingsScreen : MenuScreen
     {
-        public Button backButton;
+        public Button backButton, creditsButton;
 
 
         private void Start()
         {
             backButton.onClick.AddListener(Back);
+            creditsButton.onClick.AddListener(ShowCredits);
+        }
+
+        private void ShowCredits()
+        {
+            screensHandler.ShowCreditsScreen();
         }
 
         private void Back()

@@ -6,7 +6,7 @@ namespace Menu
 {
     public class ScreensHandler : MonoBehaviour
     {
-        public MenuScreen mainScreen, levelPackSelectScreen, levelSelectScreen, settingsScreen;
+        public MenuScreen mainScreen, levelPackSelectScreen, levelSelectScreen, settingsScreen, creditsScreen;
 
         private LevelSelect levelSelect;
 
@@ -46,6 +46,11 @@ namespace Menu
         {
             DisappearAll();
             settingsScreen.Show();
+        }
+        public void ShowCreditsScreen()
+        {
+            DisappearAll();
+            creditsScreen.Show();
         }
 
         private void DisappearAll()
