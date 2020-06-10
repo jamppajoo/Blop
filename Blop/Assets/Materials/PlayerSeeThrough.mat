@@ -64,7 +64,7 @@ Material:
     m_Floats:
     - BOOLEAN_92E2456A: 0
     - Vector1_17625892: 0.59
-    - _AllowSeeThrough: 0
+    - _AllowSeeThrough: 1
     - _AlphaClip: 0
     - _AlphaThreshold: 0.5
     - _Blend: 0
