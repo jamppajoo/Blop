@@ -15,6 +15,7 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 1092116344383198156}
   - {fileID: 8049620643843997819}
+  m_RendererFeatureMap: 
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -25,7 +26,7 @@ MonoBehaviour:
     fallbackErrorPS: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 4294967295
   m_TransparentLayerMask:
     serializedVersion: 2
     m_Bits: 1847
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: PlayerBehind
   m_EditorClassIdentifier: 
+  m_Active: 1
   settings:
     passTag: PlayerBehind
     Event: 300
@@ -87,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: PlayerInFront
   m_EditorClassIdentifier: 
+  m_Active: 1
   settings:
     passTag: PlayerInFront
     Event: 300
