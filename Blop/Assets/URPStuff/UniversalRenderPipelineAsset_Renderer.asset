@@ -71,9 +71,9 @@ MonoBehaviour:
       failOperation: 0
       zFailOperation: 0
     cameraSettings:
-      overrideCamera: 0
+      overrideCamera: 1
       restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
+      offset: {x: 0, y: 0, z: 0, w: 1}
       cameraFieldOfView: 60
 --- !u!114 &8049620643843997819
 MonoBehaviour:

@@ -26,7 +26,7 @@ public class Finish : MonoBehaviour
         //If not colliding with player, dont run anything
         if (collider.tag != "Player")
             return;
-        activeLevel = GameManager.Instance.levelNumber;
+        activeLevel = GameManager.Instance.levelNumber * GameManager.Instance.levelPackNumber;
         GameManager.Instance.levelPlayedAmount[activeLevel - 1]++;
         //Assing star amount to GameManager if star amount is bigger than in there.
         if (GameManager.Instance.levelsStarAmount[activeLevel-1] < (levelStarSystem.stars))

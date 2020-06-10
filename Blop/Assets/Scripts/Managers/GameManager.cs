@@ -28,8 +28,10 @@ public class GameManager : MonoBehaviour
 
     public string levelName;
     public int levelNumber;
+    public int levelPackNumber;
 
     public bool hintActive = false;
+    public string[] LevelPackNames;
     private int totalStarAmount;
     private void Awake()
     {
@@ -81,9 +83,10 @@ public class GameManager : MonoBehaviour
         this.levelName = levelName;
         string[] currentLevelText = levelName.Split('.');
         levelNumber = int.Parse(currentLevelText[1]);
+        levelPackNumber = int.Parse(currentLevelText[0].Replace("Level", ""));
         if (fromMenu)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(levelPackNumber);
         }
         else
         {

@@ -23,6 +23,7 @@ public class LevelsManager : MonoBehaviour
     }
     private void Start()
     {
+        Debug.Log("GameManager.Instance.levelName: " + GameManager.Instance.levelName);
         GameManager.Instance.LoadLevel(GameManager.Instance.levelName, false);
     }
 

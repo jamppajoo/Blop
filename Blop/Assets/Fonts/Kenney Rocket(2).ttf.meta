@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: ab1182fb038bc3e4598571a9f22c286e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Rocket
+  fontNames:
+  - Kenney Rocket
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a90ad6f0e92504345b50c5bcaad828e7, type: 3}
+  - {fileID: 12800000, guid: 84c0e576e40eab249af2f702fabe35a9, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
