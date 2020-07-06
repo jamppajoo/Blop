@@ -65,7 +65,8 @@ public class SaveAndLoad : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
-
+            GameManager.Instance.levelsStarAmount = new int[data.LevelsStarAmount.Length];
+            GameManager.Instance.levelPlayedAmount = new int[data.LevelPlayedAmount.Length];
             for (int i = 0; i < data.LevelsStarAmount.Length; i++)
                 GameManager.Instance.levelsStarAmount[i] = data.LevelsStarAmount[i];
             for (int i = 0; i < data.LevelPlayedAmount.Length; i++)
