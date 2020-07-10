@@ -37,12 +37,14 @@ public class AnalyticsManager : MonoBehaviour
     {
         EventManager.OnNewMovement += NewMovement;
         EventManager.OnNewRotation += NewRotation;
+        EventManager.OnLevelRestarted += AddRestartAmount;
 
     }
     private void OnDisable()
     {
         EventManager.OnNewMovement -= NewMovement;
         EventManager.OnNewRotation -= NewRotation;
+        EventManager.OnLevelRestarted -= AddRestartAmount;
 
     }
 

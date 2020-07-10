@@ -75,8 +75,10 @@ public class GameManager : MonoBehaviour
     }
     public void RestartScene()
     {
-        FindObjectOfType<LevelsManager>().RestartLevel();
-        AnalyticsManager.Instance.AddRestartAmount();
+        EventManager.LevelRestart();
+        //Switched to event based system
+        //FindObjectOfType<LevelsManager>().RestartLevel(); 
+        //AnalyticsManager.Instance.AddRestartAmount();
     }
     public void LoadLevel(string levelName, bool fromMenu)
     {

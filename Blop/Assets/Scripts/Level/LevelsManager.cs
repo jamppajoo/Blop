@@ -21,6 +21,14 @@ public class LevelsManager : MonoBehaviour
         buttonPressesText = FindObjectOfType<ButtonPressesText>();
 
     }
+    private void OnEnable()
+    {
+        EventManager.OnLevelRestarted += RestartLevel;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnLevelRestarted -= RestartLevel;
+    }
     private void Start()
     {
         Debug.Log("GameManager.Instance.levelName: " + GameManager.Instance.levelName);

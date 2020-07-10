@@ -68,6 +68,7 @@ public class HintButton : MonoBehaviour
     }
     private void ShowAdMenu()
     {
+        EventManager.HintPressed();
         adController.ShowMenu(true);
     }
 

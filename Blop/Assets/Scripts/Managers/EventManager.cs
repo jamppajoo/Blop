@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour
+public class EventManager   
 {
 
     #region InputHandler
@@ -76,7 +76,8 @@ public class EventManager : MonoBehaviour
     public static event GeneralEvent OnNewLevelLoaded;
     public static event GeneralEvent OnNewMovement;
     public static event GeneralEvent OnNewRotation;
-
+    public static event GeneralEvent OnLevelRestarted;
+    public static event GeneralEvent OnHintButtonPressed;
     public static void DisableIngameButtons()
     {
         if (OnDisableIngameButtons != null)
@@ -117,6 +118,20 @@ public class EventManager : MonoBehaviour
         if (OnNewRotation != null)
         {
             OnNewRotation();
+        }
+    }
+    public static void LevelRestart()
+    {
+        if(OnLevelRestarted != null)
+        {
+            OnLevelRestarted();
+        }
+    }
+    public static void HintPressed()
+    {
+        if (OnHintButtonPressed != null)
+        {
+            OnHintButtonPressed();
         }
     }
     #endregion
